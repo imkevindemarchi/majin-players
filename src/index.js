@@ -6,12 +6,15 @@ import "./index.css";
 
 // Components
 import App from "./App";
+import { BrowserRouter as Router } from "react-router-dom";
 
 const root = createRoot(document.getElementById("root"));
 
 const app = (
     <StrictMode>
-        <App />
+        <Router>
+            <App />
+        </Router>
     </StrictMode>
 );
 
