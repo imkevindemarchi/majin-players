@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 // Assets
 import logoImg from "../assets/images/logo.png";
@@ -9,6 +9,7 @@ import { Input, Button, IconButton } from "../components";
 
 // Utils
 import { setPageTitle } from "../utils";
+import { SnackbarContext } from "../providers";
 
 const initialState = {
     email: "",
@@ -29,6 +30,7 @@ const Login = () => {
         },
     });
     const isBtnDisabled = !formDataValues.email || !formDataValues.password;
+    const { stateHandler } = useContext(SnackbarContext);
 
     setPageTitle("Log-in");
 
@@ -36,6 +38,7 @@ const Login = () => {
     async function submitHandler(event) {
         event.preventDefault();
         console.log("🚀 ~ formDataValues:", formDataValues);
+        stateHandler("Uno due tre prova", "warning");
     }
 
     function inputHandler(event) {
