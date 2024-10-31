@@ -1,4 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+// Api
+import { AUTH_API } from "../api";
 
 // Assets
 import logoImg from "../assets/images/logo.png";
@@ -6,6 +10,9 @@ import { OpenedEyeIcon, ClosedEyeIcon } from "../assets/icons";
 
 // Components
 import { Input, Button, IconButton } from "../components";
+
+// Contexts
+import { SnackbarContext } from "../providers";
 
 // Utils
 import { setPageTitle } from "../utils";
@@ -29,13 +36,21 @@ const Login = () => {
         },
     });
     const isBtnDisabled = !formDataValues.email || !formDataValues.password;
+    const { activeHandler: activeSnackbar } = useContext(SnackbarContext);
+    const navigate = useNavigate();
 
     setPageTitle("Log-in");
 
-    // TODO:
     async function submitHandler(event) {
         event.preventDefault();
-        console.log("🚀 ~ formDataValues:", formDataValues);
+
+        const res = await AUTH_API.login(
+            formDataValues.email,
+            formDataValues.password
+        );
+
+        if (!res) activeSnackbar("Impossibile effettuare il log-in", "error");
+        else navigate("/admin");
     }
 
     function inputHandler(event) {
