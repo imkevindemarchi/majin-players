@@ -53,11 +53,20 @@ const Login = () => {
         else navigate("/admin");
     }
 
+    function resetError(event) {
+        setErrors((prevState) => ({
+            ...prevState,
+            [event.target.name]: { value: false, message: "" },
+        }));
+    }
+
     function inputHandler(event) {
         setFormDataValues((prevState) => ({
             ...prevState,
             [event.target.name]: event.target.value,
         }));
+
+        resetError(event);
     }
 
     const passwordEndIcon =
@@ -67,13 +76,6 @@ const Login = () => {
         event.preventDefault();
         event.stopPropagation();
         setPasswordType(passwordType === "password" ? "text" : "password");
-    }
-
-    function resetError(event) {
-        setErrors((prevState) => ({
-            ...prevState,
-            [event.target.name]: { value: false, message: "" },
-        }));
     }
 
     const form = (
@@ -97,7 +99,6 @@ const Login = () => {
                 value={formDataValues?.email}
                 onChange={inputHandler}
                 placeholder="E-mail"
-                onFocus={resetError}
                 error={errors.email}
             />
             <Input
@@ -106,7 +107,6 @@ const Login = () => {
                 value={formDataValues?.password}
                 onChange={inputHandler}
                 placeholder="Password"
-                onFocus={resetError}
                 endIcon={
                     <IconButton tabIndex="-1" onClick={passwordTypeHandler}>
                         {passwordEndIcon}
