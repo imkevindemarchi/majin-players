@@ -7,13 +7,16 @@ import "./index.css";
 // Components
 import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
+import { SnackbarProvider } from "./providers";
 
 const root = createRoot(document.getElementById("root"));
 
 const app = (
     <StrictMode>
         <Router>
-            <App />
+            <SnackbarProvider>
+                <App />
+            </SnackbarProvider>
         </Router>
     </StrictMode>
 );

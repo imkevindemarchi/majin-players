@@ -1,7 +1,17 @@
 import React from "react";
 
+// Components
+import Snackbar from "./Snackbar.component";
+
 const Layout = ({ children }) => {
-    return <div>{children}</div>;
+    const snackbar = <Snackbar />;
+
+    return (
+        <div>
+            {snackbar}
+            {children}
+        </div>
+    );
 };
 
 export default Layout;
