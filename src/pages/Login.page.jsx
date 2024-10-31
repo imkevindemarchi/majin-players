@@ -12,10 +12,10 @@ import { OpenedEyeIcon, ClosedEyeIcon } from "../assets/icons";
 import { Input, Button, IconButton } from "../components";
 
 // Contexts
-import { SnackbarContext } from "../providers";
+import { SessionContext, SnackbarContext } from "../providers";
 
 // Utils
-import { checkEmail, setPageTitle } from "../utils";
+import { checkEmail, setPageTitle, setToStorage } from "../utils";
 
 const initialState = {
     email: "",
@@ -37,6 +37,7 @@ const Login = () => {
     });
     const isBtnDisabled = !formDataValues.email || !formDataValues.password;
     const { activeHandler: activeSnackbar } = useContext(SnackbarContext);
+    const { setState: setSession } = useContext(SessionContext);
     const navigate = useNavigate();
 
     setPageTitle("Log-in");
@@ -58,7 +59,11 @@ const Login = () => {
             );
             if (!res)
                 activeSnackbar("Impossibile effettuare il log-in", "error");
-            else navigate("/admin");
+            else {
+                navigate("/admin");
+                setToStorage("session", res);
+                setSession(res);
+            }
         }
     }
 

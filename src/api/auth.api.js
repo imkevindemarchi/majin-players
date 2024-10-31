@@ -10,7 +10,19 @@ export const AUTH_API = {
             });
             if (!res || res.error) return false;
 
-            return res.data;
+            return res.data.session;
+        } catch (error) {
+            console.error("🚀 ~ error:", error);
+            return false;
+        }
+    },
+
+    checkSession: async () => {
+        try {
+            const res = await supabase.auth.refreshSession();
+            if (!res || res.error) return false;
+
+            return res.data.session;
         } catch (error) {
             console.error("🚀 ~ error:", error);
             return false;
