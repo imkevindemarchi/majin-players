@@ -26,7 +26,7 @@ const Input = ({
                     onChange={onChange}
                     placeholder={placeholder}
                     onFocus={onFocus}
-                    className="border-none outline-none bg-transparent"
+                    className="border-none outline-none bg-transparent w-full"
                 />
                 {endIcon && endIcon}
             </div>
