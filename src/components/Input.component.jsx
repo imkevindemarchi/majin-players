@@ -9,7 +9,6 @@ const Input = ({
     placeholder,
     endIcon,
     error,
-    onFocus,
 }) => {
     return (
         <div className="w-full flex flex-col gap-2">
@@ -24,7 +23,6 @@ const Input = ({
                     value={value}
                     onChange={onChange}
                     placeholder={placeholder}
-                    onFocus={onFocus}
                     className="border-none outline-none bg-transparent"
                 />
                 {endIcon && endIcon}
