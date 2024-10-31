@@ -9,7 +9,6 @@ export const AUTH_API = {
                 password,
             });
             if (!res || res.error) return false;
-            console.log("🚀 ~ res:", res);
 
             return res.data;
         } catch (error) {

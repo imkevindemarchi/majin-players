@@ -15,7 +15,7 @@ import { Input, Button, IconButton } from "../components";
 import { SnackbarContext } from "../providers";
 
 // Utils
-import { setPageTitle } from "../utils";
+import { checkEmail, setPageTitle } from "../utils";
 
 const initialState = {
     email: "",
@@ -44,13 +44,22 @@ const Login = () => {
     async function submitHandler(event) {
         event.preventDefault();
 
-        const res = await AUTH_API.login(
-            formDataValues.email,
-            formDataValues.password
-        );
+        const isEmailValid = checkEmail(formDataValues.email);
 
-        if (!res) activeSnackbar("Impossibile effettuare il log-in", "error");
-        else navigate("/admin");
+        if (!isEmailValid)
+            setErrors((prevState) => ({
+                ...prevState,
+                email: { value: true, message: "E-mail errata" },
+            }));
+        else {
+            const res = await AUTH_API.login(
+                formDataValues.email,
+                formDataValues.password
+            );
+            if (!res)
+                activeSnackbar("Impossibile effettuare il log-in", "error");
+            else navigate("/admin");
+        }
     }
 
     function resetError(event) {
