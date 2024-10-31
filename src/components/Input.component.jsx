@@ -14,9 +14,8 @@ const Input = ({
     return (
         <div className="w-full flex flex-col gap-2">
             <div
-                className={`bg-white px-5 w-full h-14 rounded-lg flex flex-row gap-5 items-center ${
-                    error && error.value && "border-red border-2"
-                }`}
+                className={`bg-white px-5 w-full h-14 rounded-lg flex flex-row gap-5 items-center 
+                    ${error && error.value && "border-red border-2"}`}
             >
                 <input
                     autoFocus={autofocus}
