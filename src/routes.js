@@ -11,3 +11,10 @@ export const ROUTES = [
         element: <Login />,
     },
 ];
+
+export const ADMIN_ROUTES = [
+    {
+        path: "/admin",
+        element: <span>Ciao</span>,
+    },
+];

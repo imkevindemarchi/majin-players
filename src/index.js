@@ -9,7 +9,7 @@ import "./index.css";
 import App from "./App";
 
 // Providers
-import { SnackbarProvider } from "./providers";
+import { SessionProvider, SnackbarProvider } from "./providers";
 
 const root = createRoot(document.getElementById("root"));
 
@@ -17,7 +17,9 @@ const app = (
     <StrictMode>
         <Router>
             <SnackbarProvider>
-                <App />
+                <SessionProvider>
+                    <App />
+                </SessionProvider>
             </SnackbarProvider>
         </Router>
     </StrictMode>
