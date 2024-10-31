@@ -7,6 +7,8 @@ import "./index.css";
 // Components
 import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
+
+// Providers
 import { SnackbarProvider } from "./providers";
 
 const root = createRoot(document.getElementById("root"));
