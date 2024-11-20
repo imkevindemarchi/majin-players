@@ -5,13 +5,14 @@ import { InputType } from "../types";
 
 const Input: FC<InputType> = ({
     placeholder,
-    type,
+    type = "text",
     value,
     onChange,
     error,
     disabled,
     startIcon,
     endIcon,
+    name,
 }) => {
     const inputComponent = (
         <div
@@ -26,6 +27,7 @@ const Input: FC<InputType> = ({
                 value={value}
                 onChange={onChange}
                 disabled={disabled}
+                name={name}
                 className={`w-full border-none outline-none bg-transparent
                     ${disabled && "cursor-not-allowed"}
                 `}
