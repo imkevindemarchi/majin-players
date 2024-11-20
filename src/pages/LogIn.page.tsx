@@ -16,10 +16,10 @@ import { AuthContext, LoaderContext, SnackbarContext } from "../providers";
 
 // Types
 import {
-    AuthContextType,
+    AuthContextInterface,
     ErrorType,
-    LoaderContextType,
-    SnackbarContextType,
+    LoaderContextInterface,
+    SnackbarContextInterface,
 } from "../types";
 
 // Utilities
@@ -61,11 +61,11 @@ const LogIn: FC = () => {
     const [errors, setErrors] = useState<ErrorsType>(errorsInitialValues);
     const { setState: setIsLoading } = useContext(
         LoaderContext
-    ) as LoaderContextType;
+    ) as LoaderContextInterface;
     const { activeHandler: activeSnackbar } = useContext(
         SnackbarContext
-    ) as SnackbarContextType;
-    const { setSession } = useContext(AuthContext) as AuthContextType;
+    ) as SnackbarContextInterface;
+    const { setSession } = useContext(AuthContext) as AuthContextInterface;
     const navigate = useNavigate();
 
     setPageTitle("Log In");

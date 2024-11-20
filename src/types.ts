@@ -11,7 +11,7 @@ export type InputTypeType = "text" | "number" | "password";
 
 export type ErrorType = { value: boolean; message?: string | null };
 
-export interface InputType {
+export interface InputInterface {
     placeholder: string;
     type?: InputTypeType;
     value: string;
@@ -24,7 +24,7 @@ export interface InputType {
 }
 
 // Button
-export interface ButtonType {
+export interface ButtonInterface {
     disabled?: boolean;
     onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
     type?: "button" | "submit" | "reset";
@@ -32,64 +32,86 @@ export interface ButtonType {
 }
 
 // Snackbar
-export interface SnackbarContextType {
-    state: SnackbarStateType;
-    setState?: Dispatch<SetStateAction<SnackbarStateType>>;
+export interface SnackbarContextInterface {
+    state: SnackbarStateInterface;
+    setState?: Dispatch<SetStateAction<SnackbarStateInterface>>;
     closeHandler: () => void;
     activeHandler: (message: string, type: SnackbarMessageType) => void;
 }
 
-export interface SnackbarProviderType {
+export interface SnackbarProviderInterface {
     children: ReactNode;
 }
 
 export type SnackbarMessageType = "success" | "warning" | "error" | null;
 
-export interface SnackbarStateType {
+export interface SnackbarStateInterface {
     message: string | null;
     isOpen: boolean;
     type: SnackbarMessageType;
 }
 
-export interface SnackbarType {
-    state: SnackbarStateType;
+export interface SnackbarI {
+    state: SnackbarStateInterface;
     onClose: () => void;
 }
 
 // Backdrop
-export interface BackdropType {
+export interface BackdropInterface {
     isOpen: boolean;
     onClose?: () => void;
     children: ReactNode;
 }
 
 // Loader
-export interface LoaderType {
+export interface LoaderInterface {
     isOpen: boolean;
 }
 
 // Auth
-export interface AuthContextType {
+export interface AuthContextInterface {
     session: any;
     setSession: Dispatch<SetStateAction<any>>;
     isUserAuthenticated: boolean;
 }
 
-export interface AuthProviderType {
+export interface AuthProviderInterface {
     children: ReactNode;
 }
 
 // Loader
-export interface LoaderContextType {
+export interface LoaderContextInterface {
     state: boolean;
     setState: Dispatch<SetStateAction<boolean>>;
 }
 
-export interface LoaderProviderType {
+export interface LoaderProviderInterface {
     children: ReactNode;
 }
 
 // Layout
-export interface LayoutType {
+export interface LayoutInterface {
+    children: ReactNode;
+    isAdminSection: boolean;
+    pathname: string;
+}
+
+// Routes
+export type RouteType = {
+    path: string;
+    name: string;
+    isHidden?: boolean;
+    element: any;
+};
+
+// Navbar
+export interface NavbarInterface {
+    isAdminSection: boolean;
+    urlSection: string;
+    routes: RouteType[];
+}
+
+// IconButton
+export interface IconButtonInterface {
     children: ReactNode;
 }

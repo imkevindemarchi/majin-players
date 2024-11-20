@@ -4,9 +4,9 @@ import { FC, MouseEvent } from "react";
 import { ErrorIcon, Verifiedicon, WarningIcon } from "../assets/icons";
 
 // Types
-import { SnackbarType } from "../types";
+import { SnackbarI } from "../types";
 
-const Snackbar: FC<SnackbarType> = ({ state, onClose }) => {
+const Snackbar: FC<SnackbarI> = ({ state, onClose }) => {
     const { type, isOpen, message } = state;
 
     const isErrorType = type === "error";

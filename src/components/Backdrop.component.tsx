@@ -1,9 +1,9 @@
 import { FC } from "react";
 
 // Types
-import { BackdropType } from "../types";
+import { BackdropInterface } from "../types";
 
-const Backdrop: FC<BackdropType> = ({ isOpen, onClose, children }) => {
+const Backdrop: FC<BackdropInterface> = ({ isOpen, onClose, children }) => {
     return isOpen ? (
         <div
             onClick={onClose}

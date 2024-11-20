@@ -10,7 +10,7 @@ import { Backdrop, Button, Input, Loader, Snackbar } from "../components";
 import { SnackbarContext } from "../providers";
 
 // Types
-import { SnackbarContextType } from "../types";
+import { SnackbarContextInterface } from "../types";
 
 const StyleGuide: FC = () => {
     const [inputValue, setInputValue] = useState("");
@@ -21,7 +21,7 @@ const StyleGuide: FC = () => {
         state: snackbarState,
         activeHandler: activeSnackbar,
         closeHandler: closeSnackbar,
-    } = useContext(SnackbarContext) as SnackbarContextType;
+    } = useContext(SnackbarContext) as SnackbarContextInterface;
     const [isBackdropOpen, setIsBackdropOpen] = useState<boolean>(false);
     const [isLoaderOpen, setIsLoaderOpen] = useState<boolean>(false);
 

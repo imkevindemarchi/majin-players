@@ -2,16 +2,16 @@ import { createContext, useState } from "react";
 
 // Types
 import {
-    SnackbarContextType,
+    SnackbarContextInterface,
     SnackbarMessageType,
-    SnackbarProviderType,
-    SnackbarStateType,
+    SnackbarProviderInterface,
+    SnackbarStateInterface,
 } from "../types";
 
-export const SnackbarContext = createContext<SnackbarContextType | null>(null);
+export const SnackbarContext = createContext<SnackbarContextInterface | null>(null);
 
-export const SnackbarProvider = ({ children }: SnackbarProviderType) => {
-    const [state, setState] = useState<SnackbarStateType>({
+export const SnackbarProvider = ({ children }: SnackbarProviderInterface) => {
+    const [state, setState] = useState<SnackbarStateInterface>({
         isOpen: false,
         message: "Prova",
         type: "error",
