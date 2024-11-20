@@ -237,7 +237,7 @@ const StyleGuide: FC = () => {
                     isOpen={isBackdropOpen}
                     onClose={() => setIsBackdropOpen(false)}
                 >
-                    <span className="text-white">Prova</span>
+                    <div />
                 </Backdrop>
             </div>
         </div>
@@ -272,19 +272,23 @@ const StyleGuide: FC = () => {
                 className="flex flex-col gap-5 border-t-2 border-gray-600 py-20 border-b-2"
             >
                 <span className="text-2xl text-primary font-bold">Input</span>
-                {input}
-                {inputWithError}
-                {inputDisabled}
-                {inputStartIcon}
-                {inputEndIcon}
+                <div className="flex flex-row flex-wrap gap-10">
+                    {input}
+                    {inputWithError}
+                    {inputDisabled}
+                    {inputStartIcon}
+                    {inputEndIcon}
+                </div>
             </div>
             <div
                 id="button"
                 className="flex flex-col gap-5 border-gray-600 py-20 border-b-2"
             >
                 <span className="text-2xl text-primary font-bold">Button</span>
-                {button}
-                {buttonDisabled}
+                <div className="flex flex-row flex-wrap gap-10">
+                    {button}
+                    {buttonDisabled}
+                </div>
             </div>
             <div
                 id="snackbar"
@@ -293,9 +297,11 @@ const StyleGuide: FC = () => {
                 <span className="text-2xl text-primary font-bold">
                     Snackbar
                 </span>
-                {snackbar}
-                {snackbarWarning}
-                {snackbarError}
+                <div className="flex flex-row flex-wrap gap-10">
+                    {snackbar}
+                    {snackbarWarning}
+                    {snackbarError}
+                </div>
             </div>
             <div
                 id="backdrop"
