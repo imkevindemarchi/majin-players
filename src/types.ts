@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, MouseEvent, ReactNode } from "react";
 
 export interface InputType {
     placeholder: string;
@@ -9,4 +9,10 @@ export interface InputType {
     disabled?: boolean;
     startIcon?: any;
     endIcon?: any;
+}
+
+export interface ButtonType {
+    disabled?: boolean;
+    onClick: (event: MouseEvent<HTMLButtonElement>) => void;
+    children: ReactNode;
 }
