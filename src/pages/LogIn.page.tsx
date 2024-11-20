@@ -16,10 +16,10 @@ import { AuthContext, LoaderContext, SnackbarContext } from "../providers";
 
 // Types
 import {
-    AuthContextInterface,
-    ErrorType,
-    LoaderContextInterface,
-    SnackbarContextInterface,
+    AuthContextI,
+    ErrorT,
+    LoaderContextI,
+    SnackbarContextI,
 } from "../types";
 
 // Utilities
@@ -33,8 +33,8 @@ interface FormDataType {
 type PasswordType = "text" | "password";
 
 interface ErrorsType {
-    email: ErrorType;
-    password: ErrorType;
+    email: ErrorT;
+    password: ErrorT;
 }
 
 const formDataInitialValues: FormDataType = {
@@ -61,11 +61,11 @@ const LogIn: FC = () => {
     const [errors, setErrors] = useState<ErrorsType>(errorsInitialValues);
     const { setState: setIsLoading } = useContext(
         LoaderContext
-    ) as LoaderContextInterface;
+    ) as LoaderContextI;
     const { activeHandler: activeSnackbar } = useContext(
         SnackbarContext
-    ) as SnackbarContextInterface;
-    const { setSession } = useContext(AuthContext) as AuthContextInterface;
+    ) as SnackbarContextI;
+    const { setSession } = useContext(AuthContext) as AuthContextI;
     const navigate = useNavigate();
 
     setPageTitle("Log In");

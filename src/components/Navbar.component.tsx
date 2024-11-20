@@ -9,9 +9,9 @@ import { SunIcon } from "../assets/icons";
 import IconButton from "./IconButton.component";
 
 // Types
-import { NavbarInterface } from "../types";
+import { NavbarI } from "../types";
 
-const Navbar: FC<NavbarInterface> = ({ isAdminSection, urlSection, routes }) => {
+const Navbar: FC<NavbarI> = ({ isAdminSection, urlSection, routes }) => {
     const navigate = useNavigate();
 
     return (

@@ -2,16 +2,16 @@ import { createContext, useState } from "react";
 
 // Types
 import {
-    SnackbarContextInterface,
-    SnackbarMessageType,
-    SnackbarProviderInterface,
-    SnackbarStateInterface,
+    SnackbarContextI,
+    SnackbarMessageT,
+    SnackbarProviderI,
+    SnackbarStateI,
 } from "../types";
 
-export const SnackbarContext = createContext<SnackbarContextInterface | null>(null);
+export const SnackbarContext = createContext<SnackbarContextI | null>(null);
 
-export const SnackbarProvider = ({ children }: SnackbarProviderInterface) => {
-    const [state, setState] = useState<SnackbarStateInterface>({
+export const SnackbarProvider = ({ children }: SnackbarProviderI) => {
+    const [state, setState] = useState<SnackbarStateI>({
         isOpen: false,
         message: "Prova",
         type: "error",
@@ -29,7 +29,7 @@ export const SnackbarProvider = ({ children }: SnackbarProviderInterface) => {
         }, 1000);
     }
 
-    function activeHandler(message: string, type: SnackbarMessageType) {
+    function activeHandler(message: string, type: SnackbarMessageT) {
         setState({
             isOpen: true,
             message,

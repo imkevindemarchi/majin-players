@@ -20,7 +20,7 @@ import { Layout } from "./components";
 import { AuthContext } from "./providers";
 
 // Types
-import { AuthContextInterface, RouteType } from "./types";
+import { AuthContextI, RouteT } from "./types";
 
 // Utilities
 import { removeFromStorage } from "./utilities";
@@ -28,7 +28,7 @@ import { removeFromStorage } from "./utilities";
 const App: FC = () => {
     const { isUserAuthenticated } = useContext(
         AuthContext
-    ) as AuthContextInterface;
+    ) as AuthContextI;
     const { pathname } = useLocation();
     const navigate = useNavigate();
 
@@ -63,7 +63,7 @@ const App: FC = () => {
         return children;
     };
 
-    const routeElement = (route: RouteType) =>
+    const routeElement = (route: RouteT) =>
         route.path === "/log-in" && isUserAuthenticated ? (
             <Navigate to="/admin" replace />
         ) : (

@@ -5,9 +5,9 @@ import { DotLoader as Spinner } from "react-spinners";
 import Backdrop from "./Backdrop.component";
 
 // Types
-import { LoaderInterface } from "../types";
+import { LoaderI } from "../types";
 
-const Loader: FC<LoaderInterface> = ({ isOpen }) => {
+const Loader: FC<LoaderI> = ({ isOpen }) => {
     return (
         <Backdrop isOpen={isOpen}>
             <Spinner color="white" />

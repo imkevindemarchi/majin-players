@@ -12,13 +12,13 @@ import Navbar from "./Navbar.component";
 import { LoaderContext, SnackbarContext } from "../providers";
 
 // Types
-import { LayoutInterface, LoaderContextInterface, SnackbarContextInterface } from "../types";
+import { LayoutI, LoaderContextI, SnackbarContextI } from "../types";
 
-const Layout: FC<LayoutInterface> = ({ isAdminSection, pathname, children }) => {
-    const { state: isLoading } = useContext(LoaderContext) as LoaderContextInterface;
+const Layout: FC<LayoutI> = ({ isAdminSection, pathname, children }) => {
+    const { state: isLoading } = useContext(LoaderContext) as LoaderContextI;
     const { state: snackbarState, closeHandler: closeSnackbar } = useContext(
         SnackbarContext
-    ) as SnackbarContextInterface;
+    ) as SnackbarContextI;
 
     const isLoginPage = pathname.split("/")[1] === "log-in";
     const urlSection = isAdminSection
