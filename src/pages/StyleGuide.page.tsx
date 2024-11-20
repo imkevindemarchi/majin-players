@@ -4,7 +4,7 @@ import { ChangeEvent, FC, MouseEvent, useContext, useState } from "react";
 import { UserIcon } from "../assets/icons";
 
 // Components
-import { Button, Input, Snackbar } from "../components";
+import { Backdrop, Button, Input, Snackbar } from "../components";
 
 // Contexts
 import { SnackbarContext } from "../providers";
@@ -22,8 +22,9 @@ const StyleGuide: FC = () => {
         activeHandler: activeSnackbar,
         closeHandler: closeSnackbar,
     } = useContext(SnackbarContext) as SnackbarContextType;
+    const [isBackdropOpen, setIsBackdropOpen] = useState<boolean>(false);
 
-    const linksArray = ["input", "button", "snackbar"];
+    const linksArray = ["input", "button", "snackbar", "backdrop"];
 
     function capitalizeFirstLetter(string: string): string {
         return string.charAt(0).toUpperCase() + string.slice(1);
@@ -220,6 +221,27 @@ const StyleGuide: FC = () => {
         </div>
     );
 
+    const backdrop = (
+        <div className="flex flex-col gap-3">
+            <span className="text-lg text-primary">Backdrop</span>
+            <div className="w-[30vh]">
+                <Button
+                    onClick={(event: MouseEvent<HTMLButtonElement>) =>
+                        setIsBackdropOpen(true)
+                    }
+                >
+                    <span className="text-white">Attiva Backdrop</span>
+                </Button>
+                <Backdrop
+                    isOpen={isBackdropOpen}
+                    onClose={() => setIsBackdropOpen(false)}
+                >
+                    <span className="text-white">Prova</span>
+                </Backdrop>
+            </div>
+        </div>
+    );
+
     return (
         <div className="px-40 py-20 flex flex-col gap-10 w-full h-full bg-black">
             {title}
@@ -253,6 +275,15 @@ const StyleGuide: FC = () => {
                 {snackbar}
                 {snackbarWarning}
                 {snackbarError}
+            </div>
+            <div
+                id="backdrop"
+                className="flex flex-col gap-5 border-gray-600 py-20 border-b-2"
+            >
+                <span className="text-2xl text-primary font-bold">
+                    Backdrop
+                </span>
+                {backdrop}
             </div>
         </div>
     );

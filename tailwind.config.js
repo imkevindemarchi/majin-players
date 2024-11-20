@@ -8,6 +8,7 @@ module.exports = {
                 red: "#ff0000",
                 green: "#008000",
                 orange: "#ffa500",
+                backdrop: "#0000006b",
             },
         },
     },

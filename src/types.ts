@@ -49,3 +49,10 @@ export interface SnackbarType {
     state: SnackbarStateType;
     onClose: () => void;
 }
+
+// Backdrop
+export interface BackdropType {
+    isOpen: boolean;
+    onClose?: () => void;
+    children: ReactNode;
+}
