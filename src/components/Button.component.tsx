@@ -3,13 +3,19 @@ import { FC, MouseEvent } from "react";
 // Types
 import { ButtonType } from "../types";
 
-const Button: FC<ButtonType> = ({ disabled, onClick, children }) => {
+const Button: FC<ButtonType> = ({
+    type = "button",
+    disabled,
+    onClick,
+    children,
+}) => {
     return (
         <button
+            type={type}
             disabled={disabled}
             onClick={(event: MouseEvent<HTMLButtonElement>) => {
                 event.stopPropagation();
-                onClick(event);
+                onClick && onClick(event);
             }}
             className={`w-full py-3 rounded-lg border-none outline-none 
                 ${

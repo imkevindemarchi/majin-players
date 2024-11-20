@@ -7,21 +7,27 @@ import {
 } from "react";
 
 // Input
+export type InputTypeType = "text" | "number" | "password";
+
+export type ErrorType = { value: boolean; message?: string | null };
+
 export interface InputType {
     placeholder: string;
-    type: string;
+    type?: InputTypeType;
     value: string;
     onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-    error?: { value: boolean; message: string };
+    error?: ErrorType;
     disabled?: boolean;
     startIcon?: any;
     endIcon?: any;
+    name?: string;
 }
 
 // Button
 export interface ButtonType {
     disabled?: boolean;
-    onClick: (event: MouseEvent<HTMLButtonElement>) => void;
+    onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
+    type?: "button" | "submit" | "reset";
     children: ReactNode;
 }
 
