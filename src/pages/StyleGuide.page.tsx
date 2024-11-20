@@ -1,35 +1,46 @@
-import { ChangeEvent, FC, MouseEvent, useState } from "react";
+import { ChangeEvent, FC, MouseEvent, useContext, useState } from "react";
 
 // Assets
 import { UserIcon } from "../assets/icons";
 
 // Components
-import { Button, Input } from "../components";
+import { Button, Input, Snackbar } from "../components";
+
+// Contexts
+import { SnackbarContext } from "../providers";
+
+// Types
+import { SnackbarContextType } from "../types";
 
 const StyleGuide: FC = () => {
     const [inputValue, setInputValue] = useState("");
     const [inputWithErrorValue, setInputWithErrorValue] = useState("");
     const [inputDisabledValue, setInputDisabledValue] = useState("");
     const [inputStartIconValue, setInputStartIconValue] = useState("");
+    const {
+        state: snackbarState,
+        activeHandler: activeSnackbar,
+        closeHandler: closeSnackbar,
+    } = useContext(SnackbarContext) as SnackbarContextType;
+
+    const linksArray = ["input", "button", "snackbar"];
+
+    function capitalizeFirstLetter(string: string): string {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
 
     const links = (
         <ul className="flex flex-col gap-3 text-white text-lg">
-            <li>
-                <a
-                    href="#input"
-                    className="transition-all duration-200 hover:text-primary"
-                >
-                    Input
-                </a>
-            </li>
-            <li>
-                <a
-                    href="#button"
-                    className="transition-all duration-200 hover:text-primary"
-                >
-                    Button
-                </a>
-            </li>
+            {linksArray.map((link) => (
+                <li key={link}>
+                    <a
+                        href={`#${link}`}
+                        className="transition-all duration-200 hover:text-primary"
+                    >
+                        {capitalizeFirstLetter(link)}
+                    </a>
+                </li>
+            ))}
         </ul>
     );
 
@@ -152,6 +163,63 @@ const StyleGuide: FC = () => {
         </div>
     );
 
+    const snackbar = (
+        <div className="flex flex-col gap-3">
+            <span className="text-lg text-primary">Snackbar</span>
+            <div className="w-[30vh]">
+                <Button
+                    onClick={(event: MouseEvent<HTMLButtonElement>) =>
+                        activeSnackbar(
+                            "Messaggio di prova della snackbar",
+                            "success"
+                        )
+                    }
+                >
+                    <span className="text-white">Attiva Snackbar</span>
+                </Button>
+                <Snackbar state={snackbarState} onClose={closeSnackbar} />
+            </div>
+        </div>
+    );
+
+    const snackbarWarning = (
+        <div className="flex flex-col gap-3">
+            <span className="text-lg text-primary">Snackbar Warning</span>
+            <div className="w-[30vh]">
+                <Button
+                    onClick={(event: MouseEvent<HTMLButtonElement>) =>
+                        activeSnackbar(
+                            "Messaggio di prova della snackbar",
+                            "warning"
+                        )
+                    }
+                >
+                    <span className="text-white">Attiva Snackbar</span>
+                </Button>
+                <Snackbar state={snackbarState} onClose={closeSnackbar} />
+            </div>
+        </div>
+    );
+
+    const snackbarError = (
+        <div className="flex flex-col gap-3">
+            <span className="text-lg text-primary">Snackbar Error</span>
+            <div className="w-[30vh]">
+                <Button
+                    onClick={(event: MouseEvent<HTMLButtonElement>) =>
+                        activeSnackbar(
+                            "Messaggio di prova della snackbar",
+                            "error"
+                        )
+                    }
+                >
+                    <span className="text-white">Attiva Snackbar</span>
+                </Button>
+                <Snackbar state={snackbarState} onClose={closeSnackbar} />
+            </div>
+        </div>
+    );
+
     return (
         <div className="px-40 py-20 flex flex-col gap-10 w-full h-full bg-black">
             {title}
@@ -174,6 +242,17 @@ const StyleGuide: FC = () => {
                 <span className="text-2xl text-primary font-bold">Button</span>
                 {button}
                 {buttonDisabled}
+            </div>
+            <div
+                id="snackbar"
+                className="flex flex-col gap-5 border-gray-600 py-20 border-b-2"
+            >
+                <span className="text-2xl text-primary font-bold">
+                    Snackbar
+                </span>
+                {snackbar}
+                {snackbarWarning}
+                {snackbarError}
             </div>
         </div>
     );
