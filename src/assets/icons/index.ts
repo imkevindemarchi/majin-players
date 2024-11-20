@@ -6,3 +6,4 @@ export { OpenedEyeIcon } from "./OpenedEye.icon";
 export { ClosedEyeIcon } from "./ClosedEye.icon";
 export { SunIcon } from "./Sun.icon";
 export { MoonIcon } from "./Moon.icon";
+export { LogoutIcon } from "./Logout.icon";

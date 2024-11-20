@@ -9,14 +9,10 @@ import { getFromStorage } from "../utilities";
 export const AuthContext = createContext<AuthContextI | null>(null);
 
 export const AuthProvider = ({ children }: AuthProviderI) => {
-    const [session, setSession] = useState<any>(null);
-
-    const isUserAuthenticated: boolean = getFromStorage("user") ? true : false;
+    const [session, setSession] = useState<any>(getFromStorage("user") || null);
 
     return (
-        <AuthContext.Provider
-            value={{ session, setSession, isUserAuthenticated }}
-        >
+        <AuthContext.Provider value={{ session, setSession }}>
             {children}
         </AuthContext.Provider>
     );

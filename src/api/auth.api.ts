@@ -46,4 +46,16 @@ export const AUTH_API = {
             };
         }
     },
+
+    logout: async (): Promise<boolean> => {
+        try {
+            const res = await supabase.auth.signOut();
+            if (!res || res.error) return false;
+
+            return true;
+        } catch (error) {
+            console.error("🚀 ~ error:", error);
+            return false;
+        }
+    },
 };

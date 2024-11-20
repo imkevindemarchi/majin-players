@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 // Assets
 import logoImg from "../assets/images/logo.png";
-import { MoonIcon, SunIcon } from "../assets/icons";
+import { LogoutIcon, MoonIcon, SunIcon } from "../assets/icons";
 
 // Components
 import IconButton from "./IconButton.component";
@@ -17,6 +17,7 @@ const Navbar: FC<NavbarI> = ({
     routes,
     isDarkMode,
     themeHandler,
+    logoutHandler,
 }) => {
     const navigate = useNavigate();
 
@@ -89,6 +90,20 @@ const Navbar: FC<NavbarI> = ({
                 >
                     {themeIcon}
                 </IconButton>
+                {isAdminSection && (
+                    <button
+                        onClick={(event: MouseEvent<HTMLButtonElement>) => {
+                            event.preventDefault();
+                            logoutHandler();
+                        }}
+                    >
+                        <LogoutIcon
+                            className={`text-3xl transition-all duration-200 hover:text-primary
+                            ${isDarkMode ? "text-white" : "text-black"}
+                        `}
+                        />
+                    </button>
+                )}
             </div>
         </div>
     );

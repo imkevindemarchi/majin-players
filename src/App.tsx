@@ -26,11 +26,11 @@ import { AuthContextI, RouteT } from "./types";
 import { removeFromStorage } from "./utilities";
 
 const App: FC = () => {
-    const { isUserAuthenticated } = useContext(
-        AuthContext
-    ) as AuthContextI;
     const { pathname } = useLocation();
     const navigate = useNavigate();
+    const { session: isUserAuthenticated } = useContext(
+        AuthContext
+    ) as AuthContextI;
 
     const isAdminSection = pathname.split("/")[1] === "admin";
 

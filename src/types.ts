@@ -72,7 +72,6 @@ export interface LoaderI {
 export interface AuthContextI {
     session: any;
     setSession: Dispatch<SetStateAction<any>>;
-    isUserAuthenticated: boolean;
 }
 
 export interface AuthProviderI {
@@ -111,6 +110,7 @@ export interface NavbarI {
     routes: RouteT[];
     isDarkMode: boolean;
     themeHandler: () => void;
+    logoutHandler: () => void;
 }
 
 // IconButton
