@@ -28,7 +28,7 @@ const Navbar: FC<NavbarI> = ({
 
     return (
         <div className="fixed flex w-full px-20 py-14 justify-between items-center z-[10]">
-            <div className="flex flex-row items-center gap-10">
+            <div className="flex flex-row items-center gap-10 mobile:hidden">
                 <button
                     onClick={(event: MouseEvent<HTMLButtonElement>) => {
                         event.preventDefault();
@@ -80,7 +80,7 @@ const Navbar: FC<NavbarI> = ({
                     })}
                 </div>
             </div>
-            <div className="flex flex-row gap-10">
+            <div className="flex flex-row gap-10 mobile:hidden">
                 <IconButton
                     onClick={(event: MouseEvent<HTMLButtonElement>) => {
                         event.preventDefault();

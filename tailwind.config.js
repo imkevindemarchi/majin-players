@@ -12,6 +12,9 @@ module.exports = {
                 "pink-transparent": "#f37c903a",
             },
         },
+        screens: {
+            mobile: { max: "767px" },
+        },
     },
     plugins: [],
 };
