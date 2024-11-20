@@ -10,23 +10,25 @@ import {
 // Api
 import { AUTH_API } from "./api";
 
+// Assets
+import { ADMIN_ROUTES, ROUTES } from "./routes";
+
 // Components
 import { Layout } from "./components";
 
 // Contexts
 import { AuthContext } from "./providers";
 
-// Pages
-import { StyleGuide, LogIn } from "./pages";
-
 // Types
-import { AuthContextType } from "./types";
+import { AuthContextInterface, RouteType } from "./types";
 
 // Utilities
 import { removeFromStorage } from "./utilities";
 
 const App: FC = () => {
-    const { isUserAuthenticated } = useContext(AuthContext) as AuthContextType;
+    const { isUserAuthenticated } = useContext(
+        AuthContext
+    ) as AuthContextInterface;
     const { pathname } = useLocation();
     const navigate = useNavigate();
 
@@ -61,25 +63,34 @@ const App: FC = () => {
         return children;
     };
 
-    const loginElement = isUserAuthenticated ? (
-        <Navigate to="/admin" />
-    ) : (
-        <LogIn />
-    );
+    const routeElement = (route: RouteType) =>
+        route.path === "/log-in" && isUserAuthenticated ? (
+            <Navigate to="/admin" replace />
+        ) : (
+            route.element
+        );
 
     return (
-        <Layout>
+        <Layout isAdminSection={isAdminSection} pathname={pathname}>
             <Routes>
-                <Route path="/style-guide" element={<StyleGuide />} />
-                <Route path="/log-in" element={loginElement} />
-                <Route
-                    path="/admin"
-                    element={
-                        <ProtectedRoute>
-                            <></>
-                        </ProtectedRoute>
-                    }
-                />
+                {ROUTES.map((route) => (
+                    <Route
+                        key={route.path}
+                        path={route.path}
+                        element={routeElement(route)}
+                    />
+                ))}
+                {ADMIN_ROUTES.map((adminRoute) => (
+                    <Route
+                        key={adminRoute.path}
+                        path={adminRoute.path}
+                        element={
+                            <ProtectedRoute>
+                                {adminRoute.element}
+                            </ProtectedRoute>
+                        }
+                    />
+                ))}
             </Routes>
         </Layout>
     );

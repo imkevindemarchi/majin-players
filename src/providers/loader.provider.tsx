@@ -1,11 +1,11 @@
 import { createContext, useState } from "react";
 
 // Types
-import { LoaderContextType, LoaderProviderType } from "../types";
+import { LoaderContextInterface, LoaderProviderInterface } from "../types";
 
-export const LoaderContext = createContext<LoaderContextType | null>(null);
+export const LoaderContext = createContext<LoaderContextInterface | null>(null);
 
-export const LoaderProvider = ({ children }: LoaderProviderType) => {
+export const LoaderProvider = ({ children }: LoaderProviderInterface) => {
     const [state, setState] = useState(false);
 
     return (

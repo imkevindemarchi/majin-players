@@ -1,9 +1,9 @@
 import { FC, MouseEvent } from "react";
 
 // Types
-import { ButtonType } from "../types";
+import { ButtonInterface } from "../types";
 
-const Button: FC<ButtonType> = ({
+const Button: FC<ButtonInterface> = ({
     type = "button",
     disabled,
     onClick,

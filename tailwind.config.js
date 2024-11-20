@@ -9,6 +9,7 @@ module.exports = {
                 green: "#008000",
                 orange: "#ffa500",
                 backdrop: "#0000006b",
+                "pink-transparent": "#f37c903a",
             },
         },
     },
