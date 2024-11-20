@@ -1,5 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { BrowserRouter as Router } from "react-router-dom";
 
 // Assets
 import "./index.css";
@@ -11,7 +12,11 @@ const root = createRoot(document.getElementById("root") as HTMLElement);
 
 const app = (
     <StrictMode>
-        <App />
+        <Router
+            future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+        >
+            <App />
+        </Router>
     </StrictMode>
 );
 
