@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 // Assets
 import logoImg from "../assets/images/logo.png";
-import { SunIcon } from "../assets/icons";
+import { MoonIcon, SunIcon } from "../assets/icons";
 
 // Components
 import IconButton from "./IconButton.component";
@@ -11,8 +11,20 @@ import IconButton from "./IconButton.component";
 // Types
 import { NavbarI } from "../types";
 
-const Navbar: FC<NavbarI> = ({ isAdminSection, urlSection, routes }) => {
+const Navbar: FC<NavbarI> = ({
+    isAdminSection,
+    urlSection,
+    routes,
+    isDarkMode,
+    themeHandler,
+}) => {
     const navigate = useNavigate();
+
+    const themeIcon = isDarkMode ? (
+        <MoonIcon className="text-2xl text-primary" />
+    ) : (
+        <SunIcon className="text-2xl text-primary" />
+    );
 
     return (
         <div className="fixed flex w-full px-20 py-14 justify-between items-center z-[10]">
@@ -52,7 +64,9 @@ const Navbar: FC<NavbarI> = ({ isAdminSection, urlSection, routes }) => {
                                     <span
                                         className={`text-xl font-bold transition-all duration-200
                                             ${
-                                                isRouteActive
+                                                isRouteActive && isDarkMode
+                                                    ? "text-black"
+                                                    : isRouteActive
                                                     ? "text-white"
                                                     : "text-primary"
                                             }
@@ -67,8 +81,13 @@ const Navbar: FC<NavbarI> = ({ isAdminSection, urlSection, routes }) => {
                 </div>
             </div>
             <div className="flex flex-row gap-10">
-                <IconButton>
-                    <SunIcon className="text-2xl text-primary" />
+                <IconButton
+                    onClick={(event: MouseEvent<HTMLButtonElement>) => {
+                        event.preventDefault();
+                        themeHandler();
+                    }}
+                >
+                    {themeIcon}
                 </IconButton>
             </div>
         </div>

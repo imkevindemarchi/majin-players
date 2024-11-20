@@ -9,7 +9,12 @@ import "./index.css";
 import App from "./App";
 
 // Providers
-import { AuthProvider, LoaderProvider, SnackbarProvider } from "./providers";
+import {
+    AuthProvider,
+    LoaderProvider,
+    SnackbarProvider,
+    ThemeProvider,
+} from "./providers";
 
 const root = createRoot(document.getElementById("root") as HTMLElement);
 
@@ -21,7 +26,9 @@ const app = (
             <SnackbarProvider>
                 <AuthProvider>
                     <LoaderProvider>
-                        <App />
+                        <ThemeProvider>
+                            <App />
+                        </ThemeProvider>
                     </LoaderProvider>
                 </AuthProvider>
             </SnackbarProvider>
