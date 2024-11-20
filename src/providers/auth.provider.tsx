@@ -1,14 +1,14 @@
 import { createContext, useState } from "react";
 
 // Types
-import { AuthContextInterface, AuthProviderInterface } from "../types";
+import { AuthContextI, AuthProviderI } from "../types";
 
 // Utilities
 import { getFromStorage } from "../utilities";
 
-export const AuthContext = createContext<AuthContextInterface | null>(null);
+export const AuthContext = createContext<AuthContextI | null>(null);
 
-export const AuthProvider = ({ children }: AuthProviderInterface) => {
+export const AuthProvider = ({ children }: AuthProviderI) => {
     const [session, setSession] = useState<any>(null);
 
     const isUserAuthenticated = getFromStorage("user") ? true : false;

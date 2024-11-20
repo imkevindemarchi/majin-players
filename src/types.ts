@@ -7,16 +7,16 @@ import {
 } from "react";
 
 // Input
-export type InputTypeType = "text" | "number" | "password";
+export type InputTypeT = "text" | "number" | "password";
 
-export type ErrorType = { value: boolean; message?: string | null };
+export type ErrorT = { value: boolean; message?: string | null };
 
-export interface InputInterface {
+export interface InputI {
     placeholder: string;
-    type?: InputTypeType;
+    type?: InputTypeT;
     value: string;
     onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-    error?: ErrorType;
+    error?: ErrorT;
     disabled?: boolean;
     startIcon?: any;
     endIcon?: any;
@@ -24,7 +24,7 @@ export interface InputInterface {
 }
 
 // Button
-export interface ButtonInterface {
+export interface ButtonI {
     disabled?: boolean;
     onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
     type?: "button" | "submit" | "reset";
@@ -32,72 +32,72 @@ export interface ButtonInterface {
 }
 
 // Snackbar
-export interface SnackbarContextInterface {
-    state: SnackbarStateInterface;
-    setState?: Dispatch<SetStateAction<SnackbarStateInterface>>;
-    closeHandler: () => void;
-    activeHandler: (message: string, type: SnackbarMessageType) => void;
+export interface SnackbarStateI {
+    message: string | null;
+    isOpen: boolean;
+    type: SnackbarMessageT;
 }
 
-export interface SnackbarProviderInterface {
+export interface SnackbarContextI {
+    state: SnackbarStateI;
+    setState?: Dispatch<SetStateAction<SnackbarStateI>>;
+    closeHandler: () => void;
+    activeHandler: (message: string, type: SnackbarMessageT) => void;
+}
+
+export interface SnackbarProviderI {
     children: ReactNode;
 }
 
-export type SnackbarMessageType = "success" | "warning" | "error" | null;
-
-export interface SnackbarStateInterface {
-    message: string | null;
-    isOpen: boolean;
-    type: SnackbarMessageType;
-}
+export type SnackbarMessageT = "success" | "warning" | "error" | null;
 
 export interface SnackbarI {
-    state: SnackbarStateInterface;
+    state: SnackbarStateI;
     onClose: () => void;
 }
 
 // Backdrop
-export interface BackdropInterface {
+export interface BackdropI {
     isOpen: boolean;
     onClose?: () => void;
     children: ReactNode;
 }
 
 // Loader
-export interface LoaderInterface {
+export interface LoaderI {
     isOpen: boolean;
 }
 
 // Auth
-export interface AuthContextInterface {
+export interface AuthContextI {
     session: any;
     setSession: Dispatch<SetStateAction<any>>;
     isUserAuthenticated: boolean;
 }
 
-export interface AuthProviderInterface {
+export interface AuthProviderI {
     children: ReactNode;
 }
 
 // Loader
-export interface LoaderContextInterface {
+export interface LoaderContextI {
     state: boolean;
     setState: Dispatch<SetStateAction<boolean>>;
 }
 
-export interface LoaderProviderInterface {
+export interface LoaderProviderI {
     children: ReactNode;
 }
 
 // Layout
-export interface LayoutInterface {
+export interface LayoutI {
     children: ReactNode;
     isAdminSection: boolean;
     pathname: string;
 }
 
 // Routes
-export type RouteType = {
+export type RouteT = {
     path: string;
     name: string;
     isHidden?: boolean;
@@ -105,13 +105,13 @@ export type RouteType = {
 };
 
 // Navbar
-export interface NavbarInterface {
+export interface NavbarI {
     isAdminSection: boolean;
     urlSection: string;
-    routes: RouteType[];
+    routes: RouteT[];
 }
 
 // IconButton
-export interface IconButtonInterface {
+export interface IconButtonI {
     children: ReactNode;
 }

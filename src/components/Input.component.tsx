@@ -1,9 +1,9 @@
 import { FC } from "react";
 
 // Types
-import { InputInterface } from "../types";
+import { InputI } from "../types";
 
-const Input: FC<InputInterface> = ({
+const Input: FC<InputI> = ({
     placeholder,
     type = "text",
     value,
