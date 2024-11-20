@@ -67,3 +67,29 @@ export interface BackdropType {
 export interface LoaderType {
     isOpen: boolean;
 }
+
+// Auth
+export interface AuthContextType {
+    session: any;
+    setSession: Dispatch<SetStateAction<any>>;
+    isUserAuthenticated: boolean;
+}
+
+export interface AuthProviderType {
+    children: ReactNode;
+}
+
+// Loader
+export interface LoaderContextType {
+    state: boolean;
+    setState: Dispatch<SetStateAction<boolean>>;
+}
+
+export interface LoaderProviderType {
+    children: ReactNode;
+}
+
+// Layout
+export interface LayoutType {
+    children: ReactNode;
+}

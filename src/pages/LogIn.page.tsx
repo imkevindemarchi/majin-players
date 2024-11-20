@@ -1,4 +1,8 @@
-import { ChangeEvent, FC, MouseEvent, useState } from "react";
+import { ChangeEvent, FC, MouseEvent, useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+// Api
+import { AUTH_API } from "../api";
 
 // Assets
 import logoImg from "../assets/images/logo.png";
@@ -7,11 +11,19 @@ import { ClosedEyeIcon, OpenedEyeIcon } from "../assets/icons";
 // Components
 import { Button, Input } from "../components";
 
+// Contexts
+import { AuthContext, LoaderContext, SnackbarContext } from "../providers";
+
 // Types
-import { ErrorType } from "../types";
+import {
+    AuthContextType,
+    ErrorType,
+    LoaderContextType,
+    SnackbarContextType,
+} from "../types";
 
 // Utilities
-import { checkEmail } from "../utilities";
+import { checkEmail, setPageTitle, setToStorage } from "../utilities";
 
 interface FormDataType {
     email: string;
@@ -25,12 +37,12 @@ interface ErrorsType {
     password: ErrorType;
 }
 
-const formDataInitialValues = {
+const formDataInitialValues: FormDataType = {
     email: "",
     password: "",
 };
 
-const errorsInitialValues = {
+const errorsInitialValues: ErrorsType = {
     email: {
         value: false,
         message: null,
@@ -47,6 +59,16 @@ const LogIn: FC = () => {
     );
     const [passwordType, setPasswordType] = useState<PasswordType>("password");
     const [errors, setErrors] = useState<ErrorsType>(errorsInitialValues);
+    const { setState: setIsLoading } = useContext(
+        LoaderContext
+    ) as LoaderContextType;
+    const { activeHandler: activeSnackbar } = useContext(
+        SnackbarContext
+    ) as SnackbarContextType;
+    const { setSession } = useContext(AuthContext) as AuthContextType;
+    const navigate = useNavigate();
+
+    setPageTitle("Log In");
 
     function resetError(name: string): void {
         setErrors((prevState) => ({
@@ -79,7 +101,8 @@ const LogIn: FC = () => {
         </div>
     );
 
-    function submitHandler(event: any) {
+    async function submitHandler(event: any) {
+        setIsLoading(true);
         event.preventDefault();
 
         const isEmailValid = checkEmail(formData.email);
@@ -90,8 +113,18 @@ const LogIn: FC = () => {
                 email: isEmailValid,
             }));
         else {
-            console.log("form", formData);
+            const res = await AUTH_API.login(formData.email, formData.password);
+
+            if (!res || !res.value)
+                activeSnackbar("Impossibile effettuare il log in", "error");
+            else {
+                setToStorage("user", res.data);
+                setSession(res.data);
+                navigate("/admin");
+            }
         }
+
+        setIsLoading(false);
     }
 
     const form = (

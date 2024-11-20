@@ -9,7 +9,7 @@ import "./index.css";
 import App from "./App";
 
 // Providers
-import { SnackbarProvider } from "./providers";
+import { AuthProvider, LoaderProvider, SnackbarProvider } from "./providers";
 
 const root = createRoot(document.getElementById("root") as HTMLElement);
 
@@ -19,7 +19,11 @@ const app = (
             future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
         >
             <SnackbarProvider>
-                <App />
+                <AuthProvider>
+                    <LoaderProvider>
+                        <App />
+                    </LoaderProvider>
+                </AuthProvider>
             </SnackbarProvider>
         </Router>
     </StrictMode>
