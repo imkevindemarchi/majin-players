@@ -4,7 +4,7 @@ import { ChangeEvent, FC, MouseEvent, useContext, useState } from "react";
 import { UserIcon } from "../assets/icons";
 
 // Components
-import { Backdrop, Button, Input, Snackbar } from "../components";
+import { Backdrop, Button, Input, Loader, Snackbar } from "../components";
 
 // Contexts
 import { SnackbarContext } from "../providers";
@@ -23,8 +23,9 @@ const StyleGuide: FC = () => {
         closeHandler: closeSnackbar,
     } = useContext(SnackbarContext) as SnackbarContextType;
     const [isBackdropOpen, setIsBackdropOpen] = useState<boolean>(false);
+    const [isLoaderOpen, setIsLoaderOpen] = useState<boolean>(false);
 
-    const linksArray = ["input", "button", "snackbar", "backdrop"];
+    const linksArray = ["input", "button", "snackbar", "backdrop", "loader"];
 
     function capitalizeFirstLetter(string: string): string {
         return string.charAt(0).toUpperCase() + string.slice(1);
@@ -242,6 +243,26 @@ const StyleGuide: FC = () => {
         </div>
     );
 
+    const loader = (
+        <div className="flex flex-col gap-3">
+            <span className="text-lg text-primary">Loader</span>
+            <div className="w-[30vh]">
+                <Button
+                    onClick={(event: MouseEvent<HTMLButtonElement>) => {
+                        setIsLoaderOpen(true);
+
+                        setTimeout(() => {
+                            setIsLoaderOpen(false);
+                        }, 3000);
+                    }}
+                >
+                    <span className="text-white">Attiva Loader</span>
+                </Button>
+                <Loader isOpen={isLoaderOpen} />
+            </div>
+        </div>
+    );
+
     return (
         <div className="px-40 py-20 flex flex-col gap-10 w-full h-full bg-black">
             {title}
@@ -284,6 +305,13 @@ const StyleGuide: FC = () => {
                     Backdrop
                 </span>
                 {backdrop}
+            </div>
+            <div
+                id="loader"
+                className="flex flex-col gap-5 border-gray-600 py-20 border-b-2"
+            >
+                <span className="text-2xl text-primary font-bold">Loader</span>
+                {loader}
             </div>
         </div>
     );

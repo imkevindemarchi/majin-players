@@ -56,3 +56,8 @@ export interface BackdropType {
     onClose?: () => void;
     children: ReactNode;
 }
+
+// Loader
+export interface LoaderType {
+    isOpen: boolean;
+}
