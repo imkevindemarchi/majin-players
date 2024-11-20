@@ -1,7 +1,9 @@
+import { FC } from "react";
+
 // Types
 import { InputType } from "../types";
 
-const Input = ({
+const Input: FC<InputType> = ({
     placeholder,
     type,
     value,
@@ -10,7 +12,7 @@ const Input = ({
     disabled,
     startIcon,
     endIcon,
-}: InputType) => {
+}) => {
     const inputComponent = (
         <div
             className={`w-full px-5 py-4 rounded-lg flex flex-row gap-5 items-center
