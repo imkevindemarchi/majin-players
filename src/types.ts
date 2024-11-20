@@ -1,5 +1,12 @@
-import { ChangeEvent, MouseEvent, ReactNode } from "react";
+import {
+    ChangeEvent,
+    Dispatch,
+    MouseEvent,
+    ReactNode,
+    SetStateAction,
+} from "react";
 
+// Input
 export interface InputType {
     placeholder: string;
     type: string;
@@ -11,8 +18,34 @@ export interface InputType {
     endIcon?: any;
 }
 
+// Button
 export interface ButtonType {
     disabled?: boolean;
     onClick: (event: MouseEvent<HTMLButtonElement>) => void;
     children: ReactNode;
+}
+
+// Snackbar
+export interface SnackbarContextType {
+    state: SnackbarStateType;
+    setState?: Dispatch<SetStateAction<SnackbarStateType>>;
+    closeHandler: () => void;
+    activeHandler: (message: string, type: SnackbarMessageType) => void;
+}
+
+export interface SnackbarProviderType {
+    children: ReactNode;
+}
+
+export type SnackbarMessageType = "success" | "warning" | "error" | null;
+
+export interface SnackbarStateType {
+    message: string | null;
+    isOpen: boolean;
+    type: SnackbarMessageType;
+}
+
+export interface SnackbarType {
+    state: SnackbarStateType;
+    onClose: () => void;
 }

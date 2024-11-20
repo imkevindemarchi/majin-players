@@ -8,6 +8,9 @@ import "./index.css";
 // Components
 import App from "./App";
 
+// Providers
+import { SnackbarProvider } from "./providers";
+
 const root = createRoot(document.getElementById("root") as HTMLElement);
 
 const app = (
@@ -15,7 +18,9 @@ const app = (
         <Router
             future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
         >
-            <App />
+            <SnackbarProvider>
+                <App />
+            </SnackbarProvider>
         </Router>
     </StrictMode>
 );
