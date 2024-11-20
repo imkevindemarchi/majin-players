@@ -109,9 +109,24 @@ export interface NavbarI {
     isAdminSection: boolean;
     urlSection: string;
     routes: RouteT[];
+    isDarkMode: boolean;
+    themeHandler: () => void;
 }
 
 // IconButton
 export interface IconButtonI {
+    onClick: (event: MouseEvent<HTMLButtonElement>) => void;
     children: ReactNode;
 }
+
+// Theme
+export interface ThemeContextI {
+    state: string;
+    stateHandler: () => void;
+}
+
+export interface ThemeProviderI {
+    children: ReactNode;
+}
+
+export type ThemeT = "light" | "dark";
