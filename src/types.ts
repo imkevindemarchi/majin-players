@@ -130,3 +130,25 @@ export interface ThemeProviderI {
 }
 
 export type ThemeT = "light" | "dark";
+
+// Sidebar
+export interface SidebarI {
+    isAdminSection: boolean;
+    urlSection: string;
+    routes: RouteT[];
+    isDarkMode: boolean;
+    themeHandler: () => void;
+    logoutHandler: () => void;
+    isActive: boolean;
+    stateHandler: () => void;
+}
+
+// Sidebar
+export interface SidebarContextI {
+    state: boolean;
+    stateHandler: () => void;
+}
+
+export interface SidebarProviderI {
+    children: ReactNode;
+}

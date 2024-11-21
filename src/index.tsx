@@ -12,6 +12,7 @@ import App from "./App";
 import {
     AuthProvider,
     LoaderProvider,
+    SidebarProvider,
     SnackbarProvider,
     ThemeProvider,
 } from "./providers";
@@ -27,7 +28,9 @@ const app = (
                 <AuthProvider>
                     <LoaderProvider>
                         <ThemeProvider>
-                            <App />
+                            <SidebarProvider>
+                                <App />
+                            </SidebarProvider>
                         </ThemeProvider>
                     </LoaderProvider>
                 </AuthProvider>
