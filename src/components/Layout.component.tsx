@@ -62,7 +62,7 @@ const Layout: FC<LayoutI> = ({ isAdminSection, pathname, children }) => {
         const res = await AUTH_API.logout();
         if (res) {
             setSession(null);
-            removeFromStorage("user");
+            removeFromStorage("session");
             navigate("/log-in");
         } else activeSnackbar("Impossibile effettuare il log out", "error");
 

@@ -42,7 +42,7 @@ const App: FC = () => {
         const res = await AUTH_API.checkSession();
 
         if (!res || !res.value) {
-            removeFromStorage("user");
+            removeFromStorage("session");
             navigate("/log-in");
         }
     }
