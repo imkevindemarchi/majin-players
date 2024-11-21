@@ -25,12 +25,15 @@ import {
     AuthContextI,
     LayoutI,
     LoaderContextI,
+    SidebarContextI,
     SnackbarContextI,
     ThemeContextI,
 } from "../types";
 
 // Utilities
 import { removeFromStorage } from "../utilities";
+import Sidebar from "./Sidebar.component";
+import { SidebarContext } from "../providers/sidebar.provider";
 
 const Layout: FC<LayoutI> = ({ isAdminSection, pathname, children }) => {
     const { state: isLoading } = useContext(LoaderContext) as LoaderContextI;
@@ -47,6 +50,9 @@ const Layout: FC<LayoutI> = ({ isAdminSection, pathname, children }) => {
     const { activeHandler: activeSnackbar } = useContext(
         SnackbarContext
     ) as SnackbarContextI;
+    const { state: sidebarState, stateHandler: sidebarHandler } = useContext(
+        SidebarContext
+    ) as SidebarContextI;
 
     const isLoginPage = pathname.split("/")[1] === "log-in";
     const urlSection = isAdminSection
@@ -80,6 +86,19 @@ const Layout: FC<LayoutI> = ({ isAdminSection, pathname, children }) => {
         />
     );
 
+    const sidebar = (
+        <Sidebar
+            isAdminSection={isAdminSection}
+            urlSection={urlSection}
+            routes={routes}
+            isDarkMode={isDarkMode}
+            themeHandler={themeHandler}
+            logoutHandler={logoutHandler}
+            isActive={sidebarState}
+            stateHandler={sidebarHandler}
+        />
+    );
+
     const loader = <Loader isOpen={isLoading} />;
 
     const snackbar = <Snackbar state={snackbarState} onClose={closeSnackbar} />;
@@ -91,6 +110,7 @@ const Layout: FC<LayoutI> = ({ isAdminSection, pathname, children }) => {
             `}
         >
             {navbar}
+            {sidebar}
             {children}
             {loader}
             {snackbar}
