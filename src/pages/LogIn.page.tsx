@@ -118,7 +118,7 @@ const LogIn: FC = () => {
             if (!res || !res.value)
                 activeSnackbar("Impossibile effettuare il log in", "error");
             else {
-                setToStorage("user", res.data);
+                setToStorage("session", res.data);
                 setSession(res.data);
                 navigate("/admin");
             }
