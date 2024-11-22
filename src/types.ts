@@ -152,3 +152,10 @@ export interface SidebarContextI {
 export interface SidebarProviderI {
     children: ReactNode;
 }
+
+// Hamburger
+export interface HamburgerI {
+    isActive: boolean;
+    isDarkMode: boolean;
+    onClick: () => void;
+}
