@@ -70,64 +70,80 @@ const Table: FC<TableI> = ({
                     </tr>
                 </thead>
                 <tbody>
-                    {data.map((rowData: any) => (
-                        <tr
-                            key={rowData.id}
-                            onClick={() => rowHandler(rowData)}
-                            className="bg-pink-transparent-2 hover:bg-pink-transparent transition-all duration-200 cursor-pointer"
-                        >
-                            {columns.map((column) => {
-                                const isActionColumn = column.key === "actions";
-                                const isImageColumn = column.key === "image";
+                    {totalRecords > 0 &&
+                        data.map((rowData: any) => (
+                            <tr
+                                key={rowData.id}
+                                onClick={() => rowHandler(rowData)}
+                                className="bg-pink-transparent-2 hover:bg-pink-transparent transition-all duration-200 cursor-pointer"
+                            >
+                                {columns.map((column) => {
+                                    const isActionColumn =
+                                        column.key === "actions";
+                                    const isImageColumn =
+                                        column.key === "image";
 
-                                return isActionColumn && deleteHandler ? (
-                                    <td className="py-3" key={column.key}>
-                                        <div className="flex justify-center items-center w-full h-full">
-                                            <IconButton
-                                                onClick={(
-                                                    event: MouseEvent<HTMLButtonElement>
-                                                ) => onDelete(event, rowData)}
-                                            >
-                                                <DeleteIcon className="text-2xl text-primary" />
-                                            </IconButton>
-                                        </div>
-                                    </td>
-                                ) : isImageColumn ? (
-                                    <td
-                                        className="p-10 mobile:py-5"
-                                        key={column.key}
-                                    >
-                                        <div className="bg-pink-transparent w-40 flex justify-center items-center p-5 rounded-xl">
-                                            <img
-                                                src={`https://koghcmfdnzuxvzfmbzop.supabase.co/storage/v1/object/public/images/${rowData.id}`}
-                                                alt="Impossibile visualizzare l'immagine."
-                                                className="object-contain w-40"
-                                            />
-                                        </div>
-                                    </td>
-                                ) : (
-                                    <td
-                                        key={column.key}
-                                        className="py-3 text-center"
-                                    >
-                                        <span
-                                            className={`text-md transition-all duration-200
+                                    return isActionColumn && deleteHandler ? (
+                                        <td className="py-3" key={column.key}>
+                                            <div className="flex justify-center items-center w-full h-full">
+                                                <IconButton
+                                                    onClick={(
+                                                        event: MouseEvent<HTMLButtonElement>
+                                                    ) =>
+                                                        onDelete(event, rowData)
+                                                    }
+                                                >
+                                                    <DeleteIcon className="text-2xl text-primary" />
+                                                </IconButton>
+                                            </div>
+                                        </td>
+                                    ) : isImageColumn ? (
+                                        <td
+                                            className="p-10 mobile:py-5"
+                                            key={column.key}
+                                        >
+                                            <div className="bg-pink-transparent w-40 flex justify-center items-center p-5 rounded-xl">
+                                                <img
+                                                    src={`https://koghcmfdnzuxvzfmbzop.supabase.co/storage/v1/object/public/images/${rowData.id}`}
+                                                    alt="Impossibile visualizzare l'immagine."
+                                                    className="object-contain w-40"
+                                                />
+                                            </div>
+                                        </td>
+                                    ) : (
+                                        <td
+                                            key={column.key}
+                                            className="py-3 text-center"
+                                        >
+                                            <span
+                                                className={`text-md transition-all duration-200
                                             ${
                                                 isDarkMode
                                                     ? "text-white"
                                                     : "text-black"
                                             }
                                         `}
-                                        >
-                                            {rowData[column.key]}
-                                        </span>
-                                    </td>
-                                );
-                            })}
-                        </tr>
-                    ))}
+                                            >
+                                                {rowData[column.key]}
+                                            </span>
+                                        </td>
+                                    );
+                                })}
+                            </tr>
+                        ))}
                 </tbody>
             </table>
+            {totalRecords === 0 && (
+                <div className="w-full flex justify-center items-center py-5 bg-pink-transparent-2">
+                    <span
+                        className={`text-xl
+                            ${isDarkMode ? "text-white" : "text-black"}
+                        `}
+                    >
+                        Nessun risultato...
+                    </span>
+                </div>
+            )}
             <div className="w-full bg-pink-transparent p-5 rounded-bl-lg rounded-br-lg flex justify-between">
                 <span className={`${isDarkMode ? "text-white" : "text-black"}`}>
                     Totale: {totalRecords}
