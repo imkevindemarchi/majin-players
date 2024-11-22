@@ -7,3 +7,6 @@ export { ClosedEyeIcon } from "./ClosedEye.icon";
 export { SunIcon } from "./Sun.icon";
 export { MoonIcon } from "./Moon.icon";
 export { LogoutIcon } from "./Logout.icon";
+export { DeleteIcon } from "./Delete.icon";
+export { ArrowLeftIcon } from "./ArrowLeft.icon";
+export { ArrowRightIcon } from "./ArrowRight.icon";

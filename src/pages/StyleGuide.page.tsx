@@ -4,13 +4,28 @@ import { ChangeEvent, FC, MouseEvent, useContext, useState } from "react";
 import { UserIcon } from "../assets/icons";
 
 // Components
-import { Backdrop, Button, Input, Loader, Snackbar } from "../components";
+import {
+    Backdrop,
+    Button,
+    Input,
+    Loader,
+    Snackbar,
+    Table,
+} from "../components";
 
 // Contexts
-import { SnackbarContext } from "../providers";
+import { SnackbarContext, ThemeContext } from "../providers";
 
 // Types
-import { SnackbarContextI } from "../types";
+import {
+    PlayerT,
+    SnackbarContextI,
+    TableColumnT,
+    ThemeContextI,
+} from "../types";
+
+// Utilities
+import { setPageTitle } from "../utilities";
 
 const StyleGuide: FC = () => {
     const [inputValue, setInputValue] = useState("");
@@ -24,8 +39,77 @@ const StyleGuide: FC = () => {
     } = useContext(SnackbarContext) as SnackbarContextI;
     const [isBackdropOpen, setIsBackdropOpen] = useState<boolean>(false);
     const [isLoaderOpen, setIsLoaderOpen] = useState<boolean>(false);
+    const { state: theme } = useContext(ThemeContext) as ThemeContextI;
 
-    const linksArray = ["input", "button", "snackbar", "backdrop", "loader"];
+    setPageTitle("Style Guide");
+
+    const linksArray = [
+        "input",
+        "button",
+        "snackbar",
+        "backdrop",
+        "loader",
+        "table",
+    ];
+    const isDarkMode = theme === "dark";
+    const tableColumns: TableColumnT[] = [
+        {
+            key: "name",
+            value: "Nome",
+        },
+        {
+            key: "surname",
+            value: "Cognome",
+        },
+        {
+            key: "birthYear",
+            value: "Anno di nascita",
+        },
+        {
+            key: "email",
+            value: "E-mail",
+        },
+        {
+            key: "actions",
+        },
+    ];
+    const tableColumnsImage: TableColumnT[] = [
+        {
+            key: "name",
+            value: "Nome",
+        },
+        {
+            key: "surname",
+            value: "Cognome",
+        },
+        {
+            key: "birthYear",
+            value: "Anno di nascita",
+        },
+        {
+            key: "email",
+            value: "E-mail",
+        },
+        {
+            key: "actions",
+        },
+        {
+            key: "image",
+        },
+    ];
+    const tableData: PlayerT[] = [
+        {
+            id: "6c13a4b4-b984-4a05-a09b-0f6aabc3ccaa.jpg",
+            name: "Kevin",
+            surname: "De Marchi",
+            email: "imkevindemarchi@gmail.com",
+            birthYear: 1999,
+            favouriteCard: "Kashtira Arise-Heart",
+            favouriteDeck: "Tearlaments",
+            description: "Descrizione di prova",
+            instagramLink: "https://www.instagram.com/imrayalf/",
+        },
+    ];
 
     function capitalizeFirstLetter(string: string): string {
         return string.charAt(0).toUpperCase() + string.slice(1);
@@ -263,6 +347,63 @@ const StyleGuide: FC = () => {
         </div>
     );
 
+    function tableRowHandler(rowData: any): void {
+        const { id } = rowData;
+        alert(`Riga cliccata: ${id}`);
+    }
+
+    const table = (
+        <div className="flex flex-col gap-3">
+            <span className="text-lg text-primary">Table</span>
+            <Table
+                columns={tableColumns}
+                data={tableData}
+                isDarkMode={isDarkMode}
+                totalRecords={tableData.length}
+                currentPage={1}
+                previousPageHandler={() => alert("Pagina precedente")}
+                nextPageHandler={() => alert("Pagina successiva")}
+                rowHandler={tableRowHandler}
+            />
+        </div>
+    );
+
+    const tableImage = (
+        <div className="flex flex-col gap-3">
+            <span className="text-lg text-primary">Table Image</span>
+            <Table
+                columns={tableColumnsImage}
+                data={tableData}
+                isDarkMode={isDarkMode}
+                totalRecords={tableData.length}
+                currentPage={1}
+                previousPageHandler={() => alert("Pagina precedente")}
+                nextPageHandler={() => alert("Pagina successiva")}
+                rowHandler={tableRowHandler}
+            />
+        </div>
+    );
+
+    const tableDelete = (
+        <div className="flex flex-col gap-3">
+            <span className="text-lg text-primary">Table Delete</span>
+            <Table
+                columns={tableColumns}
+                data={tableData}
+                isDarkMode={isDarkMode}
+                totalRecords={tableData.length}
+                deleteHandler={(rowData: any) => {
+                    const { id } = rowData;
+                    alert(`Eliminazione riga: ${id}`);
+                }}
+                currentPage={1}
+                previousPageHandler={() => alert("Pagina precedente")}
+                nextPageHandler={() => alert("Pagina successiva")}
+                rowHandler={tableRowHandler}
+            />
+        </div>
+    );
+
     return (
         <div className="px-40 py-20 flex flex-col gap-10 w-full h-full bg-black">
             {title}
@@ -318,6 +459,15 @@ const StyleGuide: FC = () => {
             >
                 <span className="text-2xl text-primary font-bold">Loader</span>
                 {loader}
+            </div>
+            <div
+                id="table"
+                className="flex flex-col gap-5 border-gray-600 py-20 border-b-2"
+            >
+                <span className="text-2xl text-primary font-bold">Table</span>
+                {table}
+                {tableImage}
+                {tableDelete}
             </div>
         </div>
     );

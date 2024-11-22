@@ -56,6 +56,7 @@ const Layout: FC<LayoutI> = ({ isAdminSection, pathname, children }) => {
     ) as SidebarContextI;
 
     const isLoginPage = pathname.split("/")[1] === "log-in";
+    const isStyleGuidePage = pathname.split("/")[1] === "style-guide";
     const urlSection = isAdminSection
         ? pathname.split("/")[2]
         : pathname.split("/")[1];
@@ -76,7 +77,7 @@ const Layout: FC<LayoutI> = ({ isAdminSection, pathname, children }) => {
         setIsLoading(false);
     }
 
-    const navbar = !isLoginPage && (
+    const navbar = !isLoginPage && !isStyleGuidePage && (
         <Navbar
             isAdminSection={isAdminSection}
             urlSection={urlSection}
@@ -121,7 +122,15 @@ const Layout: FC<LayoutI> = ({ isAdminSection, pathname, children }) => {
             {navbar}
             {sidebar}
             {hamburger}
-            {children}
+            <div
+                className={
+                    !isStyleGuidePage
+                        ? "px-96 mobile:px-5 py-56 mobile:py-28"
+                        : ""
+                }
+            >
+                {children}
+            </div>
             {loader}
             {snackbar}
         </div>
