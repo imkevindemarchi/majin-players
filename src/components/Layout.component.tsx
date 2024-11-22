@@ -11,11 +11,14 @@ import { ADMIN_ROUTES, ROUTES } from "../routes";
 import Loader from "./Loader.component";
 import Snackbar from "./Snackbar.component";
 import Navbar from "./Navbar.component";
+import Hamburger from "./Hamburger.component";
+import Sidebar from "./Sidebar.component";
 
 // Contexts
 import {
     AuthContext,
     LoaderContext,
+    SidebarContext,
     SnackbarContext,
     ThemeContext,
 } from "../providers";
@@ -32,8 +35,6 @@ import {
 
 // Utilities
 import { removeFromStorage } from "../utilities";
-import Sidebar from "./Sidebar.component";
-import { SidebarContext } from "../providers/sidebar.provider";
 
 const Layout: FC<LayoutI> = ({ isAdminSection, pathname, children }) => {
     const { state: isLoading } = useContext(LoaderContext) as LoaderContextI;
@@ -99,6 +100,14 @@ const Layout: FC<LayoutI> = ({ isAdminSection, pathname, children }) => {
         />
     );
 
+    const hamburger = !isLoginPage && (
+        <Hamburger
+            isActive={sidebarState}
+            onClick={sidebarHandler}
+            isDarkMode={isDarkMode}
+        />
+    );
+
     const loader = <Loader isOpen={isLoading} />;
 
     const snackbar = <Snackbar state={snackbarState} onClose={closeSnackbar} />;
@@ -111,6 +120,7 @@ const Layout: FC<LayoutI> = ({ isAdminSection, pathname, children }) => {
         >
             {navbar}
             {sidebar}
+            {hamburger}
             {children}
             {loader}
             {snackbar}
