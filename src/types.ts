@@ -6,6 +6,18 @@ import {
     SetStateAction,
 } from "react";
 
+export type PlayerT = {
+    id: string;
+    name: string;
+    surname: string;
+    email: string;
+    birthYear: number;
+    favouriteCard: string;
+    favouriteDeck: string;
+    description: string;
+    instagramLink: string;
+};
+
 // Input
 export type InputTypeT = "text" | "number" | "password";
 
@@ -158,4 +170,28 @@ export interface HamburgerI {
     isActive: boolean;
     isDarkMode: boolean;
     onClick: () => void;
+}
+
+// Table
+export type TableColumnT = {
+    key: string;
+    value?: string;
+};
+
+export interface TableI {
+    columns: TableColumnT[];
+    data: PlayerT[];
+    isDarkMode: boolean;
+    totalRecords: number;
+    deleteHandler?: (rowData: any) => void;
+    currentPage: number;
+    previousPageHandler: () => void;
+    nextPageHandler: () => void;
+    rowHandler: (rowData: any) => void;
+}
+
+export interface TableFoooterBtnI {
+    onClick: () => void;
+    disabled: boolean;
+    children: ReactNode;
 }

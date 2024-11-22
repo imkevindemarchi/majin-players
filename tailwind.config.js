@@ -10,6 +10,7 @@ module.exports = {
                 orange: "#ffa500",
                 backdrop: "#0000006b",
                 "pink-transparent": "#f37c903a",
+                "pink-transparent-2": "#f37c901d",
             },
         },
         screens: {

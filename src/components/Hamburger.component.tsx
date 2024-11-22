@@ -4,9 +4,6 @@ import { FC, MouseEvent } from "react";
 import { HamburgerI } from "../types";
 
 const Hamburger: FC<HamburgerI> = ({ isActive, isDarkMode, onClick }) => {
-    console.log("🚀 ~ onClick:", onClick);
-    console.log("🚀 ~ isDarkMode:", isDarkMode);
-    console.log("🚀 ~ isActive:", isActive);
     const lines: number[] = [1, 2, 3];
 
     return (
