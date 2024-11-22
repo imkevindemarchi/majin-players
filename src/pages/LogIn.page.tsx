@@ -137,7 +137,7 @@ const LogIn: FC = () => {
                 backdropFilter: "blur(7.5px)",
                 border: "1px solid rgba(255, 255, 255, 0.3)",
             }}
-            className="py-20 px-40 flex flex-col gap-5 justify-center items-center"
+            className="py-20 px-40 flex flex-col gap-5 justify-center items-center mobile:px-8"
         >
             <span className="text-white font-bold uppercase text-3xl">
                 Log In
