@@ -399,6 +399,26 @@ const StyleGuide: FC = () => {
         </div>
     );
 
+    const tableNoData = (
+        <div className="flex flex-col gap-3">
+            <span className="text-lg text-primary">Table No Data</span>
+            <Table
+                columns={tableColumns}
+                data={[]}
+                isDarkMode
+                totalRecords={0}
+                deleteHandler={(rowData: any) => {
+                    const { id } = rowData;
+                    alert(`Eliminazione riga: ${id}`);
+                }}
+                currentPage={1}
+                previousPageHandler={() => alert("Pagina precedente")}
+                nextPageHandler={() => alert("Pagina successiva")}
+                rowHandler={tableRowHandler}
+            />
+        </div>
+    );
+
     const card = (
         <div className="flex flex-col gap-3">
             <span className="text-lg text-primary">Card</span>
@@ -472,6 +492,7 @@ const StyleGuide: FC = () => {
                 {table}
                 {tableImage}
                 {tableDelete}
+                {tableNoData}
             </div>
             <div
                 id="card"
