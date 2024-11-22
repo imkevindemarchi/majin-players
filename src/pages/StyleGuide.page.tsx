@@ -15,15 +15,10 @@ import {
 } from "../components";
 
 // Contexts
-import { SnackbarContext, ThemeContext } from "../providers";
+import { SnackbarContext } from "../providers";
 
 // Types
-import {
-    PlayerT,
-    SnackbarContextI,
-    TableColumnT,
-    ThemeContextI,
-} from "../types";
+import { PlayerT, SnackbarContextI, TableColumnT } from "../types";
 
 // Utilities
 import { setPageTitle } from "../utilities";
@@ -40,7 +35,6 @@ const StyleGuide: FC = () => {
     } = useContext(SnackbarContext) as SnackbarContextI;
     const [isBackdropOpen, setIsBackdropOpen] = useState<boolean>(false);
     const [isLoaderOpen, setIsLoaderOpen] = useState<boolean>(false);
-    const { state: theme } = useContext(ThemeContext) as ThemeContextI;
 
     setPageTitle("Style Guide");
 
@@ -53,7 +47,6 @@ const StyleGuide: FC = () => {
         "table",
         "card",
     ];
-    const isDarkMode = theme === "dark";
     const tableColumns: TableColumnT[] = [
         {
             key: "name",
@@ -360,7 +353,7 @@ const StyleGuide: FC = () => {
             <Table
                 columns={tableColumns}
                 data={tableData}
-                isDarkMode={isDarkMode}
+                isDarkMode
                 totalRecords={tableData.length}
                 currentPage={1}
                 previousPageHandler={() => alert("Pagina precedente")}
@@ -376,7 +369,7 @@ const StyleGuide: FC = () => {
             <Table
                 columns={tableColumnsImage}
                 data={tableData}
-                isDarkMode={isDarkMode}
+                isDarkMode
                 totalRecords={tableData.length}
                 currentPage={1}
                 previousPageHandler={() => alert("Pagina precedente")}
@@ -392,7 +385,7 @@ const StyleGuide: FC = () => {
             <Table
                 columns={tableColumns}
                 data={tableData}
-                isDarkMode={isDarkMode}
+                isDarkMode
                 totalRecords={tableData.length}
                 deleteHandler={(rowData: any) => {
                     const { id } = rowData;
