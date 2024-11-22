@@ -195,3 +195,8 @@ export interface TableFoooterBtnI {
     disabled: boolean;
     children: ReactNode;
 }
+
+// Card
+export interface CardI {
+    children: ReactNode;
+}

@@ -7,6 +7,7 @@ import { UserIcon } from "../assets/icons";
 import {
     Backdrop,
     Button,
+    Card,
     Input,
     Loader,
     Snackbar,
@@ -50,6 +51,7 @@ const StyleGuide: FC = () => {
         "backdrop",
         "loader",
         "table",
+        "card",
     ];
     const isDarkMode = theme === "dark";
     const tableColumns: TableColumnT[] = [
@@ -404,6 +406,15 @@ const StyleGuide: FC = () => {
         </div>
     );
 
+    const card = (
+        <div className="flex flex-col gap-3">
+            <span className="text-lg text-primary">Card</span>
+            <Card>
+                <span className="text-white">Card Content</span>
+            </Card>
+        </div>
+    );
+
     return (
         <div className="px-40 py-20 flex flex-col gap-10 w-full h-full bg-black">
             {title}
@@ -468,6 +479,13 @@ const StyleGuide: FC = () => {
                 {table}
                 {tableImage}
                 {tableDelete}
+            </div>
+            <div
+                id="card"
+                className="flex flex-col gap-5 border-gray-600 py-20 border-b-2"
+            >
+                <span className="text-2xl text-primary font-bold">Card</span>
+                {card}
             </div>
         </div>
     );
