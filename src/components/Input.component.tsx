@@ -36,6 +36,7 @@ const Input: FC<InputI> = ({
                 disabled={disabled}
                 name={name}
                 className={`w-full border-none outline-none bg-transparent
+                    ${isDarkMode ? "text-white" : "text-black"}
                     ${disabled && "cursor-not-allowed"}
                 `}
             />
