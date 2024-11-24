@@ -13,11 +13,18 @@ const Input: FC<InputI> = ({
     startIcon,
     endIcon,
     name,
+    isDarkMode,
 }) => {
     const inputComponent = (
         <div
             className={`w-full px-5 py-4 rounded-lg flex flex-row gap-5 items-center
-                ${disabled ? "bg-gray-200 cursor-not-allowed" : "bg-white"}
+                ${
+                    !disabled
+                        ? isDarkMode
+                            ? "bg-black"
+                            : "bg-white"
+                        : "bg-gray-200 cursor-not-allowed"
+                }
             `}
         >
             {startIcon && <div className="text-gray-400">{startIcon}</div>}

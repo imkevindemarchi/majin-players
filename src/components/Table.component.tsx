@@ -136,7 +136,7 @@ const Table: FC<TableI> = ({
             {totalRecords === 0 && (
                 <div className="w-full flex justify-center items-center py-5 bg-pink-transparent-2">
                     <span
-                        className={`text-xl
+                        className={`text-md
                             ${isDarkMode ? "text-white" : "text-black"}
                         `}
                     >
@@ -148,36 +148,38 @@ const Table: FC<TableI> = ({
                 <span className={`${isDarkMode ? "text-white" : "text-black"}`}>
                     Totale: {totalRecords}
                 </span>
-                <div className="flex flex-row gap-5">
-                    <FooterButton
-                        disabled={!canGoPrevious}
-                        onClick={() => previousPageHandler()}
-                    >
-                        <ArrowLeftIcon
-                            className={`text-2xl
+                {totalRecords > 0 && (
+                    <div className="flex flex-row gap-5">
+                        <FooterButton
+                            disabled={!canGoPrevious}
+                            onClick={() => previousPageHandler()}
+                        >
+                            <ArrowLeftIcon
+                                className={`text-2xl
                                 ${
                                     !canGoPrevious
                                         ? "text-pink-transparent"
                                         : "text-primary"
                                 }
                             `}
-                        />
-                    </FooterButton>
-                    <FooterButton
-                        disabled={!canGoNext}
-                        onClick={() => nextPageHandler()}
-                    >
-                        <ArrowRightIcon
-                            className={`text-2xl
+                            />
+                        </FooterButton>
+                        <FooterButton
+                            disabled={!canGoNext}
+                            onClick={() => nextPageHandler()}
+                        >
+                            <ArrowRightIcon
+                                className={`text-2xl
                                 ${
                                     !canGoNext
                                         ? "text-pink-transparent"
                                         : "text-primary"
                                 }
                             `}
-                        />
-                    </FooterButton>
-                </div>
+                            />
+                        </FooterButton>
+                    </div>
+                )}
             </div>
         </div>
     );
