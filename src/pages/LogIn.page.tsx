@@ -25,7 +25,7 @@ import {
 // Utilities
 import { checkEmail, setPageTitle, setToStorage } from "../utilities";
 
-interface FormDataType {
+interface FormDataI {
     email: string;
     password: string;
 }
@@ -37,7 +37,7 @@ interface ErrorsType {
     password: ErrorT;
 }
 
-const formDataInitialValues: FormDataType = {
+const formDataInitialValues: FormDataI = {
     email: "",
     password: "",
 };
@@ -54,9 +54,7 @@ const errorsInitialValues: ErrorsType = {
 };
 
 const LogIn: FC = () => {
-    const [formData, setFormData] = useState<FormDataType>(
-        formDataInitialValues
-    );
+    const [formData, setFormData] = useState<FormDataI>(formDataInitialValues);
     const [passwordType, setPasswordType] = useState<PasswordType>("password");
     const [errors, setErrors] = useState<ErrorsType>(errorsInitialValues);
     const { setState: setIsLoading } = useContext(

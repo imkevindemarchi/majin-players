@@ -1,4 +1,5 @@
 // Pages
+import { AdminPlayers } from "./pages/admin";
 import { LogIn, StyleGuide } from "./pages";
 
 export const ROUTES = [
@@ -24,7 +25,7 @@ export const ADMIN_ROUTES = [
     {
         path: "/admin/players",
         name: "Giocatori",
-        element: <></>,
+        element: <AdminPlayers />,
     },
     { path: "/admin/equipments", name: "Equipaggiamento", element: <></> },
     { path: "/admin/sponsorships", name: "Sponsor", element: <></> },

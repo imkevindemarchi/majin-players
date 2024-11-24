@@ -33,13 +33,16 @@ export interface InputI {
     startIcon?: any;
     endIcon?: any;
     name?: string;
+    isDarkMode?: boolean;
 }
 
 // Button
+export type ButtonT = "button" | "submit" | "reset";
+
 export interface ButtonI {
     disabled?: boolean;
     onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
-    type?: "button" | "submit" | "reset";
+    type?: ButtonT;
     children: ReactNode;
 }
 
@@ -127,8 +130,10 @@ export interface NavbarI {
 
 // IconButton
 export interface IconButtonI {
-    onClick: (event: MouseEvent<HTMLButtonElement>) => void;
+    onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
     children: ReactNode;
+    className?: string;
+    type?: ButtonT;
 }
 
 // Theme
