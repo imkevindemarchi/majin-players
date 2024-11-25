@@ -13,7 +13,7 @@ export const SnackbarContext = createContext<SnackbarContextI | null>(null);
 export const SnackbarProvider = ({ children }: SnackbarProviderI) => {
     const [state, setState] = useState<SnackbarStateI>({
         isOpen: false,
-        message: "Prova",
+        message: "",
         type: "error",
     });
 

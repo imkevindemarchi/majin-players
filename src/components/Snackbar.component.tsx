@@ -19,13 +19,13 @@ const Snackbar: FC<SnackbarI> = ({ state, onClose }) => {
     }
 
     return (
-        <div className="w-full z-[50] fixed left-0 flex justify-center items-center">
+        <div className="w-full z-[990] fixed left-0 flex justify-center items-center">
             <button
                 onClick={closeHandler}
-                className={`max-w-[30%] fixed z-[50] px-10 py-2 rounded-full flex flex-row gap-2 justify-center items-center transition-all top-5 text-white
+                className={`max-w-[30%] fixed z-[990] px-10 py-2 rounded-full flex flex-row gap-2 justify-center items-center transition-all top-5 text-white mobile:max-w-max
                     ${
                         isOpen
-                            ? "right-5 opacity-100"
+                            ? "right-5 opacity-100 mobile:right-auto"
                             : "right-[-50%] opacity-0"
                     } 
                     ${isErrorType && "bg-red"} 

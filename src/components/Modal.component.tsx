@@ -53,7 +53,7 @@ const Modal: FC<ModalI> = ({
                             event.preventDefault();
                             onClose();
                         }}
-                        className={`px-5 py-3 transition-all duration-200 hover:opacity-50 rounded-full
+                        className={`px-8 py-3 transition-all duration-200 hover:opacity-50 rounded-full
                             ${isDarkMode ? "bg-darkgray" : "bg-gray-200"}
                         `}
                     >
@@ -69,7 +69,7 @@ const Modal: FC<ModalI> = ({
                         onClick={(event: MouseEvent<HTMLButtonElement>) =>
                             submitHandler(event)
                         }
-                        className="bg-primary px-5 py-3 transition-all duration-200 hover:opacity-50 rounded-full"
+                        className="bg-primary px-8 py-3 transition-all duration-200 hover:opacity-50 rounded-full"
                     >
                         <span className="text-white text-lg">
                             {submitBtnText}
