@@ -108,7 +108,7 @@ const Table: FC<TableI> = ({
                                         </td>
                                     ) : isImageColumn ? (
                                         <td
-                                            className="p-10 mobile:py-5"
+                                            className="p-10 mobile:py-5 flex justify-center"
                                             key={column.key}
                                         >
                                             <div className="bg-pink-transparent w-40 flex justify-center items-center p-5 rounded-xl">

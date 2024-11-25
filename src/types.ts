@@ -18,6 +18,11 @@ export type PlayerT = {
     instagramLink: string;
 };
 
+export type EquipmentT = {
+    id?: string;
+    name: string;
+};
+
 export type ErrorT = { value: boolean; message?: string | null };
 
 // Input

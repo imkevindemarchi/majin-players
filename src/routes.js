@@ -1,5 +1,5 @@
 // Pages
-import { AdminPlayers, AdminPlayer } from "./pages/admin";
+import { AdminPlayers, AdminPlayer, AdminEquipments } from "./pages/admin";
 import { LogIn, StyleGuide } from "./pages";
 
 export const ROUTES = [
@@ -9,7 +9,7 @@ export const ROUTES = [
         name: "Giocatori",
         element: <></>,
     },
-    { path: "/equipments", name: "Equipaggiamento", element: <></> },
+    { path: "/equipments", name: "Equipaggiamenti", element: <></> },
     { path: "/sponsorships", name: "Sponsor", element: <></> },
     {
         path: "/style-guide",
@@ -37,6 +37,10 @@ export const ADMIN_ROUTES = [
         element: <AdminPlayer />,
         isHidden: true,
     },
-    { path: "/admin/equipments", name: "Equipaggiamento", element: <></> },
+    {
+        path: "/admin/equipments",
+        name: "Equipaggiamenti",
+        element: <AdminEquipments />,
+    },
     { path: "/admin/sponsorships", name: "Sponsor", element: <></> },
 ];
