@@ -44,12 +44,14 @@ const Input: FC<InputI> = ({
         </div>
     );
 
-    const errorComponent = <span className="text-red">{error?.message}</span>;
+    const errorComponent = error?.value && (
+        <span className="text-red">{error?.message}</span>
+    );
 
     return (
         <div className="w-full flex flex-col gap-2">
             {inputComponent}
-            {error?.value && errorComponent}
+            {errorComponent}
         </div>
     );
 };

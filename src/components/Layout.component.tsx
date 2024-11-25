@@ -1,5 +1,5 @@
 import { FC, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 
 // Api
 import { AUTH_API } from "../api";
@@ -28,6 +28,7 @@ import {
     AuthContextI,
     LayoutI,
     LoaderContextI,
+    RouteT,
     SidebarContextI,
     SnackbarContextI,
     ThemeContextI,
@@ -55,19 +56,19 @@ const Layout: FC<LayoutI> = ({ isAdminSection, pathname, children }) => {
         SidebarContext
     ) as SidebarContextI;
 
-    const isLoginPage = pathname.split("/")[1] === "log-in";
-    const isStyleGuidePage = pathname.split("/")[1] === "style-guide";
-    const urlSection = isAdminSection
+    const isLoginPage: boolean = pathname.split("/")[1] === "log-in";
+    const isStyleGuidePage: boolean = pathname.split("/")[1] === "style-guide";
+    const urlSection: string = isAdminSection
         ? pathname.split("/")[2]
         : pathname.split("/")[1];
-    const routes = isAdminSection ? ADMIN_ROUTES : ROUTES;
-    const isDarkMode = theme === "dark";
-    const navigate = useNavigate();
+    const routes: RouteT[] = isAdminSection ? ADMIN_ROUTES : ROUTES;
+    const isDarkMode: boolean = theme === "dark";
+    const navigate: NavigateFunction = useNavigate();
 
     async function logoutHandler() {
         setIsLoading(true);
 
-        const res = await AUTH_API.logout();
+        const res: boolean = await AUTH_API.logout();
         if (res) {
             setSession(null);
             removeFromStorage("session");

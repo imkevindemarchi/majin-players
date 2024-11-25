@@ -13,16 +13,17 @@ const InputFile: FC<InputFileI> = ({ value, onChange, error, icon }) => {
         <span className="text-red">{error?.message}</span>
     );
 
+    function iconButtonClickHandler(
+        event: MouseEvent<HTMLButtonElement>
+    ): void {
+        event.preventDefault();
+        if (hiddenFileInput.current) {
+            hiddenFileInput.current.click();
+        }
+    }
+
     const iconButton = (
-        <IconButton
-            className="p-5"
-            onClick={(event: MouseEvent<HTMLButtonElement>) => {
-                event.preventDefault();
-                if (hiddenFileInput.current) {
-                    hiddenFileInput.current.click();
-                }
-            }}
-        >
+        <IconButton className="p-5" onClick={iconButtonClickHandler}>
             {icon}
         </IconButton>
     );
@@ -31,16 +32,17 @@ const InputFile: FC<InputFileI> = ({ value, onChange, error, icon }) => {
         <span className="text-primary mobile:hidden">{value?.name}</span>
     );
 
+    function inputHandler(event: ChangeEvent<HTMLInputElement>): void {
+        const files = event.target.files;
+        if (files && files.length > 0) onChange(files[0]);
+    }
+
     const input = (
         <input
             ref={hiddenFileInput}
-            id="file-upload"
             type="file"
-            onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                const files = event.target.files;
-                console.log("🚀 ~ files:", files);
-                if (files && files.length > 0) onChange(files[0]);
-            }}
+            id="file-upload"
+            onChange={inputHandler}
         />
     );
 

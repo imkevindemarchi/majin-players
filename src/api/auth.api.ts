@@ -1,16 +1,14 @@
 // Supabase
 import { supabase } from "../supabase";
 
-type HTTPResponseDataType = {
-    data: any;
-    value: boolean;
-};
+// Types
+import { HTTPResponseDataT } from "../types";
 
 export const AUTH_API = {
     login: async (
         email: string,
         password: string
-    ): Promise<HTTPResponseDataType> => {
+    ): Promise<HTTPResponseDataT> => {
         try {
             const res = await supabase.auth.signInWithPassword({
                 email,
@@ -30,7 +28,7 @@ export const AUTH_API = {
         }
     },
 
-    checkSession: async (): Promise<HTTPResponseDataType> => {
+    checkSession: async (): Promise<HTTPResponseDataT> => {
         try {
             const res = await supabase.auth.refreshSession();
 

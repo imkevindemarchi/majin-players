@@ -20,6 +20,11 @@ const Modal: FC<ModalI> = ({
     submitHandler,
     children,
 }) => {
+    function closeHandler(event: MouseEvent<HTMLButtonElement>): void {
+        event.preventDefault();
+        onClose();
+    }
+
     const modal = (
         <div
             className={`transition-all duration-200 p-10 rounded-3xl flex flex-col gap-10 max-w-[40%] mobile:max-w-[95%] mobile:p-5
@@ -35,7 +40,7 @@ const Modal: FC<ModalI> = ({
                     {title}
                 </span>
                 <IconButton
-                    onClick={onClose}
+                    onClick={closeHandler}
                     className="mobile:h-14 mobile:w-14 mobile:flex mobile:justify-center mobile:items-center"
                 >
                     <CancelIcon
@@ -49,10 +54,7 @@ const Modal: FC<ModalI> = ({
             <div className="flex justify-end">
                 <div className="flex flex-row gap-5">
                     <button
-                        onClick={(event: MouseEvent<HTMLButtonElement>) => {
-                            event.preventDefault();
-                            onClose();
-                        }}
+                        onClick={closeHandler}
                         className={`px-8 py-3 transition-all duration-200 hover:opacity-50 rounded-full
                             ${isDarkMode ? "bg-darkgray" : "bg-gray-200"}
                         `}

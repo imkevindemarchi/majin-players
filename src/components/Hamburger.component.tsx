@@ -6,12 +6,14 @@ import { HamburgerI } from "../types";
 const Hamburger: FC<HamburgerI> = ({ isActive, isDarkMode, onClick }) => {
     const lines: number[] = [1, 2, 3];
 
+    function clickHandler(event: MouseEvent<HTMLButtonElement>): void {
+        event.preventDefault();
+        onClick();
+    }
+
     return (
         <button
-            onClick={(event: MouseEvent<HTMLButtonElement>) => {
-                event.preventDefault();
-                onClick();
-            }}
+            onClick={clickHandler}
             className="hidden mobile:flex flex-col top-7 left-7 justify-around w-10 h-10 fixed z-[980]"
         >
             {lines.map((line) => (

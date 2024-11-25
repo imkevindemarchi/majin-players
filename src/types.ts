@@ -18,10 +18,10 @@ export type PlayerT = {
     instagramLink: string;
 };
 
+export type ErrorT = { value: boolean; message?: string | null };
+
 // Input
 export type InputTypeT = "text" | "number" | "password";
-
-export type ErrorT = { value: boolean; message?: string | null };
 
 export interface InputI {
     placeholder: string;
@@ -115,7 +115,7 @@ export interface LayoutI {
 // Routes
 export type RouteT = {
     path: string;
-    name: string;
+    name?: string;
     isHidden?: boolean;
     element: any;
 };
@@ -219,6 +219,11 @@ export interface ModalI {
     children: ReactNode;
 }
 
+// GoBackBtn
+export interface GoBackBtnI {
+    isDarkMode: boolean;
+}
+
 // InputFile
 export interface InputFileI {
     value: File | null;
@@ -238,3 +243,9 @@ export interface TextAreaI {
     name?: string;
     isDarkMode?: boolean;
 }
+
+// HTTP
+export type HTTPResponseDataT = {
+    data: any;
+    value: boolean;
+};

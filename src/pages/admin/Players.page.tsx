@@ -6,7 +6,12 @@ import {
     useEffect,
     useState,
 } from "react";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import {
+    NavigateFunction,
+    useLocation,
+    useNavigate,
+    useSearchParams,
+} from "react-router-dom";
 
 // Api
 import { PLAYERS_API } from "../../api";
@@ -44,8 +49,8 @@ const Players: FC = () => {
         name: searchParams.get("name") || "",
         surname: searchParams.get("surname") || "",
     });
-    const navigate = useNavigate();
-    const { pathname } = useLocation();
+    const navigate: NavigateFunction = useNavigate();
+    const { pathname }: { pathname: string } = useLocation();
     const { setState: setIsLoading } = useContext(
         LoaderContext
     ) as LoaderContextI;
@@ -67,7 +72,7 @@ const Players: FC = () => {
     const [selectedPlayer, setSelectedPlayer] = useState<PlayerT | null>(null);
 
     const pageTitle: string = "Giocatori";
-    const isDarkMode = theme === "dark";
+    const isDarkMode: boolean = theme === "dark";
     const tableColumns: TableColumnT[] = [
         {
             key: "name",
@@ -119,7 +124,7 @@ const Players: FC = () => {
     const title = <span className="text-3xl text-primary">{pageTitle}</span>;
 
     function inputHandler(event: ChangeEvent<HTMLInputElement>): void {
-        const { name, value } = event.target;
+        const { name, value }: { name: string; value: string } = event.target;
 
         setFormData((prevState) => ({ ...prevState, [name]: value }));
     }
@@ -276,7 +281,7 @@ const Players: FC = () => {
         setIsLoading(false);
     }
 
-    const playerFullName = `${selectedPlayer?.name} ${selectedPlayer?.surname}`;
+    const playerFullName: string = `${selectedPlayer?.name} ${selectedPlayer?.surname}`;
 
     const modal = (
         <Modal

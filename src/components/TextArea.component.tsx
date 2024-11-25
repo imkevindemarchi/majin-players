@@ -5,7 +5,6 @@ import { TextAreaI } from "../types";
 
 const TextArea: FC<TextAreaI> = ({
     placeholder,
-    type = "text",
     value,
     onChange,
     error,

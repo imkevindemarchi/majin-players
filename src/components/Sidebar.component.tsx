@@ -1,5 +1,5 @@
 import { FC, MouseEvent } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavigateFunction, useNavigate } from "react-router-dom";
 
 // Assets
 import logoImg from "../assets/images/logo.png";
@@ -9,7 +9,7 @@ import { LogoutIcon, MoonIcon, SunIcon } from "../assets/icons";
 import IconButton from "./IconButton.component";
 
 // Types
-import { SidebarI } from "../types";
+import { RouteT, SidebarI } from "../types";
 
 const Sidebar: FC<SidebarI> = ({
     isAdminSection,
@@ -21,7 +21,7 @@ const Sidebar: FC<SidebarI> = ({
     isActive,
     stateHandler,
 }) => {
-    const navigate = useNavigate();
+    const navigate: NavigateFunction = useNavigate();
 
     const themeIcon = isDarkMode ? (
         <MoonIcon className="text-2xl text-primary" />
@@ -29,19 +29,23 @@ const Sidebar: FC<SidebarI> = ({
         <SunIcon className="text-2xl text-primary" />
     );
 
+    function goToHomePageHandler(event: MouseEvent<HTMLButtonElement>): void {
+        event.preventDefault();
+        navigate(isAdminSection ? "/admin" : "/");
+    }
+
     return (
         <div
             className={`fixed flex w-full left-0 z-[900] h-[100vh] justify-center items-center flex-col gap-10 transition-all duration-200
                 ${isDarkMode ? "bg-black" : "bg-white"}
-                ${isActive ? "top-0 opacity-100" : "top-[-100%] mobile:top-[-120%] opacity-0"}
+                ${
+                    isActive
+                        ? "top-0 opacity-100"
+                        : "top-[-100%] mobile:top-[-120%] opacity-0"
+                }
             `}
         >
-            <button
-                onClick={(event: MouseEvent<HTMLButtonElement>) => {
-                    event.preventDefault();
-                    navigate(isAdminSection ? "/admin" : "/");
-                }}
-            >
+            <button onClick={goToHomePageHandler}>
                 <img
                     src={logoImg}
                     onClick={() => stateHandler()}
@@ -50,11 +54,12 @@ const Sidebar: FC<SidebarI> = ({
                 />
             </button>
             <div className="flex flex-col items-center gap-5">
-                {routes.map((route) => {
-                    const currentSection = isAdminSection
+                {routes.map((route: RouteT) => {
+                    const currentSection: string = isAdminSection
                         ? route.path.split("/")[2]
                         : route.path.split("/")[1];
-                    const isRouteActive = currentSection === urlSection;
+                    const isRouteActive: boolean =
+                        currentSection === urlSection;
 
                     return (
                         !route?.isHidden && (

@@ -26,7 +26,7 @@ import { AuthContextI, RouteT } from "./types";
 import { removeFromStorage } from "./utilities";
 
 const App: FC = () => {
-    const { pathname } = useLocation();
+    const { pathname }: { pathname: string } = useLocation();
     const navigate = useNavigate();
     const { session: isUserAuthenticated } = useContext(
         AuthContext

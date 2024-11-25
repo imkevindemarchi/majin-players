@@ -9,9 +9,9 @@ import { SnackbarI } from "../types";
 const Snackbar: FC<SnackbarI> = ({ state, onClose }) => {
     const { type, isOpen, message } = state;
 
-    const isErrorType = type === "error";
-    const isSuccessType = type === "success";
-    const isWarningType = type === "warning";
+    const isErrorType: boolean = type === "error";
+    const isSuccessType: boolean = type === "success";
+    const isWarningType: boolean = type === "warning";
 
     function closeHandler(event: MouseEvent<HTMLButtonElement>): void {
         event.preventDefault();
