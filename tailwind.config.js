@@ -12,6 +12,7 @@ module.exports = {
                 "backdrop-dark": "#3030306b",
                 "pink-transparent": "#f37c903a",
                 "pink-transparent-2": "#f37c901d",
+                "pink-2": "#0000006b",
                 darkgray: "#141414",
             },
         },
