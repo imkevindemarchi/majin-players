@@ -57,7 +57,7 @@ export interface SnackbarContextI {
     state: SnackbarStateI;
     setState?: Dispatch<SetStateAction<SnackbarStateI>>;
     closeHandler: () => void;
-    activeHandler: (message: string, type: SnackbarMessageT) => void;
+    activateHandler: (message: string, type: SnackbarMessageT) => void;
 }
 
 export interface SnackbarProviderI {
@@ -185,7 +185,7 @@ export type TableColumnT = {
 
 export interface TableI {
     columns: TableColumnT[];
-    data: PlayerT[];
+    data: any[];
     isDarkMode: boolean;
     totalRecords: number;
     deleteHandler?: (rowData: any) => void;

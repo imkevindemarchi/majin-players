@@ -9,6 +9,10 @@ import IconButton from "./IconButton.component";
 // Types
 import { TableFoooterBtnI, TableI } from "../types";
 
+function approximateByExcess(num: number) {
+    return Math.ceil(num);
+}
+
 const Table: FC<TableI> = ({
     columns,
     data,
@@ -20,8 +24,9 @@ const Table: FC<TableI> = ({
     nextPageHandler,
     rowHandler,
 }) => {
-    const canGoPrevious: boolean = currentPage !== 1;
-    const canGoNext: boolean = totalRecords / 5 > currentPage;
+    const canGoPrevious: boolean = currentPage > 1;
+    const totalPages = approximateByExcess(totalRecords / 5);
+    const canGoNext: boolean = currentPage < totalPages;
 
     function onDelete(
         event: MouseEvent<HTMLButtonElement>,

@@ -29,7 +29,7 @@ export const SnackbarProvider = ({ children }: SnackbarProviderI) => {
         }, 1000);
     }
 
-    function activeHandler(message: string, type: SnackbarMessageT) {
+    function activateHandler(message: string, type: SnackbarMessageT) {
         setState({
             isOpen: true,
             message,
@@ -43,7 +43,7 @@ export const SnackbarProvider = ({ children }: SnackbarProviderI) => {
 
     return (
         <SnackbarContext.Provider
-            value={{ state, activeHandler, closeHandler }}
+            value={{ state, activateHandler, closeHandler }}
         >
             {children}
         </SnackbarContext.Provider>

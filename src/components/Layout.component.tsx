@@ -48,7 +48,7 @@ const Layout: FC<LayoutI> = ({ isAdminSection, pathname, children }) => {
         LoaderContext
     ) as LoaderContextI;
     const { setSession } = useContext(AuthContext) as AuthContextI;
-    const { activeHandler: activeSnackbar } = useContext(
+    const { activateHandler: activateSnackbar } = useContext(
         SnackbarContext
     ) as SnackbarContextI;
     const { state: sidebarState, stateHandler: sidebarHandler } = useContext(
@@ -72,7 +72,7 @@ const Layout: FC<LayoutI> = ({ isAdminSection, pathname, children }) => {
             setSession(null);
             removeFromStorage("session");
             navigate("/log-in");
-        } else activeSnackbar("Impossibile effettuare il log out", "error");
+        } else activateSnackbar("Impossibile effettuare il log out", "error");
 
         setIsLoading(false);
     }
@@ -124,7 +124,7 @@ const Layout: FC<LayoutI> = ({ isAdminSection, pathname, children }) => {
             {hamburger}
             <div
                 className={
-                    !isStyleGuidePage
+                    !isStyleGuidePage && !isLoginPage
                         ? "px-96 mobile:px-5 py-56 mobile:py-28"
                         : ""
                 }
