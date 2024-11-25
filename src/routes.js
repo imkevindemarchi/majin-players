@@ -1,5 +1,6 @@
 // Pages
 import {
+    AdminDashboard,
     AdminPlayers,
     AdminPlayer,
     AdminEquipments,
@@ -28,7 +29,12 @@ export const ROUTES = [
 ];
 
 export const ADMIN_ROUTES = [
-    { path: "/admin", name: "Dashboard", isHidden: true, element: <></> },
+    {
+        path: "/admin",
+        name: "Dashboard",
+        isHidden: true,
+        element: <AdminDashboard />,
+    },
     {
         path: "/admin/players",
         name: "Giocatori",
