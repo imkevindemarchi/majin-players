@@ -12,3 +12,8 @@
 ::-webkit-scrollbar {
     display: none;
 }
+
+
+input[type="file"] {
+    display: none;
+}

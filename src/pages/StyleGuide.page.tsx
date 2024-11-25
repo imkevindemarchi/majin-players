@@ -9,6 +9,7 @@ import {
     Button,
     Card,
     Input,
+    InputFile,
     Loader,
     Modal,
     Snackbar,
@@ -37,6 +38,7 @@ const StyleGuide: FC = () => {
     const [isBackdropOpen, setIsBackdropOpen] = useState<boolean>(false);
     const [isLoaderOpen, setIsLoaderOpen] = useState<boolean>(false);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    const [file, setFile] = useState<File | null>(null);
 
     setPageTitle("Style Guide");
 
@@ -49,6 +51,7 @@ const StyleGuide: FC = () => {
         "table",
         "card",
         "modal",
+        "inputFile",
     ];
     const tableColumns: TableColumnT[] = [
         {
@@ -460,6 +463,17 @@ const StyleGuide: FC = () => {
         </div>
     );
 
+    const inputFile = (
+        <div className="flex flex-col gap-3">
+            <span className="text-lg text-primary">Input FIle</span>
+            <InputFile
+                value={file}
+                onChange={(file: File) => setFile(file)}
+                icon={<UserIcon className="text-3xl text-primary" />}
+            />
+        </div>
+    );
+
     return (
         <div className="px-40 py-20 flex flex-col gap-10 w-full h-full bg-black">
             {title}
@@ -539,6 +553,15 @@ const StyleGuide: FC = () => {
             >
                 <span className="text-2xl text-primary font-bold">Modal</span>
                 {modal}
+            </div>
+            <div
+                id="inputFile"
+                className="flex flex-col gap-5 border-gray-600 py-20 border-b-2"
+            >
+                <span className="text-2xl text-primary font-bold">
+                    Input File
+                </span>
+                {inputFile}
             </div>
         </div>
     );
