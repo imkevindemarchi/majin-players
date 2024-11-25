@@ -5,6 +5,7 @@ import {
     AdminEquipments,
     AdminEquipment,
     AdminSponsorships,
+    AdminSponsorship,
 } from "./pages/admin";
 import { LogIn, StyleGuide } from "./pages";
 
@@ -62,5 +63,15 @@ export const ADMIN_ROUTES = [
         path: "/admin/sponsorships",
         name: "Sponsor",
         element: <AdminSponsorships />,
+    },
+    {
+        path: "/admin/sponsorships/new",
+        element: <AdminSponsorship />,
+        isHidden: true,
+    },
+    {
+        path: "/admin/sponsorships/:id",
+        element: <AdminSponsorship />,
+        isHidden: true,
     },
 ];
