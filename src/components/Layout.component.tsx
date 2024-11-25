@@ -109,7 +109,7 @@ const Layout: FC<LayoutI> = ({ isAdminSection, pathname, children }) => {
         />
     );
 
-    const loader = <Loader isOpen={isLoading} />;
+    const loader = <Loader isOpen={isLoading} isDarkMode={isDarkMode} />;
 
     const snackbar = <Snackbar state={snackbarState} onClose={closeSnackbar} />;
 

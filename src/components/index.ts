@@ -10,3 +10,4 @@ export { default as Sidebar } from "./Sidebar.component";
 export { default as Hamburger } from "./Hamburger.component";
 export { default as Table } from "./Table.component";
 export { default as Card } from "./Card.component";
+export { default as Modal } from "./Modal.component";

@@ -10,6 +10,7 @@ import {
     Card,
     Input,
     Loader,
+    Modal,
     Snackbar,
     Table,
 } from "../components";
@@ -35,6 +36,7 @@ const StyleGuide: FC = () => {
     } = useContext(SnackbarContext) as SnackbarContextI;
     const [isBackdropOpen, setIsBackdropOpen] = useState<boolean>(false);
     const [isLoaderOpen, setIsLoaderOpen] = useState<boolean>(false);
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
     setPageTitle("Style Guide");
 
@@ -46,6 +48,7 @@ const StyleGuide: FC = () => {
         "loader",
         "table",
         "card",
+        "modal",
     ];
     const tableColumns: TableColumnT[] = [
         {
@@ -315,6 +318,7 @@ const StyleGuide: FC = () => {
                 <Backdrop
                     isOpen={isBackdropOpen}
                     onClose={() => setIsBackdropOpen(false)}
+                    isDarkMode
                 >
                     <div />
                 </Backdrop>
@@ -337,7 +341,7 @@ const StyleGuide: FC = () => {
                 >
                     <span className="text-white">Attiva Loader</span>
                 </Button>
-                <Loader isOpen={isLoaderOpen} />
+                <Loader isOpen={isLoaderOpen} isDarkMode />
             </div>
         </div>
     );
@@ -428,6 +432,37 @@ const StyleGuide: FC = () => {
         </div>
     );
 
+    const modal = (
+        <div className="flex flex-col gap-3">
+            <span className="text-lg text-primary">Modal</span>
+            <div className="w-[30vh]">
+                <Button
+                    onClick={(event: MouseEvent<HTMLButtonElement>) =>
+                        setIsModalOpen(true)
+                    }
+                >
+                    <span className="text-white">Apri Modal</span>
+                </Button>
+                <Modal
+                    title="Modal Title"
+                    isOpen={isModalOpen}
+                    onClose={() => setIsModalOpen(false)}
+                    submitBtnText="Sì"
+                    cancelBtnText="No"
+                    submitHandler={(event: MouseEvent<HTMLButtonElement>) =>
+                        alert("Modal Confirmation")
+                    }
+                    cancelHandler={(event: MouseEvent<HTMLButtonElement>) =>
+                        setIsModalOpen(false)
+                    }
+                    isDarkMode
+                >
+                    <h1 className="text-white">Modal Content</h1>
+                </Modal>
+            </div>
+        </div>
+    );
+
     return (
         <div className="px-40 py-20 flex flex-col gap-10 w-full h-full bg-black">
             {title}
@@ -500,6 +535,13 @@ const StyleGuide: FC = () => {
             >
                 <span className="text-2xl text-primary font-bold">Card</span>
                 {card}
+            </div>
+            <div
+                id="modal"
+                className="flex flex-col gap-5 border-gray-600 py-20 border-b-2"
+            >
+                <span className="text-2xl text-primary font-bold">Modal</span>
+                {modal}
             </div>
         </div>
     );
