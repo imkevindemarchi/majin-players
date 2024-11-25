@@ -14,6 +14,7 @@ import {
     Modal,
     Snackbar,
     Table,
+    TextArea,
 } from "../components";
 
 // Contexts
@@ -26,10 +27,10 @@ import { PlayerT, SnackbarContextI, TableColumnT } from "../types";
 import { setPageTitle } from "../utilities";
 
 const StyleGuide: FC = () => {
-    const [inputValue, setInputValue] = useState("");
-    const [inputWithErrorValue, setInputWithErrorValue] = useState("");
-    const [inputDisabledValue, setInputDisabledValue] = useState("");
-    const [inputStartIconValue, setInputStartIconValue] = useState("");
+    const [inputValue, setInputValue] = useState<string>("");
+    const [inputWithErrorValue, setInputWithErrorValue] = useState<string>("");
+    const [inputDisabledValue, setInputDisabledValue] = useState<string>("");
+    const [inputStartIconValue, setInputStartIconValue] = useState<string>("");
     const {
         state: snackbarState,
         activateHandler: activateSnackbar,
@@ -39,6 +40,11 @@ const StyleGuide: FC = () => {
     const [isLoaderOpen, setIsLoaderOpen] = useState<boolean>(false);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [file, setFile] = useState<File | null>(null);
+    const [textAreaValue, setTextAreaValue] = useState<string>("");
+    const [textAreaWithErrorValue, setTextAreaWithErrorValue] =
+        useState<string>("");
+    const [textAreaDisabledValue, setTextAreaDisabledValue] =
+        useState<string>("");
 
     setPageTitle("Style Guide");
 
@@ -52,6 +58,7 @@ const StyleGuide: FC = () => {
         "card",
         "modal",
         "inputFile",
+        "textArea",
     ];
     const tableColumns: TableColumnT[] = [
         {
@@ -474,6 +481,56 @@ const StyleGuide: FC = () => {
         </div>
     );
 
+    const textArea = (
+        <div className="flex flex-col gap-3">
+            <span className="text-lg text-primary">Text Area</span>
+            <div className="w-[30vh]">
+                <TextArea
+                    placeholder="placeholder..."
+                    type="text"
+                    value={textAreaValue}
+                    onChange={(event: ChangeEvent<HTMLTextAreaElement>) =>
+                        setTextAreaValue(event.target.value)
+                    }
+                />
+            </div>
+        </div>
+    );
+
+    const textAreaWithError = (
+        <div className="flex flex-col gap-3">
+            <span className="text-lg text-primary">Text Area Error</span>
+            <div className="w-[30vh]">
+                <TextArea
+                    placeholder="placeholder..."
+                    type="text"
+                    value={textAreaWithErrorValue}
+                    onChange={(event: ChangeEvent<HTMLTextAreaElement>) =>
+                        setTextAreaWithErrorValue(event.target.value)
+                    }
+                    error={{ value: true, message: "Errore della text area" }}
+                />
+            </div>
+        </div>
+    );
+
+    const textAreaDisabled = (
+        <div className="flex flex-col gap-3">
+            <span className="text-lg text-primary">Text Area Disabled</span>
+            <div className="w-[30vh]">
+                <TextArea
+                    placeholder="placeholder..."
+                    type="text"
+                    value={textAreaDisabledValue}
+                    onChange={(event: ChangeEvent<HTMLTextAreaElement>) =>
+                        setTextAreaDisabledValue(event.target.value)
+                    }
+                    disabled
+                />
+            </div>
+        </div>
+    );
+
     return (
         <div className="px-40 py-20 flex flex-col gap-10 w-full h-full bg-black">
             {title}
@@ -562,6 +619,17 @@ const StyleGuide: FC = () => {
                     Input File
                 </span>
                 {inputFile}
+            </div>
+            <div
+                id="textArea"
+                className="flex flex-col gap-5 border-gray-600 py-20 border-b-2"
+            >
+                <span className="text-2xl text-primary font-bold">
+                    Text Area
+                </span>
+                {textArea}
+                {textAreaWithError}
+                {textAreaDisabled}
             </div>
         </div>
     );
