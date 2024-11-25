@@ -9,10 +9,15 @@ import { ThemeContext } from "../../providers";
 // Types
 import { ThemeContextI } from "../../types";
 
+// Utilities
+import { setPageTitle } from "../../utilities";
+
 const Dashboard: FC = () => {
     const { state: theme } = useContext(ThemeContext) as ThemeContextI;
 
     const isDarkMode: boolean = theme === "dark";
+
+    setPageTitle("Dasboard");
 
     const image = (
         <img
