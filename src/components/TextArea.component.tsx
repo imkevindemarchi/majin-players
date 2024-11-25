@@ -30,7 +30,7 @@ const TextArea: FC<TextAreaI> = ({
                 onChange={onChange}
                 disabled={disabled}
                 name={name}
-                className={`w-full border-none outline-none bg-transparent
+                className={`w-full border-none outline-none bg-transparent mobile:h-40
                     ${isDarkMode ? "text-white" : "text-black"}
                     ${disabled && "cursor-not-allowed"}
                 `}

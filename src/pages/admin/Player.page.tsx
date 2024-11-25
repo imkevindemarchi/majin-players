@@ -175,7 +175,7 @@ const Player: FC = () => {
 
     const form = (
         <Card>
-            <form className="flex flex-col gap-10">
+            <form className="flex flex-col gap-10 mobile:gap-5">
                 <div className="flex justify-center items-center gap-10">
                     {formData.image && (
                         <img
@@ -192,7 +192,7 @@ const Player: FC = () => {
                         error={errors.image}
                     />
                 </div>
-                <div className="flex flex-row gap-20">
+                <div className="flex flex-row gap-20 mobile:flex-col mobile:gap-5">
                     <Input
                         name="name"
                         placeholder="Nome"
@@ -219,7 +219,7 @@ const Player: FC = () => {
                         isDarkMode={isDarkMode}
                     />
                 </div>
-                <div className="flex flex-row gap-20">
+                <div className="flex flex-row gap-20 mobile:flex-col mobile:gap-5">
                     <Input
                         name="favouriteCard"
                         placeholder="Carta preferita"
