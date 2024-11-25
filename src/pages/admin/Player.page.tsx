@@ -262,7 +262,9 @@ const Player: FC = () => {
         </Card>
     );
 
-    const tops = isEditMode && <Tops isDarkMode={isDarkMode} isAdminSection />;
+    const tops = isEditMode && (
+        <Tops isDarkMode={isDarkMode} isAdminSection playerId={id} />
+    );
 
     function validateForm(): boolean {
         const currentYear: number = new Date().getFullYear();

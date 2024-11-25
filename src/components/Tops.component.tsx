@@ -1,4 +1,11 @@
-import { ChangeEvent, FC, MouseEvent, useContext, useState } from "react";
+import {
+    ChangeEvent,
+    FC,
+    MouseEvent,
+    useContext,
+    useEffect,
+    useState,
+} from "react";
 
 // Assets
 import { AddIcon, DeleteIcon } from "../assets/icons";
@@ -17,6 +24,7 @@ import { ErrorT, LoaderContextI, TopsI, TopT } from "../types";
 
 // Utilities
 import { checkFormField, checkFormFieldYear } from "../utilities";
+import { TOPS_API } from "../api";
 
 interface FormDataI {
     year: string;
@@ -65,7 +73,7 @@ const errorsInitialValues: ErrorsI = {
     },
 };
 
-const Tops: FC<TopsI> = ({ isDarkMode, isAdminSection }) => {
+const Tops: FC<TopsI> = ({ isDarkMode, isAdminSection, playerId }) => {
     const [formData, setFormData] = useState<FormDataI>(formDataInitialState);
     const [errors, setErrors] = useState<ErrorsI>(errorsInitialValues);
     const { setState: setIsLoading } = useContext(
@@ -75,6 +83,32 @@ const Tops: FC<TopsI> = ({ isDarkMode, isAdminSection }) => {
     const [years, setYears] = useState<number[]>([]);
     const [selectedTop, setSelectedTop] = useState<TopT | null>(null);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
+
+    function getDistinctYears(array: TopT[]): number[] {
+        return Array.from(new Set(array.map((obj) => obj.year)));
+    }
+
+    async function getDataHandler() {
+        if (playerId) {
+            setIsLoading(true);
+
+            const res = await TOPS_API.getAll(playerId);
+
+            if (res) {
+                const years = getDistinctYears(res);
+                setYears(years);
+                setTops(res);
+            }
+
+            setIsLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        getDataHandler();
+
+        // eslint-disable-next-line
+    }, []);
 
     const title = <span className="text-3xl text-primary">Top</span>;
 
