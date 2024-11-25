@@ -197,7 +197,7 @@ const Sponsorship: FC = () => {
         event.preventDefault();
         setIsLoading(true);
 
-        const isFormValid = validateForm();
+        const isFormValid: boolean = validateForm();
 
         if (isFormValid) {
             if (isEditMode && id) {

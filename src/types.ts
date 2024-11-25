@@ -30,6 +30,15 @@ export type SponsorshipT = {
 
 export type ErrorT = { value: boolean; message?: string | null };
 
+export type TopT = {
+    id?: string;
+    year: number;
+    position: string;
+    deck: string;
+    tournament: string;
+    place: string;
+};
+
 // Input
 export type InputTypeT = "text" | "number" | "password";
 
@@ -260,3 +269,9 @@ export type HTTPResponseDataT = {
     data: any;
     value: boolean;
 };
+
+// Tops
+export interface TopsI {
+    isDarkMode: boolean;
+    isAdminSection?: boolean;
+}
