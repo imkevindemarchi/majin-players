@@ -22,6 +22,7 @@ import {
     Input,
     InputFile,
     TextArea,
+    Tops,
 } from "../../components";
 
 // Contexts
@@ -261,6 +262,8 @@ const Player: FC = () => {
         </Card>
     );
 
+    const tops = isEditMode && <Tops isDarkMode={isDarkMode} isAdminSection />;
+
     function validateForm(): boolean {
         const currentYear: number = new Date().getFullYear();
         const allowedMaxYear: number = currentYear - 10;
@@ -315,7 +318,7 @@ const Player: FC = () => {
         event.preventDefault();
         setIsLoading(true);
 
-        const isFormValid = validateForm();
+        const isFormValid: boolean = validateForm();
 
         if (isFormValid) {
             if (isEditMode && id) {
@@ -428,6 +431,7 @@ const Player: FC = () => {
             {title}
             {goBackBtn}
             {form}
+            {tops}
             {btn}
         </div>
     );
