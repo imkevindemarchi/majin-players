@@ -9,8 +9,10 @@ module.exports = {
                 green: "#008000",
                 orange: "#ffa500",
                 backdrop: "#0000006b",
+                "backdrop-dark": "#3030306b",
                 "pink-transparent": "#f37c903a",
                 "pink-transparent-2": "#f37c901d",
+                darkgray: "#141414",
             },
         },
         screens: {

@@ -75,12 +75,14 @@ export interface SnackbarI {
 export interface BackdropI {
     isOpen: boolean;
     onClose?: () => void;
+    isDarkMode: boolean;
     children: ReactNode;
 }
 
 // Loader
 export interface LoaderI {
     isOpen: boolean;
+    isDarkMode: boolean;
 }
 
 // Auth
@@ -203,5 +205,18 @@ export interface TableFoooterBtnI {
 
 // Card
 export interface CardI {
+    children: ReactNode;
+}
+
+// Modal
+export interface ModalI {
+    title: string;
+    isOpen: boolean;
+    onClose: () => void;
+    isDarkMode: boolean;
+    submitBtnText: string;
+    cancelBtnText: string;
+    submitHandler: (event: MouseEvent<HTMLButtonElement>) => void;
+    cancelHandler: (event: MouseEvent<HTMLButtonElement>) => void;
     children: ReactNode;
 }
