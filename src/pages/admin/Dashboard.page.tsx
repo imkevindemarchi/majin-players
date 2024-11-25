@@ -24,7 +24,7 @@ const Dashboard: FC = () => {
 
     const title = (
         <span
-            className={`absolute text-[3em] uppercase tracking-[1em] font-bold transition-all duration-200
+            className={`absolute text-[3em] uppercase tracking-[1em] font-bold transition-all duration-200 mobile:text-center mobile:tracking-[0.3em]
                 ${isDarkMode ? "text-white" : "text-black"}
             `}
             style={{
