@@ -162,7 +162,6 @@ export interface SidebarI {
     stateHandler: () => void;
 }
 
-// Sidebar
 export interface SidebarContextI {
     state: boolean;
     stateHandler: () => void;
@@ -218,4 +217,12 @@ export interface ModalI {
     cancelBtnText: string;
     submitHandler: (event: MouseEvent<HTMLButtonElement>) => void;
     children: ReactNode;
+}
+
+// InputFile
+export interface InputFileI {
+    value: File | null;
+    onChange: (file: File) => void;
+    error?: ErrorT;
+    icon: any;
 }
