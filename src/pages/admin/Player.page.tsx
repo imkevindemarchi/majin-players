@@ -6,6 +6,10 @@ import {
     useEffect,
     useState,
 } from "react";
+import { NavigateFunction, useNavigate } from "react-router-dom";
+
+// Api
+import { IMAGES_API, PLAYERS_API } from "../../api";
 
 // Assets
 import { SaveIcon, UserIcon } from "../../assets/icons";
@@ -21,10 +25,16 @@ import {
 } from "../../components";
 
 // Contexts
-import { ThemeContext } from "../../providers";
+import { LoaderContext, SnackbarContext, ThemeContext } from "../../providers";
 
 // Types
-import { ErrorT, ThemeContextI } from "../../types";
+import {
+    ErrorT,
+    LoaderContextI,
+    PlayerT,
+    SnackbarContextI,
+    ThemeContextI,
+} from "../../types";
 
 // Utilities
 import {
@@ -96,6 +106,13 @@ const Player: FC = () => {
     const { state: theme } = useContext(ThemeContext) as ThemeContextI;
     const [formData, setFormData] = useState<FormDataI>(formDataInitialState);
     const [errors, setErrors] = useState<ErrorsI>(errorsInitialValues);
+    const { activateHandler: activateSnackbar } = useContext(
+        SnackbarContext
+    ) as SnackbarContextI;
+    const navigate: NavigateFunction = useNavigate();
+    const { setState: setIsLoading } = useContext(
+        LoaderContext
+    ) as LoaderContextI;
 
     const pageTitle: string = "Nuovo Giocatore";
     const isDarkMode: boolean = theme === "dark";
@@ -224,47 +241,47 @@ const Player: FC = () => {
         const currentYear: number = new Date().getFullYear();
         const allowedMaxYear: number = currentYear - 10;
 
-        const isNameValid: ErrorT = checkFormField(formData.name);
-        const isSurnameValid: ErrorT = checkFormField(formData.surname);
-        const isBirthYearValid: ErrorT = checkFormFieldYear(
+        const hasNameError: ErrorT = checkFormField(formData.name);
+        const hasSurnameError: ErrorT = checkFormField(formData.surname);
+        const hasBirthYearError: ErrorT = checkFormFieldYear(
             formData.birthYear,
             allowedMaxYear
         );
-        const isEmailValid: ErrorT = formData.email
+        const hasEmailError: ErrorT = formData.email
             ? checkEmail(formData.email)
             : { value: true };
-        const isImageValid = checkFormFieldImage(formData.image);
+        const hasImageError = checkFormFieldImage(formData.image);
 
         setErrors((prevState) => ({
             ...prevState,
             name: {
-                value: isNameValid.value,
-                message: isNameValid.message,
+                value: hasNameError.value,
+                message: hasNameError.message,
             },
             surname: {
-                value: isSurnameValid.value,
-                message: isSurnameValid.message,
+                value: hasSurnameError.value,
+                message: hasSurnameError.message,
             },
             birthYear: {
-                value: isBirthYearValid.value,
-                message: isBirthYearValid.message,
+                value: hasBirthYearError.value,
+                message: hasBirthYearError.message,
             },
             email: {
-                value: isEmailValid.value,
-                message: isEmailValid.message,
+                value: hasEmailError.value,
+                message: hasEmailError.message,
             },
             image: {
-                value: isImageValid.value,
-                message: isImageValid.message,
+                value: hasImageError.value,
+                message: hasImageError.message,
             },
         }));
 
         if (
-            isNameValid.value &&
-            isSurnameValid.value &&
-            isBirthYearValid.value &&
-            isEmailValid.value &&
-            isImageValid.value
+            !hasNameError.value &&
+            !hasSurnameError.value &&
+            !hasBirthYearError.value &&
+            !hasEmailError.value &&
+            !hasImageError.value
         )
             return true;
         else return false;
@@ -272,9 +289,40 @@ const Player: FC = () => {
 
     async function submitHandler(event: MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
+        setIsLoading(true);
 
         const isFormValid = validateForm();
-        console.log("🚀 ~ isFormValid:", isFormValid);
+
+        if (isFormValid) {
+            const data: PlayerT = {
+                name: formData.name,
+                surname: formData.surname,
+                email: formData.email,
+                birthYear: parseInt(formData.birthYear),
+                favouriteCard: formData.favouriteCard,
+                favouriteDeck: formData.favouriteDeck,
+                description: formData.description,
+                instagramLink: formData.instagramLink,
+            };
+
+            const res = await PLAYERS_API.create(data);
+            if (res && typeof res !== "boolean" && formData.image) {
+                const imageRes = await IMAGES_API.add(res, formData.image);
+                if (imageRes) {
+                    activateSnackbar(
+                        "Giocatore creato con successo",
+                        "success"
+                    );
+                    navigate(`/admin/players/${res}`);
+                } else
+                    activateSnackbar(
+                        "Impossibile aggiungere l'immagine al giocatore",
+                        "error"
+                    );
+            } else activateSnackbar("Impossibile creare il giocatore", "error");
+        }
+
+        setIsLoading(false);
     }
 
     const btn = (

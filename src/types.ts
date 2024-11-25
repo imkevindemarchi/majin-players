@@ -7,7 +7,7 @@ import {
 } from "react";
 
 export type PlayerT = {
-    id: string;
+    id?: string;
     name: string;
     surname: string;
     email: string;
