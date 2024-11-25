@@ -23,6 +23,11 @@ export type EquipmentT = {
     name: string;
 };
 
+export type SponsorshipT = {
+    id?: string;
+    name: string;
+};
+
 export type ErrorT = { value: boolean; message?: string | null };
 
 // Input

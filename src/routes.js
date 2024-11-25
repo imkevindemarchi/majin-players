@@ -4,6 +4,7 @@ import {
     AdminPlayer,
     AdminEquipments,
     AdminEquipment,
+    AdminSponsorships,
 } from "./pages/admin";
 import { LogIn, StyleGuide } from "./pages";
 
@@ -57,5 +58,9 @@ export const ADMIN_ROUTES = [
         element: <AdminEquipment />,
         isHidden: true,
     },
-    { path: "/admin/sponsorships", name: "Sponsor", element: <></> },
+    {
+        path: "/admin/sponsorships",
+        name: "Sponsor",
+        element: <AdminSponsorships />,
+    },
 ];
