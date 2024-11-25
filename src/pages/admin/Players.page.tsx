@@ -280,7 +280,7 @@ const Players: FC = () => {
 
     const modal = (
         <Modal
-            title="Eliminazione giocatore"
+            title="Elimina giocatore"
             cancelBtnText="No"
             isDarkMode={isDarkMode}
             submitBtnText="Sì"

@@ -12,7 +12,7 @@ const Hamburger: FC<HamburgerI> = ({ isActive, isDarkMode, onClick }) => {
                 event.preventDefault();
                 onClick();
             }}
-            className="hidden mobile:flex flex-col top-7 left-7 justify-around w-10 h-10 fixed z-[999]"
+            className="hidden mobile:flex flex-col top-7 left-7 justify-around w-10 h-10 fixed z-[980]"
         >
             {lines.map((line) => (
                 <div

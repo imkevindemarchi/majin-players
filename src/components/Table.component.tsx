@@ -142,7 +142,7 @@ const Table: FC<TableI> = ({
                 </tbody>
             </table>
             {totalRecords === 0 && (
-                <div className="w-full flex justify-center items-center py-5 bg-pink-transparent-2">
+                <div className="w-full flex justify-center items-center py-5 bg-pink-transparent-2 rounded-bl-lg rounded-br-lg">
                     <span
                         className={`text-md
                             ${isDarkMode ? "text-white" : "text-black"}
@@ -153,7 +153,7 @@ const Table: FC<TableI> = ({
                 </div>
             )}
             {totalRecords > 0 && (
-                <div className="w-full bg-pink-transparent p-5 rounded-bl-lg rounded-br-lg flex justify-between">
+                <div className="w-full bg-pink-transparent p-5 rounded-bl-lg rounded-br-lg flex justify-between sticky bottom-0 left-0 right-0">
                     <span
                         className={`${
                             isDarkMode ? "text-white" : "text-black"
