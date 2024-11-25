@@ -1,11 +1,18 @@
-import { ChangeEvent, FC, useContext, useEffect, useState } from "react";
+import {
+    ChangeEvent,
+    FC,
+    MouseEvent,
+    useContext,
+    useEffect,
+    useState,
+} from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
 // Api
 import { PLAYERS_API } from "../../api";
 
 // Assets
-import { AddIcon, SearchIcon } from "../../assets/icons";
+import { AddIcon, CancelIcon, SearchIcon } from "../../assets/icons";
 
 // Components
 import { Card, IconButton, Input, Table } from "../../components";
@@ -109,13 +116,13 @@ const Players: FC = () => {
 
     const title = <span className="text-3xl text-primary">{pageTitle}</span>;
 
-    function inputHandler(event: ChangeEvent<HTMLInputElement>) {
+    function inputHandler(event: ChangeEvent<HTMLInputElement>): void {
         const { name, value } = event.target;
 
         setFormData((prevState) => ({ ...prevState, [name]: value }));
     }
 
-    async function submitHandler(event: any) {
+    function submitHandler(event: any): void {
         event.preventDefault();
 
         setSearchParams({
@@ -125,6 +132,21 @@ const Players: FC = () => {
             to: to.toString(),
             page: tableCurrentPage.toString(),
         });
+    }
+
+    function resetHandler(event: MouseEvent<HTMLButtonElement>): void {
+        event.preventDefault();
+        setSearchParams({
+            name: "",
+            surname: "",
+            from: "0",
+            to: "4",
+            page: "1",
+        });
+        setFormData({ name: "", surname: "" });
+        setFrom(0);
+        setTo(4);
+        setTableCurrentPage(1);
     }
 
     const form = (
@@ -153,6 +175,14 @@ const Players: FC = () => {
                     className="w-14 h-1w-14 flex justify-center items-center bg-primary"
                 >
                     <SearchIcon className="text-white" />
+                </IconButton>
+                <IconButton
+                    onClick={resetHandler}
+                    className="w-14 h-1w-14 flex justify-center items-center"
+                >
+                    <CancelIcon
+                        className={isDarkMode ? "text-white" : "text-black"}
+                    />
                 </IconButton>
             </form>
         </Card>

@@ -12,3 +12,4 @@ export { ArrowLeftIcon } from "./arrow-left.icon";
 export { ArrowRightIcon } from "./arrow-right.icon";
 export { SearchIcon } from "./search.icon";
 export { AddIcon } from "./add.icon";
+export { CancelIcon } from "./cancel.icon";
