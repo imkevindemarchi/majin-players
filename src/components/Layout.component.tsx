@@ -123,11 +123,14 @@ const Layout: FC<LayoutI> = ({ isAdminSection, pathname, children }) => {
             {sidebar}
             {hamburger}
             <div
-                className={
-                    !isStyleGuidePage && !isLoginPage
-                        ? "px-96 mobile:px-5 py-56 mobile:py-28"
-                        : ""
-                }
+                className={`transition-all duration-500 
+                    ${sidebarState && "opacity-0"}
+                    ${
+                        !isStyleGuidePage && !isLoginPage
+                            ? "px-96 mobile:px-5 py-56 mobile:py-28"
+                            : ""
+                    }
+                `}
             >
                 {children}
             </div>

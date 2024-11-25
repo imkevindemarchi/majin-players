@@ -33,7 +33,7 @@ const Sidebar: FC<SidebarI> = ({
         <div
             className={`fixed flex w-full left-0 z-[900] h-[100vh] justify-center items-center flex-col gap-10 transition-all duration-200
                 ${isDarkMode ? "bg-black" : "bg-white"}
-                ${isActive ? "top-0" : "top-[-100%] mobile:top-[-120%]"}
+                ${isActive ? "top-0 opacity-100" : "top-[-100%] mobile:top-[-120%] opacity-0"}
             `}
         >
             <button
