@@ -24,7 +24,7 @@ import { SnackbarContext } from "../providers";
 import { PlayerT, SnackbarContextI, TableColumnT } from "../types";
 
 // Utilities
-import { setPageTitle } from "../utilities";
+import { capitalizeFirstLetter, setPageTitle } from "../utilities";
 
 const StyleGuide: FC = () => {
     const [inputValue, setInputValue] = useState<string>("");
@@ -48,7 +48,7 @@ const StyleGuide: FC = () => {
 
     setPageTitle("Style Guide");
 
-    const linksArray = [
+    const linksArray: string[] = [
         "input",
         "button",
         "snackbar",
@@ -81,7 +81,7 @@ const StyleGuide: FC = () => {
             key: "actions",
         },
     ];
-    const tableColumnsImage: TableColumnT[] = [
+    const tableColumnsWithImage: TableColumnT[] = [
         {
             key: "name",
             value: "Nome",
@@ -118,10 +118,6 @@ const StyleGuide: FC = () => {
             instagramLink: "https://www.instagram.com/imrayalf/",
         },
     ];
-
-    function capitalizeFirstLetter(string: string): string {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-    }
 
     const links = (
         <ul className="flex flex-col gap-3 text-white text-lg">
@@ -381,7 +377,7 @@ const StyleGuide: FC = () => {
         <div className="flex flex-col gap-3">
             <span className="text-lg text-primary">Table Image</span>
             <Table
-                columns={tableColumnsImage}
+                columns={tableColumnsWithImage}
                 data={tableData}
                 isDarkMode
                 totalRecords={tableData.length}

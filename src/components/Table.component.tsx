@@ -7,11 +7,10 @@ import { ArrowLeftIcon, ArrowRightIcon, DeleteIcon } from "../assets/icons";
 import IconButton from "./IconButton.component";
 
 // Types
-import { TableFoooterBtnI, TableI } from "../types";
+import { TableColumnT, TableFoooterBtnI, TableI } from "../types";
 
-function approximateByExcess(num: number) {
-    return Math.ceil(num);
-}
+// Utilities
+import { approximateByExcess } from "../utilities";
 
 const Table: FC<TableI> = ({
     columns,
@@ -25,7 +24,7 @@ const Table: FC<TableI> = ({
     rowHandler,
 }) => {
     const canGoPrevious: boolean = currentPage > 1;
-    const totalPages = approximateByExcess(totalRecords / 5);
+    const totalPages: number = approximateByExcess(totalRecords / 5);
     const canGoNext: boolean = currentPage < totalPages;
 
     function onDelete(
@@ -82,10 +81,10 @@ const Table: FC<TableI> = ({
                                 onClick={() => rowHandler(rowData)}
                                 className="bg-pink-transparent-2 hover:bg-pink-transparent transition-all duration-200 cursor-pointer"
                             >
-                                {columns.map((column) => {
-                                    const isActionColumn =
+                                {columns.map((column: TableColumnT) => {
+                                    const isActionColumn: boolean =
                                         column.key === "actions";
-                                    const isImageColumn =
+                                    const isImageColumn: boolean =
                                         column.key === "image";
 
                                     return isActionColumn && deleteHandler ? (

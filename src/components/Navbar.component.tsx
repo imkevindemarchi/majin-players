@@ -1,5 +1,5 @@
 import { FC, MouseEvent } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavigateFunction, useNavigate } from "react-router-dom";
 
 // Assets
 import logoImg from "../assets/images/logo.png";
@@ -9,7 +9,7 @@ import { LogoutIcon, MoonIcon, SunIcon } from "../assets/icons";
 import IconButton from "./IconButton.component";
 
 // Types
-import { NavbarI } from "../types";
+import { NavbarI, RouteT } from "../types";
 
 const Navbar: FC<NavbarI> = ({
     isAdminSection,
@@ -19,13 +19,18 @@ const Navbar: FC<NavbarI> = ({
     themeHandler,
     logoutHandler,
 }) => {
-    const navigate = useNavigate();
+    const navigate: NavigateFunction = useNavigate();
 
     const themeIcon = isDarkMode ? (
         <MoonIcon className="text-2xl text-primary" />
     ) : (
         <SunIcon className="text-2xl text-primary" />
     );
+
+    function goToHomePageHandler(event: MouseEvent<HTMLButtonElement>): void {
+        event.preventDefault();
+        navigate(isAdminSection ? "/admin" : "/");
+    }
 
     return (
         <div
@@ -34,12 +39,7 @@ const Navbar: FC<NavbarI> = ({
             `}
         >
             <div className="flex flex-row items-center gap-10 mobile:hidden">
-                <button
-                    onClick={(event: MouseEvent<HTMLButtonElement>) => {
-                        event.preventDefault();
-                        navigate(isAdminSection ? "/admin" : "/");
-                    }}
-                >
+                <button onClick={goToHomePageHandler}>
                     <img
                         src={logoImg}
                         alt="Impossibile visualizzare l'immagine."
@@ -47,11 +47,12 @@ const Navbar: FC<NavbarI> = ({
                     />
                 </button>
                 <div className="flex flex-row items-center">
-                    {routes.map((route) => {
-                        const currentSection = isAdminSection
+                    {routes.map((route: RouteT) => {
+                        const currentSection: string = isAdminSection
                             ? route.path.split("/")[2]
                             : route.path.split("/")[1];
-                        const isRouteActive = currentSection === urlSection;
+                        const isRouteActive: boolean =
+                            currentSection === urlSection;
 
                         return (
                             !route?.isHidden && (

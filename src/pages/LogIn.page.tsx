@@ -1,5 +1,5 @@
 import { ChangeEvent, FC, MouseEvent, useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 
 // Api
 import { AUTH_API } from "../api";
@@ -30,9 +30,9 @@ interface FormDataI {
     password: string;
 }
 
-type PasswordType = "text" | "password";
+type PasswordT = "text" | "password";
 
-interface ErrorsType {
+interface ErrorsI {
     email: ErrorT;
     password: ErrorT;
 }
@@ -42,7 +42,7 @@ const formDataInitialValues: FormDataI = {
     password: "",
 };
 
-const errorsInitialValues: ErrorsType = {
+const errorsInitialValues: ErrorsI = {
     email: {
         value: false,
         message: null,
@@ -55,8 +55,8 @@ const errorsInitialValues: ErrorsType = {
 
 const LogIn: FC = () => {
     const [formData, setFormData] = useState<FormDataI>(formDataInitialValues);
-    const [passwordType, setPasswordType] = useState<PasswordType>("password");
-    const [errors, setErrors] = useState<ErrorsType>(errorsInitialValues);
+    const [passwordType, setPasswordType] = useState<PasswordT>("password");
+    const [errors, setErrors] = useState<ErrorsI>(errorsInitialValues);
     const { setState: setIsLoading } = useContext(
         LoaderContext
     ) as LoaderContextI;
@@ -64,7 +64,7 @@ const LogIn: FC = () => {
         SnackbarContext
     ) as SnackbarContextI;
     const { setSession } = useContext(AuthContext) as AuthContextI;
-    const navigate = useNavigate();
+    const navigate: NavigateFunction = useNavigate();
 
     setPageTitle("Log In");
 
@@ -75,8 +75,8 @@ const LogIn: FC = () => {
         }));
     }
 
-    function inputHandler(event: ChangeEvent<HTMLInputElement>) {
-        const { name, value } = event.target;
+    function inputHandler(event: ChangeEvent<HTMLInputElement>): void {
+        const { name, value }: { name: string; value: string } = event.target;
 
         setFormData((prevState) => ({ ...prevState, [name]: value }));
 
@@ -86,6 +86,7 @@ const LogIn: FC = () => {
     function passwordTypeHandler(event: MouseEvent<HTMLInputElement>): void {
         event.preventDefault();
         event.stopPropagation();
+
         setPasswordType(passwordType === "password" ? "text" : "password");
     }
 
@@ -103,7 +104,7 @@ const LogIn: FC = () => {
         setIsLoading(true);
         event.preventDefault();
 
-        const isEmailValid = checkEmail(formData.email);
+        const isEmailValid: ErrorT = checkEmail(formData.email);
 
         if (isEmailValid.value)
             setErrors((prevState) => ({
