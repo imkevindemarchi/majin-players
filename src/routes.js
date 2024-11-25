@@ -1,5 +1,10 @@
 // Pages
-import { AdminPlayers, AdminPlayer, AdminEquipments } from "./pages/admin";
+import {
+    AdminPlayers,
+    AdminPlayer,
+    AdminEquipments,
+    AdminEquipment,
+} from "./pages/admin";
 import { LogIn, StyleGuide } from "./pages";
 
 export const ROUTES = [
@@ -41,6 +46,16 @@ export const ADMIN_ROUTES = [
         path: "/admin/equipments",
         name: "Equipaggiamenti",
         element: <AdminEquipments />,
+    },
+    {
+        path: "/admin/equipments/new",
+        element: <AdminEquipment />,
+        isHidden: true,
+    },
+    {
+        path: "/admin/equipments/:id",
+        element: <AdminEquipment />,
+        isHidden: true,
     },
     { path: "/admin/sponsorships", name: "Sponsor", element: <></> },
 ];

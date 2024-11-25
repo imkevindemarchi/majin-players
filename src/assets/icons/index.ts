@@ -15,3 +15,4 @@ export { AddIcon } from "./add.icon";
 export { CancelIcon } from "./cancel.icon";
 export { BackIcon } from "./back.icon";
 export { SaveIcon } from "./save.icon";
+export { ImageIcon } from "./image.icon";
