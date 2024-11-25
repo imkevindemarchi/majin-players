@@ -282,13 +282,15 @@ const Players: FC = () => {
                         "success"
                     );
                     await getDataHandler();
-                } else
+                } else {
                     activateSnackbar(
                         "Impossibile cancellare l'immagine del giocatore",
                         "error"
                     );
-            } else
+                }
+            } else {
                 activateSnackbar("Impossibile eliminare il giocatore", "error");
+            }
         }
 
         setIsLoading(false);
