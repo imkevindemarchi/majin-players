@@ -1,5 +1,8 @@
-import { ChangeEvent, FC, useContext, useState } from "react";
+import { ChangeEvent, FC, useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+
+// Api
+import { PLAYERS_API } from "../../api";
 
 // Assets
 import { AddIcon, SearchIcon } from "../../assets/icons";
@@ -8,10 +11,16 @@ import { AddIcon, SearchIcon } from "../../assets/icons";
 import { Card, IconButton, Input, Table } from "../../components";
 
 // Contexts
-import { ThemeContext } from "../../providers";
+import { LoaderContext, SnackbarContext, ThemeContext } from "../../providers";
 
 // Types
-import { PlayerT, TableColumnT, ThemeContextI } from "../../types";
+import {
+    LoaderContextI,
+    PlayerT,
+    SnackbarContextI,
+    TableColumnT,
+    ThemeContextI,
+} from "../../types";
 
 // Utilities
 import { setPageTitle } from "../../utilities";
@@ -30,11 +39,25 @@ const Players: FC = () => {
     });
     const navigate = useNavigate();
     const { pathname } = useLocation();
+    const { setState: setIsLoading } = useContext(
+        LoaderContext
+    ) as LoaderContextI;
+    const [from, setFrom] = useState<number>(
+        parseInt(searchParams.get("from") as string) || 0
+    );
+    const [to, setTo] = useState<number>(
+        parseInt(searchParams.get("to") as string) || 4
+    );
+    const [tableCurrentPage, setTableCurrentPage] = useState<number>(
+        parseInt(searchParams.get("page") as string) || 1
+    );
+    const [tableData, setTableData] = useState<PlayerT[]>([]);
+    const { activateHandler: activateSnackbar } = useContext(
+        SnackbarContext
+    ) as SnackbarContextI;
+    const [totalPlayers, setTotalPlayers] = useState<number>(0);
 
     const pageTitle: string = "Giocatori";
-
-    setPageTitle(pageTitle);
-
     const isDarkMode = theme === "dark";
     const tableColumns: TableColumnT[] = [
         {
@@ -57,7 +80,32 @@ const Players: FC = () => {
             key: "actions",
         },
     ];
-    const tableData: PlayerT[] = [];
+
+    setPageTitle(pageTitle);
+
+    async function getDataHandler() {
+        setIsLoading(true);
+
+        const playersRes = await PLAYERS_API.getAll(
+            from,
+            to,
+            formData.name,
+            formData.surname
+        );
+
+        if (playersRes.value && playersRes.data && playersRes.totalRecords) {
+            setTableData(playersRes.data);
+            setTotalPlayers(playersRes.totalRecords);
+        } else activateSnackbar("Impossibile recuperare i giocatori", "error");
+
+        setIsLoading(false);
+    }
+
+    useEffect(() => {
+        getDataHandler();
+
+        // eslint-disable-next-line
+    }, [from, to]);
 
     const title = <span className="text-3xl text-primary">{pageTitle}</span>;
 
@@ -67,10 +115,16 @@ const Players: FC = () => {
         setFormData((prevState) => ({ ...prevState, [name]: value }));
     }
 
-    function submitHandler(event: any) {
+    async function submitHandler(event: any) {
         event.preventDefault();
 
-        setSearchParams({ name: formData.name, surname: formData.surname });
+        setSearchParams({
+            name: formData.name,
+            surname: formData.surname,
+            from: from.toString(),
+            to: to.toString(),
+            page: tableCurrentPage.toString(),
+        });
     }
 
     const form = (
@@ -104,25 +158,55 @@ const Players: FC = () => {
         </Card>
     );
 
+    function tablePreviousPageHandler(): void {
+        setFrom(from - 5);
+        setTo(to - 5);
+        setTableCurrentPage(tableCurrentPage - 1);
+        setSearchParams({
+            name: formData.name,
+            surname: formData.surname,
+            from: (from - 5).toString(),
+            to: (to - 5).toString(),
+            page: (tableCurrentPage - 1).toString(),
+        });
+    }
+
+    function tableNextPageHandler(): void {
+        setFrom(from + 5);
+        setTo(to + 5);
+        setTableCurrentPage(tableCurrentPage + 1);
+        setSearchParams({
+            name: formData.name,
+            surname: formData.surname,
+            from: (from + 5).toString(),
+            to: (to + 5).toString(),
+            page: (tableCurrentPage + 1).toString(),
+        });
+    }
+
+    function pageHandler(url: string): void {
+        navigate(url);
+    }
+
+    function tableRowHandler(rowData: any) {
+        pageHandler(`${pathname}/${rowData.id}`);
+    }
+
     const table = (
         <Card>
             <Table
                 columns={tableColumns}
                 data={tableData}
-                currentPage={1}
+                currentPage={tableCurrentPage}
                 isDarkMode={isDarkMode}
-                nextPageHandler={() => {}}
-                previousPageHandler={() => {}}
-                rowHandler={() => {}}
-                totalRecords={0}
+                nextPageHandler={tableNextPageHandler}
+                previousPageHandler={tablePreviousPageHandler}
+                rowHandler={tableRowHandler}
+                totalRecords={totalPlayers}
                 deleteHandler={() => {}}
             />
         </Card>
     );
-
-    function pageHandler(url: string): void {
-        navigate(url);
-    }
 
     const btn = (
         <div className="fixed bottom-10 right-10">

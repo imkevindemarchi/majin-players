@@ -60,7 +60,7 @@ const LogIn: FC = () => {
     const { setState: setIsLoading } = useContext(
         LoaderContext
     ) as LoaderContextI;
-    const { activeHandler: activeSnackbar } = useContext(
+    const { activateHandler: activateSnackbar } = useContext(
         SnackbarContext
     ) as SnackbarContextI;
     const { setSession } = useContext(AuthContext) as AuthContextI;
@@ -114,7 +114,7 @@ const LogIn: FC = () => {
             const res = await AUTH_API.login(formData.email, formData.password);
 
             if (!res || !res.value)
-                activeSnackbar("Impossibile effettuare il log in", "error");
+                activateSnackbar("Impossibile effettuare il log in", "error");
             else {
                 setToStorage("session", res.data);
                 setSession(res.data);

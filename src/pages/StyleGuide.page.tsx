@@ -30,7 +30,7 @@ const StyleGuide: FC = () => {
     const [inputStartIconValue, setInputStartIconValue] = useState("");
     const {
         state: snackbarState,
-        activeHandler: activeSnackbar,
+        activateHandler: activateSnackbar,
         closeHandler: closeSnackbar,
     } = useContext(SnackbarContext) as SnackbarContextI;
     const [isBackdropOpen, setIsBackdropOpen] = useState<boolean>(false);
@@ -250,7 +250,7 @@ const StyleGuide: FC = () => {
             <div className="w-[30vh]">
                 <Button
                     onClick={(event: MouseEvent<HTMLButtonElement>) =>
-                        activeSnackbar(
+                        activateSnackbar(
                             "Messaggio di prova della snackbar",
                             "success"
                         )
@@ -269,7 +269,7 @@ const StyleGuide: FC = () => {
             <div className="w-[30vh]">
                 <Button
                     onClick={(event: MouseEvent<HTMLButtonElement>) =>
-                        activeSnackbar(
+                        activateSnackbar(
                             "Messaggio di prova della snackbar",
                             "warning"
                         )
@@ -288,7 +288,7 @@ const StyleGuide: FC = () => {
             <div className="w-[30vh]">
                 <Button
                     onClick={(event: MouseEvent<HTMLButtonElement>) =>
-                        activeSnackbar(
+                        activateSnackbar(
                             "Messaggio di prova della snackbar",
                             "error"
                         )
