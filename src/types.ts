@@ -274,4 +274,5 @@ export type HTTPResponseDataT = {
 export interface TopsI {
     isDarkMode: boolean;
     isAdminSection?: boolean;
+    playerId: string | undefined;
 }
