@@ -8,7 +8,7 @@ const TABLE = "players";
 
 type HTTPResponseDataType = {
     data?: PlayerT[];
-    totalRecords?: number | null;
+    totalRecords?: string | null;
     value: boolean;
 };
 
@@ -38,7 +38,27 @@ export const PLAYERS_API = {
 
             return {
                 data: res,
-                totalRecords: resTotal,
+                totalRecords: resTotal === 0 ? "0" : `${resTotal}`,
+                value: true,
+            };
+        } catch (error) {
+            console.error("🚀 ~ error:", error);
+            return {
+                value: false,
+            };
+        }
+    },
+
+    delete: async (id: string): Promise<HTTPResponseDataType> => {
+        try {
+            const { error } = await supabase.from(TABLE).delete().eq("id", id);
+
+            if (error)
+                return {
+                    value: false,
+                };
+
+            return {
                 value: true,
             };
         } catch (error) {

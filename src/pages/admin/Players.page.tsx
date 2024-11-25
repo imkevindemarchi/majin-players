@@ -15,7 +15,7 @@ import { PLAYERS_API } from "../../api";
 import { AddIcon, CancelIcon, SearchIcon } from "../../assets/icons";
 
 // Components
-import { Card, IconButton, Input, Table } from "../../components";
+import { Card, IconButton, Input, Modal, Table } from "../../components";
 
 // Contexts
 import { LoaderContext, SnackbarContext, ThemeContext } from "../../providers";
@@ -63,6 +63,8 @@ const Players: FC = () => {
         SnackbarContext
     ) as SnackbarContextI;
     const [totalPlayers, setTotalPlayers] = useState<number>(0);
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
+    const [selectedPlayer, setSelectedPlayer] = useState<PlayerT | null>(null);
 
     const pageTitle: string = "Giocatori";
     const isDarkMode = theme === "dark";
@@ -102,7 +104,7 @@ const Players: FC = () => {
 
         if (playersRes.value && playersRes.data && playersRes.totalRecords) {
             setTableData(playersRes.data);
-            setTotalPlayers(playersRes.totalRecords);
+            setTotalPlayers(parseInt(playersRes.totalRecords));
         } else activateSnackbar("Impossibile recuperare i giocatori", "error");
 
         setIsLoading(false);
@@ -218,8 +220,13 @@ const Players: FC = () => {
         navigate(url);
     }
 
-    function tableRowHandler(rowData: any) {
+    function tableRowHandler(rowData: any): void {
         pageHandler(`${pathname}/${rowData.id}`);
+    }
+
+    function tableDeleteHandler(rowData: any): void {
+        setSelectedPlayer(rowData);
+        setIsDeleteModalOpen(true);
     }
 
     const table = (
@@ -233,7 +240,7 @@ const Players: FC = () => {
                 previousPageHandler={tablePreviousPageHandler}
                 rowHandler={tableRowHandler}
                 totalRecords={totalPlayers}
-                deleteHandler={() => {}}
+                deleteHandler={tableDeleteHandler}
             />
         </Card>
     );
@@ -249,13 +256,56 @@ const Players: FC = () => {
         </div>
     );
 
+    async function deleteHandler() {
+        setIsLoading(true);
+
+        if (selectedPlayer?.id) {
+            const res = await PLAYERS_API.delete(selectedPlayer.id);
+
+            if (res.value) {
+                setIsDeleteModalOpen(false);
+                activateSnackbar("Giocatore eliminato con successo", "success");
+                await getDataHandler();
+            } else
+                activateSnackbar("Impossibile eliminare il giocatore", "error");
+        }
+
+        setIsLoading(false);
+    }
+
+    const playerFullName = `${selectedPlayer?.name} ${selectedPlayer?.surname}`;
+
+    const modal = (
+        <Modal
+            title="Eliminazione giocatore"
+            cancelBtnText="No"
+            isDarkMode={isDarkMode}
+            submitBtnText="Sì"
+            isOpen={isDeleteModalOpen}
+            onClose={() => setIsDeleteModalOpen(false)}
+            submitHandler={deleteHandler}
+        >
+            <span
+                className={`transition-all duration-200 text-lg
+                    ${isDarkMode ? "text-white" : "text-black"}
+                `}
+            >
+                Confermi di voler eliminare il giocatore
+                <span className="text-primary ml-1">{playerFullName}</span>?
+            </span>
+        </Modal>
+    );
+
     return (
-        <div className="flex flex-col gap-10">
-            {title}
-            {form}
-            {table}
-            {btn}
-        </div>
+        <>
+            <div className="flex flex-col gap-10">
+                {title}
+                {form}
+                {table}
+                {btn}
+            </div>
+            {modal}
+        </>
     );
 };
 

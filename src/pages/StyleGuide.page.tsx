@@ -452,9 +452,6 @@ const StyleGuide: FC = () => {
                     submitHandler={(event: MouseEvent<HTMLButtonElement>) =>
                         alert("Modal Confirmation")
                     }
-                    cancelHandler={(event: MouseEvent<HTMLButtonElement>) =>
-                        setIsModalOpen(false)
-                    }
                     isDarkMode
                 >
                     <h1 className="text-white">Modal Content</h1>

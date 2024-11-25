@@ -18,16 +18,15 @@ const Modal: FC<ModalI> = ({
     submitBtnText,
     cancelBtnText,
     submitHandler,
-    cancelHandler,
     children,
 }) => {
     const modal = (
         <div
-            className={`transition-all duration-200 p-10 rounded-3xl flex flex-col gap-10
+            className={`transition-all duration-200 p-10 rounded-3xl flex flex-col gap-10 max-w-[40%]
                 ${isDarkMode ? "bg-black" : "bg-white"}
             `}
         >
-            <div className="flex justify-between gap-40">
+            <div className="flex justify-between">
                 <span
                     className={`transition-all duration-200 text-3xl font-bold
                         ${isDarkMode ? "text-white" : "text-black"}
@@ -45,17 +44,18 @@ const Modal: FC<ModalI> = ({
             </div>
             {children}
             <div className="flex justify-end">
-                <div className="w-[40%] flex flex-row justify-between">
+                <div className="flex flex-row gap-5">
                     <button
-                        onClick={(event: MouseEvent<HTMLButtonElement>) =>
-                            cancelHandler(event)
-                        }
-                        className={`px-5 py-3 rounded-xl transition-all duration-200 hover:opacity-50
+                        onClick={(event: MouseEvent<HTMLButtonElement>) => {
+                            event.preventDefault();
+                            onClose();
+                        }}
+                        className={`px-5 py-3 transition-all duration-200 hover:opacity-50 rounded-full
                             ${isDarkMode ? "bg-darkgray" : "bg-gray-200"}
                         `}
                     >
                         <span
-                            className={`transition-all duration-200
+                            className={`transition-all duration-200 text-lg
                                 ${isDarkMode ? "text-white" : "text-black"}
                             `}
                         >
@@ -66,9 +66,11 @@ const Modal: FC<ModalI> = ({
                         onClick={(event: MouseEvent<HTMLButtonElement>) =>
                             submitHandler(event)
                         }
-                        className="bg-primary px-5 py-3 rounded-xl transition-all duration-200 hover:opacity-50"
+                        className="bg-primary px-5 py-3 transition-all duration-200 hover:opacity-50 rounded-full"
                     >
-                        <span className="text-white">{submitBtnText}</span>
+                        <span className="text-white text-lg">
+                            {submitBtnText}
+                        </span>
                     </button>
                 </div>
             </div>

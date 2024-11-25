@@ -217,6 +217,5 @@ export interface ModalI {
     submitBtnText: string;
     cancelBtnText: string;
     submitHandler: (event: MouseEvent<HTMLButtonElement>) => void;
-    cancelHandler: (event: MouseEvent<HTMLButtonElement>) => void;
     children: ReactNode;
 }
