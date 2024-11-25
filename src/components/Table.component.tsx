@@ -61,13 +61,13 @@ const Table: FC<TableI> = ({
     );
 
     return (
-        <div>
+        <div className="overflow-x-scroll relative">
             <table className="w-full">
                 <thead className="bg-pink-transparent w-full">
                     <tr>
                         {columns.map((column) => (
-                            <th className="py-3" key={column.key}>
-                                <span className="text-primary text-lg">
+                            <th className="py-3 mobile:px-5" key={column.key}>
+                                <span className="text-primary text-lg whitespace-nowrap">
                                     {column.value}
                                 </span>
                             </th>
@@ -89,7 +89,10 @@ const Table: FC<TableI> = ({
                                         column.key === "image";
 
                                     return isActionColumn && deleteHandler ? (
-                                        <td className="py-3" key={column.key}>
+                                        <td
+                                            className="py-3 mobile:px-5"
+                                            key={column.key}
+                                        >
                                             <div className="flex justify-center items-center w-full h-full">
                                                 <IconButton
                                                     onClick={(
@@ -149,11 +152,15 @@ const Table: FC<TableI> = ({
                     </span>
                 </div>
             )}
-            <div className="w-full bg-pink-transparent p-5 rounded-bl-lg rounded-br-lg flex justify-between">
-                <span className={`${isDarkMode ? "text-white" : "text-black"}`}>
-                    Totale: {totalRecords}
-                </span>
-                {totalRecords > 0 && (
+            {totalRecords > 0 && (
+                <div className="w-full bg-pink-transparent p-5 rounded-bl-lg rounded-br-lg flex justify-between">
+                    <span
+                        className={`${
+                            isDarkMode ? "text-white" : "text-black"
+                        }`}
+                    >
+                        Totale: {totalRecords}
+                    </span>
                     <div className="flex flex-row gap-5">
                         <FooterButton
                             disabled={!canGoPrevious}
@@ -184,8 +191,8 @@ const Table: FC<TableI> = ({
                             />
                         </FooterButton>
                     </div>
-                )}
-            </div>
+                </div>
+            )}
         </div>
     );
 };

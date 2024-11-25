@@ -153,8 +153,11 @@ const Players: FC = () => {
 
     const form = (
         <Card>
-            <form onSubmit={submitHandler} className="flex flex-row gap-5">
-                <div className="w-[30vh]">
+            <form
+                onSubmit={submitHandler}
+                className="flex flex-row gap-5 mobile:flex-col mobile:justify-center mobile:items-center"
+            >
+                <div className="w-[30vh] mobile:w-full">
                     <Input
                         name="name"
                         placeholder="Nome"
@@ -163,7 +166,7 @@ const Players: FC = () => {
                         isDarkMode={isDarkMode}
                     />
                 </div>
-                <div className="w-[30vh]">
+                <div className="w-[30vh] mobile:w-full">
                     <Input
                         name="surname"
                         placeholder="Cognome"
@@ -172,20 +175,22 @@ const Players: FC = () => {
                         isDarkMode={isDarkMode}
                     />
                 </div>
-                <IconButton
-                    type="submit"
-                    className="w-14 h-1w-14 flex justify-center items-center bg-primary"
-                >
-                    <SearchIcon className="text-white" />
-                </IconButton>
-                <IconButton
-                    onClick={resetHandler}
-                    className="w-14 h-1w-14 flex justify-center items-center"
-                >
-                    <CancelIcon
-                        className={isDarkMode ? "text-white" : "text-black"}
-                    />
-                </IconButton>
+                <div className="flex gap-5 flex-row">
+                    <IconButton
+                        type="submit"
+                        className="w-14 h-14 flex justify-center items-center bg-primary"
+                    >
+                        <SearchIcon className="text-white" />
+                    </IconButton>
+                    <IconButton
+                        onClick={resetHandler}
+                        className="w-14 h-14 flex justify-center items-center"
+                    >
+                        <CancelIcon
+                            className={isDarkMode ? "text-white" : "text-black"}
+                        />
+                    </IconButton>
+                </div>
             </form>
         </Card>
     );
@@ -230,26 +235,24 @@ const Players: FC = () => {
     }
 
     const table = (
-        <Card>
-            <Table
-                columns={tableColumns}
-                data={tableData}
-                currentPage={tableCurrentPage}
-                isDarkMode={isDarkMode}
-                nextPageHandler={tableNextPageHandler}
-                previousPageHandler={tablePreviousPageHandler}
-                rowHandler={tableRowHandler}
-                totalRecords={totalPlayers}
-                deleteHandler={tableDeleteHandler}
-            />
-        </Card>
+        <Table
+            columns={tableColumns}
+            data={tableData}
+            currentPage={tableCurrentPage}
+            isDarkMode={isDarkMode}
+            nextPageHandler={tableNextPageHandler}
+            previousPageHandler={tablePreviousPageHandler}
+            rowHandler={tableRowHandler}
+            totalRecords={totalPlayers}
+            deleteHandler={tableDeleteHandler}
+        />
     );
 
     const btn = (
-        <div className="fixed bottom-10 right-10">
+        <div className="fixed bottom-10 right-10 mobile:bottom-5 mobile:right-5">
             <IconButton
                 onClick={() => pageHandler(`${pathname}/new`)}
-                className="px-4 py-4"
+                className="px-4 py-4 bg-pink-2"
             >
                 <AddIcon className="text-primary text-3xl" />
             </IconButton>

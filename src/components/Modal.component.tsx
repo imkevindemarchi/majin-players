@@ -22,19 +22,22 @@ const Modal: FC<ModalI> = ({
 }) => {
     const modal = (
         <div
-            className={`transition-all duration-200 p-10 rounded-3xl flex flex-col gap-10 max-w-[40%]
+            className={`transition-all duration-200 p-10 rounded-3xl flex flex-col gap-10 max-w-[40%] mobile:max-w-[95%] mobile:p-5
                 ${isDarkMode ? "bg-black" : "bg-white"}
             `}
         >
             <div className="flex justify-between">
                 <span
-                    className={`transition-all duration-200 text-3xl font-bold
+                    className={`transition-all duration-200 text-3xl mobile:text-2xl font-bold
                         ${isDarkMode ? "text-white" : "text-black"}
                     `}
                 >
                     {title}
                 </span>
-                <IconButton onClick={onClose}>
+                <IconButton
+                    onClick={onClose}
+                    className="mobile:h-14 mobile:w-14 mobile:flex mobile:justify-center mobile:items-center"
+                >
                     <CancelIcon
                         className={`text-xl transition-all duration-200
                             ${isDarkMode ? "text-white" : "text-black"}
