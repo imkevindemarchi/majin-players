@@ -6,7 +6,7 @@ import {
     useEffect,
     useState,
 } from "react";
-import { NavigateFunction, useNavigate } from "react-router-dom";
+import { NavigateFunction, useNavigate, useParams } from "react-router-dom";
 
 // Api
 import { IMAGES_API, PLAYERS_API } from "../../api";
@@ -113,11 +113,35 @@ const Player: FC = () => {
     const { setState: setIsLoading } = useContext(
         LoaderContext
     ) as LoaderContextI;
+    const { id } = useParams();
+    const [isImageUpdated, setIsImageUpdated] = useState<boolean>(false);
 
-    const pageTitle: string = "Nuovo Giocatore";
+    const isEditMode: boolean = id ? true : false;
+    const pageTitle: string = `${id ? "Modifica" : "Nuovo"} Giocatore`;
     const isDarkMode: boolean = theme === "dark";
 
     setPageTitle(pageTitle);
+
+    async function getDataHandler() {
+        if (id) {
+            setIsLoading(true);
+
+            const res = await PLAYERS_API.get(id);
+            setFormData({
+                ...res,
+                birthYear: res.birthYear.toString(),
+                image: res.id,
+            });
+
+            setIsLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        isEditMode && getDataHandler();
+
+        // eslint-disable-next-line
+    }, []);
 
     useEffect(() => {
         if (formData.image && typeof formData.image === "object") {
@@ -129,7 +153,9 @@ const Player: FC = () => {
 
     const title = <span className="text-3xl text-primary">{pageTitle}</span>;
 
-    const goBackBtn = <GoBackBtn isDarkMode={isDarkMode} />;
+    const goBackBtn = (
+        <GoBackBtn url="/admin/players" isDarkMode={isDarkMode} />
+    );
 
     function inputHandler(
         event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
@@ -144,29 +170,27 @@ const Player: FC = () => {
             ...prevState,
             image: file,
         }));
+        setIsImageUpdated(true);
     }
 
     const form = (
         <Card>
             <form className="flex flex-col gap-10">
-                <div className="flex justify-center items-center">
-                    {formData.image ? (
+                <div className="flex justify-center items-center gap-10">
+                    {formData.image && (
                         <img
                             id="image"
                             src={`https://koghcmfdnzuxvzfmbzop.supabase.co/storage/v1/object/public/images/${formData?.id}`}
                             alt="Impossibile visualizzare l'immagine."
                             className="w-40 rounded-lg object-contain"
                         />
-                    ) : (
-                        <InputFile
-                            value={formData.image}
-                            onChange={imageHandler}
-                            icon={
-                                <UserIcon className="text-3xl text-primary" />
-                            }
-                            error={errors.image}
-                        />
                     )}
+                    <InputFile
+                        value={formData.image}
+                        onChange={imageHandler}
+                        icon={<UserIcon className="text-3xl text-primary" />}
+                        error={errors.image}
+                    />
                 </div>
                 <div className="flex flex-row gap-20">
                     <Input
@@ -294,32 +318,98 @@ const Player: FC = () => {
         const isFormValid = validateForm();
 
         if (isFormValid) {
-            const data: PlayerT = {
-                name: formData.name,
-                surname: formData.surname,
-                email: formData.email,
-                birthYear: parseInt(formData.birthYear),
-                favouriteCard: formData.favouriteCard,
-                favouriteDeck: formData.favouriteDeck,
-                description: formData.description,
-                instagramLink: formData.instagramLink,
-            };
+            if (isEditMode && id) {
+                const data: PlayerT = {
+                    id: formData.id,
+                    name: formData.name,
+                    surname: formData.surname,
+                    email: formData.email,
+                    birthYear: parseInt(formData.birthYear),
+                    favouriteCard: formData.favouriteCard,
+                    favouriteDeck: formData.favouriteDeck,
+                    description: formData.description,
+                    instagramLink: formData.instagramLink,
+                };
 
-            const res = await PLAYERS_API.create(data);
-            if (res && typeof res !== "boolean" && formData.image) {
-                const imageRes = await IMAGES_API.add(res, formData.image);
-                if (imageRes) {
+                const res = await PLAYERS_API.update(data, id);
+
+                if (res && typeof res === "string") {
+                    if (isImageUpdated && formData.image) {
+                        const deleteImageRes: boolean = await IMAGES_API.delete(
+                            id
+                        );
+
+                        if (deleteImageRes) {
+                            const imageRes = await IMAGES_API.add(
+                                res,
+                                formData.image
+                            );
+
+                            if (imageRes) {
+                                activateSnackbar(
+                                    "Giocatore aggiornato con successo",
+                                    "success"
+                                );
+                                await getDataHandler();
+                            } else {
+                                activateSnackbar(
+                                    "Impossibile aggiungere l'immagine al giocatore",
+                                    "error"
+                                );
+                            }
+                        } else {
+                            activateSnackbar(
+                                "Impossibile cancellare l'immagine precedente",
+                                "error"
+                            );
+                        }
+                    } else {
+                        activateSnackbar(
+                            "Giocatore aggiornato con successo",
+                            "success"
+                        );
+                        await getDataHandler();
+                    }
+                } else {
                     activateSnackbar(
-                        "Giocatore creato con successo",
-                        "success"
-                    );
-                    navigate(`/admin/players/${res}`);
-                } else
-                    activateSnackbar(
-                        "Impossibile aggiungere l'immagine al giocatore",
+                        "Impossibile aggiornare il giocatore",
                         "error"
                     );
-            } else activateSnackbar("Impossibile creare il giocatore", "error");
+                }
+            } else {
+                const data: PlayerT = {
+                    name: formData.name,
+                    surname: formData.surname,
+                    email: formData.email,
+                    birthYear: parseInt(formData.birthYear),
+                    favouriteCard: formData.favouriteCard,
+                    favouriteDeck: formData.favouriteDeck,
+                    description: formData.description,
+                    instagramLink: formData.instagramLink,
+                };
+
+                const res = await PLAYERS_API.create(data);
+                if (res && typeof res !== "boolean" && formData.image) {
+                    const imageRes = await IMAGES_API.add(res, formData.image);
+                    if (imageRes) {
+                        activateSnackbar(
+                            "Giocatore creato con successo",
+                            "success"
+                        );
+                        navigate(`/admin/players/${res}`);
+                    } else {
+                        activateSnackbar(
+                            "Impossibile aggiungere l'immagine al giocatore",
+                            "error"
+                        );
+                    }
+                } else {
+                    activateSnackbar(
+                        "Impossibile creare il giocatore",
+                        "error"
+                    );
+                }
+            }
         }
 
         setIsLoading(false);

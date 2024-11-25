@@ -222,6 +222,7 @@ export interface ModalI {
 // GoBackBtn
 export interface GoBackBtnI {
     isDarkMode: boolean;
+    url?: string;
 }
 
 // InputFile

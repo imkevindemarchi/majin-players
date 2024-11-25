@@ -32,6 +32,11 @@ export const ADMIN_ROUTES = [
         element: <AdminPlayer />,
         isHidden: true,
     },
+    {
+        path: "/admin/players/:id",
+        element: <AdminPlayer />,
+        isHidden: true,
+    },
     { path: "/admin/equipments", name: "Equipaggiamento", element: <></> },
     { path: "/admin/sponsorships", name: "Sponsor", element: <></> },
 ];

@@ -49,11 +49,43 @@ export const PLAYERS_API = {
         }
     },
 
+    get: async (id: string): Promise<any> => {
+        try {
+            const { data: res, error } = await supabase
+                .from(TABLE)
+                .select()
+                .eq("id", id);
+
+            if (error) return false;
+
+            return res[0];
+        } catch (error) {
+            console.error("🚀 ~ error:", error);
+        }
+    },
+
     create: async (data: PlayerT): Promise<string | boolean> => {
         try {
             const { data: res, error } = await supabase
                 .from(TABLE)
                 .insert([data])
+                .select();
+
+            if (!res || error) return false;
+
+            return res[0].id;
+        } catch (error) {
+            console.error("🚀 ~ error:", error);
+            return false;
+        }
+    },
+
+    update: async (data: PlayerT, id: string): Promise<string | boolean> => {
+        try {
+            const { data: res, error } = await supabase
+                .from(TABLE)
+                .update(data)
+                .eq("id", id)
                 .select();
 
             if (!res || error) return false;

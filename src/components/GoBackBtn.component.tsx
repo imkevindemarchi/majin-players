@@ -1,5 +1,5 @@
 import { FC, MouseEvent } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 
 // Assets
 import { BackIcon } from "../assets/icons";
@@ -7,12 +7,13 @@ import { BackIcon } from "../assets/icons";
 // Types
 import { GoBackBtnI } from "../types";
 
-const GoBackBtn: FC<GoBackBtnI> = ({ isDarkMode }) => {
-    const navigate = useNavigate();
+const GoBackBtn: FC<GoBackBtnI> = ({ isDarkMode, url }) => {
+    const navigate: NavigateFunction = useNavigate();
 
     function goBackHandler(event: MouseEvent<HTMLButtonElement>): void {
         event.preventDefault();
-        navigate(-1);
+        if (url) navigate(url);
+        else navigate(-1);
     }
 
     return (
