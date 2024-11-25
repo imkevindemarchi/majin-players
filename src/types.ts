@@ -226,3 +226,15 @@ export interface InputFileI {
     error?: ErrorT;
     icon: any;
 }
+
+// TextArea
+export interface TextAreaI {
+    placeholder: string;
+    value: string;
+    type?: string;
+    onChange: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+    error?: ErrorT;
+    disabled?: boolean;
+    name?: string;
+    isDarkMode?: boolean;
+}
