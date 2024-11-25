@@ -86,6 +86,8 @@ const Table: FC<TableI> = ({
                                         column.key === "actions";
                                     const isImageColumn: boolean =
                                         column.key === "image";
+                                    const isEmailColumn: boolean =
+                                        column.key === "email";
 
                                     return isActionColumn && deleteHandler ? (
                                         <td
@@ -124,12 +126,17 @@ const Table: FC<TableI> = ({
                                         >
                                             <span
                                                 className={`text-md transition-all duration-200
-                                            ${
-                                                isDarkMode
-                                                    ? "text-white"
-                                                    : "text-black"
-                                            }
-                                        `}
+                                                    ${
+                                                        isEmailColumn &&
+                                                        "text-primary font-bold"
+                                                    }
+                                                    ${
+                                                        !isEmailColumn &&
+                                                        isDarkMode
+                                                            ? "text-white"
+                                                            : "text-black"
+                                                    }
+                                                `}
                                             >
                                                 {rowData[column.key]}
                                             </span>

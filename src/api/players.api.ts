@@ -49,6 +49,22 @@ export const PLAYERS_API = {
         }
     },
 
+    create: async (data: PlayerT): Promise<string | boolean> => {
+        try {
+            const { data: res, error } = await supabase
+                .from(TABLE)
+                .insert([data])
+                .select();
+
+            if (!res || error) return false;
+
+            return res[0].id;
+        } catch (error) {
+            console.error("🚀 ~ error:", error);
+            return false;
+        }
+    },
+
     delete: async (id: string): Promise<HTTPResponseDataType> => {
         try {
             const { error } = await supabase.from(TABLE).delete().eq("id", id);

@@ -14,7 +14,7 @@ import {
 } from "react-router-dom";
 
 // Api
-import { PLAYERS_API } from "../../api";
+import { IMAGES_API, PLAYERS_API } from "../../api";
 
 // Assets
 import { AddIcon, CancelIcon, SearchIcon } from "../../assets/icons";
@@ -271,9 +271,22 @@ const Players: FC = () => {
             const res = await PLAYERS_API.delete(selectedPlayer.id);
 
             if (res.value) {
-                setIsDeleteModalOpen(false);
-                activateSnackbar("Giocatore eliminato con successo", "success");
-                await getDataHandler();
+                const imageRes: boolean = await IMAGES_API.delete(
+                    selectedPlayer.id
+                );
+
+                if (imageRes) {
+                    setIsDeleteModalOpen(false);
+                    activateSnackbar(
+                        "Giocatore eliminato con successo",
+                        "success"
+                    );
+                    await getDataHandler();
+                } else
+                    activateSnackbar(
+                        "Impossibile cancellare l'immagine del giocatore",
+                        "error"
+                    );
             } else
                 activateSnackbar("Impossibile eliminare il giocatore", "error");
         }
