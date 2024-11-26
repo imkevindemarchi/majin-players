@@ -37,13 +37,18 @@ const Home: FC = () => {
         else activateSnackbar("Impossibile recuperare gli sponsor", "error");
     }
 
-    useEffect(() => {
+    async function getDataHandler() {
         setIsLoading(true);
 
-        getEquipmentHandler();
-        getSponsorshipsHandler();
+        await getEquipmentHandler();
+        await getSponsorshipsHandler();
 
         setIsLoading(false);
+    }
+
+    useEffect(() => {
+        getDataHandler();
+
         // eslint-disable-next-line
     }, []);
 
