@@ -9,6 +9,9 @@ import { LoaderContext, SnackbarContext } from "../providers";
 // Types
 import { LoaderContextI, SnackbarContextI } from "../types";
 
+// Utilities
+import { setPageTitle } from "../utilities";
+
 const Home: FC = () => {
     const { setState: setIsLoading } = useContext(
         LoaderContext
@@ -18,6 +21,8 @@ const Home: FC = () => {
     ) as SnackbarContextI;
     const [img, setImg] = useState<any>(null);
     const [sponsorships, setSponsorships] = useState<any[]>([]);
+
+    setPageTitle("Home");
 
     async function getEquipmentHandler() {
         const res = await EQUIPMENTS_API.getByName("Maglietta");
