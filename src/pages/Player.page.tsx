@@ -68,7 +68,7 @@ const Player: FC = () => {
     }, []);
 
     const Row = ({ label, value }: RowI) => (
-        <div className="flex flex-row gap-1">
+        <div className="flex flex-row gap-1 mobile:flex-wrap">
             <span
                 className={`transition-all duration-200 text-lg
                     ${isDarkMode ? "text-white" : "text-black"}
@@ -81,25 +81,25 @@ const Player: FC = () => {
     );
 
     const info = (
-        <div className="flex flex-col gap-10">
+        <div className="flex flex-col gap-10 mobile:justify-center mobile:items-center">
             <span
                 className={`transition-all duration-200 text-2xl font-bold
-        ${isDarkMode ? "text-white" : "text-black"}
-    `}
+                    ${isDarkMode ? "text-white" : "text-black"}
+                `}
             >
                 {fullNameText}
             </span>
             <div
-                className={`transition-all duration-200 overflow-hidden rounded-xl flex flex-row relative
-        ${isDarkMode ? "bg-black" : "bg-white"}
-    `}
+                className={`transition-all duration-200 overflow-hidden rounded-xl flex flex-row relative mobile:flex-col mobile:pb-20
+                    ${isDarkMode ? "bg-black" : "bg-white"}
+                `}
             >
                 <img
                     src={`https://koghcmfdnzuxvzfmbzop.supabase.co/storage/v1/object/public/images/${data?.id}`}
                     alt="Impossibile visualizzare l'immagine."
-                    className="w-[30vh] object-contain"
+                    className="w-[30vh] object-contain mobile:w-full"
                 />
-                <div className="py-10 flex flex-col gap-5 px-10">
+                <div className="py-10 flex flex-col gap-5 px-10 mobile:px-5">
                     <Row
                         label="Anno di nascita:"
                         value={data?.birthYear?.toString()}
@@ -108,8 +108,8 @@ const Player: FC = () => {
                     <Row label="Mazzo preferito:" value={data?.favouriteDeck} />
                     <span
                         className={`transition-all duration-200 text-lg
-                ${isDarkMode ? "text-white" : "text-black"}
-            `}
+                            ${isDarkMode ? "text-white" : "text-black"}
+                        `}
                     >
                         {data?.description}
                     </span>
@@ -130,8 +130,8 @@ const Player: FC = () => {
     const tops = <Tops isDarkMode={isDarkMode} playerId={id} />;
 
     return (
-        <div className="flex flex-row flex-wrap pb-[30vh] mobile:pb-[100vh] mobile:pt-20 gap-10 mobile:gap-5">
-            <Card>
+        <div className="flex flex-row flex-wrap pb-[30vh] mobile:pb-[100vh] gap-10 mobile:gap-5">
+            <Card hiddenOnMobile>
                 <div className="flex flex-col gap-10">
                     {info}
                     {tops}

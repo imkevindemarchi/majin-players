@@ -225,6 +225,7 @@ export interface TableFoooterBtnI {
 // Card
 export interface CardI {
     children: ReactNode;
+    hiddenOnMobile?: boolean;
 }
 
 // Modal
