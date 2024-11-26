@@ -154,9 +154,7 @@ const Player: FC = () => {
 
     const title = <span className="text-3xl text-primary">{pageTitle}</span>;
 
-    const goBackBtn = (
-        <GoBackBtn url="/admin/players" isDarkMode={isDarkMode} />
-    );
+    const goBackBtn = <GoBackBtn isDarkMode={isDarkMode} />;
 
     function inputHandler(
         event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
@@ -278,7 +276,7 @@ const Player: FC = () => {
         );
         const hasEmailError: ErrorT = formData.email
             ? checkEmail(formData.email)
-            : { value: true };
+            : { value: false };
         const hasImageError = checkFormFieldImage(formData.image);
 
         setErrors((prevState) => ({

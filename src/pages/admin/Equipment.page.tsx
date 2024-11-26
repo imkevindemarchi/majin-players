@@ -120,9 +120,7 @@ const Equipment: FC = () => {
 
     const title = <span className="text-3xl text-primary">{pageTitle}</span>;
 
-    const goBackBtn = (
-        <GoBackBtn url="/admin/equipments" isDarkMode={isDarkMode} />
-    );
+    const goBackBtn = <GoBackBtn isDarkMode={isDarkMode} />;
 
     function inputHandler(
         event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>

@@ -7,13 +7,12 @@ import { BackIcon } from "../assets/icons";
 // Types
 import { GoBackBtnI } from "../types";
 
-const GoBackBtn: FC<GoBackBtnI> = ({ isDarkMode, url }) => {
+const GoBackBtn: FC<GoBackBtnI> = ({ isDarkMode }) => {
     const navigate: NavigateFunction = useNavigate();
 
     function goBackHandler(event: MouseEvent<HTMLButtonElement>): void {
         event.preventDefault();
-        if (url) navigate(url);
-        else navigate(-1);
+        navigate(-1);
     }
 
     return (
