@@ -53,7 +53,7 @@ const Sidebar: FC<SidebarI> = ({
                     className="transition-all duration-200 w-40 hover:opacity-50"
                 />
             </button>
-            <div className="flex flex-col items-center gap-5">
+            <div className="flex flex-col items-center gap-5 mobile:gap-2">
                 {routes.map((route: RouteT) => {
                     const currentSection: string = isAdminSection
                         ? route.path.split("/")[2]

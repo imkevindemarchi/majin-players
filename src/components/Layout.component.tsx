@@ -125,7 +125,7 @@ const Layout: FC<LayoutI> = ({ isAdminSection, pathname, children }) => {
 
     return (
         <div
-            className={`w-full min-h-[100vh] 
+            className={`w-full min-h-[100vh] relative
                 ${isDarkMode ? "bg-black" : "bg-white"}
             `}
         >

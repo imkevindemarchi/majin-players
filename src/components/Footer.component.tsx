@@ -50,7 +50,7 @@ const Footer: FC<FooterI> = ({ isDarkMode, routes, urlSection }) => {
     );
 
     const columns = (
-        <div className="flex flex-row justify-between">
+        <div className="flex flex-row justify-between mobile:flex-col mobile:gap-10">
             <Column title={process.env.REACT_APP_WEBSITE_NAME}>
                 <a
                     href={`mailto: ${process.env.REACT_APP_EMAIL}`}
@@ -59,7 +59,7 @@ const Footer: FC<FooterI> = ({ isDarkMode, routes, urlSection }) => {
                     `}
                 >
                     <EmailIcon className="text-2xl" />
-                    <span className="font-bold text-lg">
+                    <span className="font-bold text-lg mobile:text-base">
                         {process.env.REACT_APP_EMAIL}
                     </span>
                 </a>
@@ -69,13 +69,13 @@ const Footer: FC<FooterI> = ({ isDarkMode, routes, urlSection }) => {
                     `}
                 >
                     <LocationIcon className="text-2xl" />
-                    <span className="text-lg">
+                    <span className="text-lg mobile:text-base">
                         {process.env.REACT_APP_COUNTRY}
                     </span>
                 </div>
             </Column>
             <Column title="Collegamenti">
-                <div className="text-center flex flex-col gap-3">
+                <div className="text-center flex flex-col gap-3 mobile:text-left">
                     {routes.map((route: RouteT) => {
                         const currentSection: string = route.path.split("/")[1];
                         const isRouteActive: boolean =
@@ -86,7 +86,7 @@ const Footer: FC<FooterI> = ({ isDarkMode, routes, urlSection }) => {
                                 <Link
                                     key={route.path}
                                     to={route.path}
-                                    className={`hover:text-primary transition-all duration-200
+                                    className={`hover:text-primary transition-all duration-200 mobile:text-lg
                                         ${
                                             isRouteActive &&
                                             "text-primary font-bold"
@@ -125,7 +125,7 @@ const Footer: FC<FooterI> = ({ isDarkMode, routes, urlSection }) => {
 
     const copyright = (
         <span
-            className={`transition-all duration-200 text-md text-left 
+            className={`transition-all duration-200 text-md text-left mobile:text-center
                 ${isDarkMode ? "text-gray-300" : "text-darkgray"}
             `}
         >
@@ -134,7 +134,7 @@ const Footer: FC<FooterI> = ({ isDarkMode, routes, urlSection }) => {
     );
 
     return (
-        <div className="absolute bottom-0 w-full py-20 px-40 flex flex-col gap-10">
+        <div className="absolute bottom-0 w-full py-20 px-40 flex flex-col gap-10 mobile:px-5">
             {columns}
             {copyright}
         </div>
