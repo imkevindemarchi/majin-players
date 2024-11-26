@@ -276,3 +276,10 @@ export interface TopsI {
     isAdminSection?: boolean;
     playerId: string | undefined;
 }
+
+// Footer
+export interface FooterI {
+    isDarkMode: boolean;
+    routes: RouteT[];
+    urlSection: string;
+}

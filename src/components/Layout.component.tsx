@@ -36,6 +36,7 @@ import {
 
 // Utilities
 import { removeFromStorage } from "../utilities";
+import Footer from "./Footer.component";
 
 const Layout: FC<LayoutI> = ({ isAdminSection, pathname, children }) => {
     const { state: isLoading } = useContext(LoaderContext) as LoaderContextI;
@@ -110,6 +111,14 @@ const Layout: FC<LayoutI> = ({ isAdminSection, pathname, children }) => {
         />
     );
 
+    const footer = !isAdminSection && !isLoginPage && (
+        <Footer
+            isDarkMode={isDarkMode}
+            routes={routes}
+            urlSection={urlSection}
+        />
+    );
+
     const loader = <Loader isOpen={isLoading} isDarkMode={isDarkMode} />;
 
     const snackbar = <Snackbar state={snackbarState} onClose={closeSnackbar} />;
@@ -135,6 +144,7 @@ const Layout: FC<LayoutI> = ({ isAdminSection, pathname, children }) => {
             >
                 {children}
             </div>
+            {footer}
             {loader}
             {snackbar}
         </div>

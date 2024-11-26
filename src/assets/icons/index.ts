@@ -16,3 +16,7 @@ export { CancelIcon } from "./cancel.icon";
 export { BackIcon } from "./back.icon";
 export { SaveIcon } from "./save.icon";
 export { ImageIcon } from "./image.icon";
+export { EmailIcon } from "./email.icon";
+export { LocationIcon } from "./location.icon";
+export { InstagramIcon } from "./instagram.icon";
+export { YouTubeIcon } from "./youtube.icon";
