@@ -70,7 +70,7 @@ const Home: FC = () => {
             {sponsorships.map((sponsorship) => (
                 <div
                     key={sponsorship.id}
-                    className="border-solid border-2 border-white rounded-full p-10 justify-center items-center"
+                    className="border-solid border-2 border-white rounded-full bg-pink-transparent p-10 justify-center items-center"
                 >
                     <img
                         src={`https://koghcmfdnzuxvzfmbzop.supabase.co/storage/v1/object/public/images/${sponsorship.id}`}
