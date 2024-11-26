@@ -209,7 +209,7 @@ const Tops: FC<TopsI> = ({ isDarkMode, isAdminSection, playerId }) => {
         <Card>
             <form
                 onSubmit={submitHandler}
-                className="flex flex-row justify-between items-center gap-5"
+                className="flex flex-row justify-between items-center gap-5 mobile:flex-col"
             >
                 <Input
                     name="year"
@@ -255,7 +255,7 @@ const Tops: FC<TopsI> = ({ isDarkMode, isAdminSection, playerId }) => {
                     type="submit"
                     className="transition-all duration-200 hover:opacity-50"
                 >
-                    <AddIcon className="text-primary text-[3em]" />
+                    <AddIcon className="text-primary text-[3em] mobile:text-[4em]" />
                 </button>
             </form>
         </Card>
