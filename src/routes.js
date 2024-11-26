@@ -8,7 +8,7 @@ import {
     AdminSponsorships,
     AdminSponsorship,
 } from "./pages/admin";
-import { LogIn, StyleGuide, Home, Players, Player } from "./pages";
+import { LogIn, StyleGuide, Home, Players, Player, Equipments } from "./pages";
 
 export const ROUTES = [
     { path: "/", name: "Home", isHidden: true, element: <Home /> },
@@ -22,7 +22,7 @@ export const ROUTES = [
         isHidden: true,
         element: <Player />,
     },
-    { path: "/equipments", name: "Equipaggiamenti", element: <></> },
+    { path: "/equipments", name: "Equipaggiamenti", element: <Equipments /> },
     { path: "/sponsorships", name: "Sponsor", element: <></> },
     { path: "/contacts", name: "Contatti", element: <></> },
     {

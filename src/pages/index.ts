@@ -3,3 +3,4 @@ export { default as LogIn } from "./LogIn.page";
 export { default as Home } from "./Home.page";
 export { default as Players } from "./Players.page";
 export { default as Player } from "./Player.page";
+export { default as Equipments } from "./Equipments.page";
