@@ -78,6 +78,27 @@ export const SPONSORSHIPS_API = {
         }
     },
 
+    getAllWithoutFilters: async (): Promise<any> => {
+        try {
+            const { data: res, error } = await supabase.from(TABLE).select("*");
+
+            if (!res || error)
+                return {
+                    value: false,
+                };
+
+            return {
+                data: res,
+                value: true,
+            };
+        } catch (error) {
+            console.error("🚀 ~ error:", error);
+            return {
+                value: false,
+            };
+        }
+    },
+
     update: async (
         data: SponsorshipT,
         id: string

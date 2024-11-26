@@ -134,7 +134,11 @@ const Footer: FC<FooterI> = ({ isDarkMode, routes, urlSection }) => {
     );
 
     return (
-        <div className="absolute bottom-0 w-full py-20 px-40 flex flex-col gap-10 mobile:px-5">
+        <div
+            className={`transition-all duration-200 absolute bottom-0 w-full py-20 px-40 flex flex-col gap-10 mobile:px-5
+                ${isDarkMode ? "bg-black" : "bg-white"}
+            `}
+        >
             {columns}
             {copyright}
         </div>

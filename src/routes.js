@@ -8,10 +8,10 @@ import {
     AdminSponsorships,
     AdminSponsorship,
 } from "./pages/admin";
-import { LogIn, StyleGuide } from "./pages";
+import { LogIn, StyleGuide, Home } from "./pages";
 
 export const ROUTES = [
-    { path: "/", name: "Home", isHidden: true, element: <></> },
+    { path: "/", name: "Home", isHidden: true, element: <Home /> },
     {
         path: "/players",
         name: "Giocatori",
