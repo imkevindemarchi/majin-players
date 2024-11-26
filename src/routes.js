@@ -8,14 +8,14 @@ import {
     AdminSponsorships,
     AdminSponsorship,
 } from "./pages/admin";
-import { LogIn, StyleGuide, Home } from "./pages";
+import { LogIn, StyleGuide, Home, Players } from "./pages";
 
 export const ROUTES = [
     { path: "/", name: "Home", isHidden: true, element: <Home /> },
     {
         path: "/players",
         name: "Giocatori",
-        element: <></>,
+        element: <Players />,
     },
     { path: "/equipments", name: "Equipaggiamenti", element: <></> },
     { path: "/sponsorships", name: "Sponsor", element: <></> },
