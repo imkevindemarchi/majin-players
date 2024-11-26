@@ -119,7 +119,19 @@ const Tops: FC<TopsI> = ({ isDarkMode, isAdminSection, playerId }) => {
         // eslint-disable-next-line
     }, []);
 
-    const title = <span className="text-3xl text-primary">Top</span>;
+    const title = (
+        <span
+            className={`transition-all duration-200 text-3xl
+                ${isAdminSection && "text-primary"}
+                ${
+                    !isAdminSection &&
+                    (isDarkMode ? "text-white" : "text-black")
+                } 
+            `}
+        >
+            Top
+        </span>
+    );
 
     function inputHandler(
         event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
@@ -274,7 +286,15 @@ const Tops: FC<TopsI> = ({ isDarkMode, isAdminSection, playerId }) => {
         <div className="flex flex-col gap-10">
             {years.map((year) => (
                 <div key={year} className="flex flex-col gap-5">
-                    <span className="text-primary text-2xl font-bold">
+                    <span
+                        className={`transition-all duration-200 text-2xl font-bold
+                            ${isAdminSection && "text-primary"}
+                            ${
+                                !isAdminSection &&
+                                (isDarkMode ? "text-white" : "text-black")
+                            }
+                        `}
+                    >
                         {year}
                     </span>
                     {tops.map((top: TopT) => {
@@ -285,7 +305,18 @@ const Tops: FC<TopsI> = ({ isDarkMode, isAdminSection, playerId }) => {
                             isTopVisible && (
                                 <div
                                     key={top.id}
-                                    className="w-full rounded-lg px-5 py-3 justify-between flex flex-row items-center bg-pink-transparent"
+                                    className={`w-full rounded-lg px-5 py-3 justify-between flex flex-row items-center 
+                                        ${
+                                            isAdminSection &&
+                                            "bg-pink-transparent"
+                                        }
+                                        ${
+                                            !isAdminSection &&
+                                            (isDarkMode
+                                                ? "bg-black"
+                                                : "bg-white")
+                                        }
+                                    `}
                                 >
                                     <span
                                         className={`transition-all duration-200
@@ -301,14 +332,16 @@ const Tops: FC<TopsI> = ({ isDarkMode, isAdminSection, playerId }) => {
                                         </span>
                                         {` | ${top.tournament} | ${top.place}`}
                                     </span>
-                                    <IconButton
-                                        onClick={(
-                                            event: MouseEvent<HTMLButtonElement>
-                                        ) => onDeleteHandler(event, top)}
-                                        className="bg-pink-transparent"
-                                    >
-                                        <DeleteIcon className="text-2xl text-primary" />
-                                    </IconButton>
+                                    {isAdminSection && (
+                                        <IconButton
+                                            onClick={(
+                                                event: MouseEvent<HTMLButtonElement>
+                                            ) => onDeleteHandler(event, top)}
+                                            className="bg-pink-transparent"
+                                        >
+                                            <DeleteIcon className="text-2xl text-primary" />
+                                        </IconButton>
+                                    )}
                                 </div>
                             )
                         );
