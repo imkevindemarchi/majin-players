@@ -17,10 +17,16 @@ import Modal from "./Modal.component";
 import IconButton from "./IconButton.component";
 
 // Contexts
-import { LoaderContext } from "../providers";
+import { LoaderContext, SnackbarContext } from "../providers";
 
 // Types
-import { ErrorT, LoaderContextI, TopsI, TopT } from "../types";
+import {
+    ErrorT,
+    LoaderContextI,
+    SnackbarContextI,
+    TopsI,
+    TopT,
+} from "../types";
 
 // Utilities
 import { checkFormField, checkFormFieldYear } from "../utilities";
@@ -83,6 +89,9 @@ const Tops: FC<TopsI> = ({ isDarkMode, isAdminSection, playerId }) => {
     const [years, setYears] = useState<number[]>([]);
     const [selectedTop, setSelectedTop] = useState<TopT | null>(null);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
+    const { activateHandler: activateSnackbar } = useContext(
+        SnackbarContext
+    ) as SnackbarContextI;
 
     function getDistinctYears(array: TopT[]): number[] {
         return Array.from(new Set(array.map((obj) => obj.year)));
@@ -174,15 +183,23 @@ const Tops: FC<TopsI> = ({ isDarkMode, isAdminSection, playerId }) => {
 
         const isFormValid: boolean = validateForm();
 
-        if (isFormValid) {
+        if (isFormValid && playerId) {
             const data: TopT = {
                 year: parseInt(formData.year),
                 position: formData.position,
                 deck: formData.deck,
                 tournament: formData.tournament,
                 place: formData.place,
+                playerId,
             };
-            console.log("🚀 ~ data:", data);
+
+            const res = await TOPS_API.create(data);
+
+            if (res) {
+                activateSnackbar("Top inserita con successo", "success");
+                setFormData(formDataInitialState);
+                await getDataHandler();
+            }
         }
 
         setIsLoading(false);
@@ -254,9 +271,9 @@ const Tops: FC<TopsI> = ({ isDarkMode, isAdminSection, playerId }) => {
     }
 
     const topsComponent = tops.length > 0 && years.length > 0 && (
-        <div>
+        <div className="flex flex-col gap-10">
             {years.map((year) => (
-                <div key={year}>
+                <div key={year} className="flex flex-col gap-5">
                     <span className="text-primary text-2xl font-bold">
                         {year}
                     </span>
@@ -268,7 +285,7 @@ const Tops: FC<TopsI> = ({ isDarkMode, isAdminSection, playerId }) => {
                             isTopVisible && (
                                 <div
                                     key={top.id}
-                                    className="ml-20 w-full rounded-lg px-5 py-3 justify-between flex flex-row items-center bg-pink-transparent"
+                                    className="w-full rounded-lg px-5 py-3 justify-between flex flex-row items-center bg-pink-transparent"
                                 >
                                     <span
                                         className={`transition-all duration-200

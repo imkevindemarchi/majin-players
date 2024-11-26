@@ -6,7 +6,7 @@ import { PlayerT } from "../types";
 
 const TABLE = "players";
 
-type HTTPResponseDataType = {
+type HTTPResponseDataT = {
     data?: PlayerT[];
     totalRecords?: string | null;
     value: boolean;
@@ -18,7 +18,7 @@ export const PLAYERS_API = {
         to: number,
         name: string,
         surname: string
-    ): Promise<HTTPResponseDataType> => {
+    ): Promise<HTTPResponseDataT> => {
         try {
             const {
                 data: res,
@@ -97,7 +97,7 @@ export const PLAYERS_API = {
         }
     },
 
-    delete: async (id: string): Promise<HTTPResponseDataType> => {
+    delete: async (id: string): Promise<HTTPResponseDataT> => {
         try {
             const { error } = await supabase.from(TABLE).delete().eq("id", id);
 

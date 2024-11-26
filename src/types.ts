@@ -37,6 +37,7 @@ export type TopT = {
     deck: string;
     tournament: string;
     place: string;
+    playerId: string;
 };
 
 // Input
