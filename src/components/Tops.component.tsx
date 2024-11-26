@@ -318,7 +318,21 @@ const Tops: FC<TopsI> = ({ isDarkMode, isAdminSection, playerId }) => {
         </div>
     );
 
-    async function deleteHandler() {}
+    async function deleteHandler() {
+        setIsLoading(true);
+
+        if (selectedTop?.id) {
+            const res = await TOPS_API.delete(selectedTop?.id);
+
+            if (res) {
+                setIsDeleteModalOpen(false);
+                activateSnackbar("Top eliminata con successo", "success");
+                await getDataHandler();
+            } else activateSnackbar("Impossibile eliminare la top", "error");
+        }
+
+        setIsLoading(false);
+    }
 
     const modal = (
         <Modal

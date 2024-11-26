@@ -38,4 +38,17 @@ export const TOPS_API = {
             return false;
         }
     },
+
+    delete: async (id: string): Promise<boolean> => {
+        try {
+            const { error } = await supabase.from(TABLE).delete().eq("id", id);
+
+            if (error) return false;
+
+            return true;
+        } catch (error) {
+            console.error("🚀 ~ error:", error);
+            return false;
+        }
+    },
 };
