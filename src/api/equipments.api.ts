@@ -62,6 +62,21 @@ export const EQUIPMENTS_API = {
         }
     },
 
+    getByName: async (name: string): Promise<any> => {
+        try {
+            const { data: res, error } = await supabase
+                .from(TABLE)
+                .select()
+                .eq("name", name);
+
+            if (error) return false;
+
+            return res[0];
+        } catch (error) {
+            console.error("🚀 ~ error:", error);
+        }
+    },
+
     create: async (data: EquipmentT): Promise<string | boolean> => {
         try {
             const { data: res, error } = await supabase

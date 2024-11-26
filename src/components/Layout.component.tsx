@@ -111,7 +111,7 @@ const Layout: FC<LayoutI> = ({ isAdminSection, pathname, children }) => {
         />
     );
 
-    const footer = !isAdminSection && !isLoginPage && (
+    const footer = !isAdminSection && !isLoginPage && !isStyleGuidePage && (
         <Footer
             isDarkMode={isDarkMode}
             routes={routes}
@@ -133,6 +133,13 @@ const Layout: FC<LayoutI> = ({ isAdminSection, pathname, children }) => {
             {sidebar}
             {hamburger}
             <div
+                style={{
+                    background:
+                        !isLoginPage && !isAdminSection && !isStyleGuidePage
+                            ? `linear-gradient(360deg, #c86476 20%, 
+                            ${isDarkMode ? "#000000" : "#ffffff"} 70%)`
+                            : "",
+                }}
                 className={`transition-all duration-500 
                     ${sidebarState && "opacity-0"}
                     ${
