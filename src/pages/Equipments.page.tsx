@@ -69,7 +69,7 @@ const Equipments: FC = () => {
         <img
             src={`https://koghcmfdnzuxvzfmbzop.supabase.co/storage/v1/object/public/images/${tShirt?.id}`}
             alt="Impossibile visualizzare l'immagine."
-            className="w-[40vh] object-contain"
+            className="w-[40vh] object-contain mobile:w-60"
         />
     );
 
@@ -77,7 +77,7 @@ const Equipments: FC = () => {
         <img
             src={`https://koghcmfdnzuxvzfmbzop.supabase.co/storage/v1/object/public/images/${armWarmer?.id}`}
             alt="Impossibile visualizzare l'immagine."
-            className="w-[25vh] object-contain"
+            className="w-[25vh] mobile:w-32 object-contain"
         />
     );
 
@@ -85,7 +85,7 @@ const Equipments: FC = () => {
         <img
             src={`https://koghcmfdnzuxvzfmbzop.supabase.co/storage/v1/object/public/images/${spellground?.id}`}
             alt="Impossibile visualizzare l'immagine."
-            className="w-[60vh] object-contain"
+            className="w-[60vh] mobile:w-[40vh] object-contain"
         />
     );
 
@@ -93,7 +93,7 @@ const Equipments: FC = () => {
         <img
             src={`https://koghcmfdnzuxvzfmbzop.supabase.co/storage/v1/object/public/images/${playmat?.id}`}
             alt="Impossibile visualizzare l'immagine."
-            className="w-[60vh] object-contain"
+            className="w-[60vh] mobile:w-[40vh] object-contain"
         />
     );
 
@@ -101,17 +101,17 @@ const Equipments: FC = () => {
         <img
             src={`https://koghcmfdnzuxvzfmbzop.supabase.co/storage/v1/object/public/images/${fieldCenter?.id}`}
             alt="Impossibile visualizzare l'immagine."
-            className="w-60 object-contain"
+            className="w-60 mobile:w-32 object-contain"
         />
     );
 
     return (
-        <div className="flex flex-col justify-center items-center pb-[30vh] gap-40">
-            <div className="w-full justify-center flex flex-row gap-10">
+        <div className="flex flex-col justify-center items-center pb-[30vh] gap-20 mobile:pb-[100vh] mobile:pt-20">
+            <div className="w-full justify-center flex flex-row gap-10 mobile:gap-0">
                 {tshirtImage}
                 {armWarmerImage}
             </div>
-            <div className="flex flex-row gap-10 justify-center">
+            <div className="flex flex-row gap-10 justify-center mobile:flex-col mobile:items-center">
                 {spellgroundImage}
                 {playmatImage}
                 {fieldCenterImage}
