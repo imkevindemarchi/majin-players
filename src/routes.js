@@ -8,7 +8,7 @@ import {
     AdminSponsorships,
     AdminSponsorship,
 } from "./pages/admin";
-import { LogIn, StyleGuide, Home, Players } from "./pages";
+import { LogIn, StyleGuide, Home, Players, Player } from "./pages";
 
 export const ROUTES = [
     { path: "/", name: "Home", isHidden: true, element: <Home /> },
@@ -16,6 +16,11 @@ export const ROUTES = [
         path: "/players",
         name: "Giocatori",
         element: <Players />,
+    },
+    {
+        path: "/players/:id",
+        isHidden: true,
+        element: <Player />,
     },
     { path: "/equipments", name: "Equipaggiamenti", element: <></> },
     { path: "/sponsorships", name: "Sponsor", element: <></> },

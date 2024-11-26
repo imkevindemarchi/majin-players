@@ -40,10 +40,10 @@ const Players: FC = () => {
     async function getDataHandler() {
         setIsLoading(true);
 
-        const playersRes = await PLAYERS_API.getAllWithoutFilters();
+        const res = await PLAYERS_API.getAllWithoutFilters();
 
-        if (playersRes.value && playersRes.data) {
-            setPlayers(playersRes.data);
+        if (res.value && res.data) {
+            setPlayers(res.data);
         } else activateSnackbar("Impossibile recuperare i giocatori", "error");
 
         setIsLoading(false);
