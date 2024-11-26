@@ -15,3 +15,4 @@ export { default as GoBackBtn } from "./GoBackBtn.component";
 export { default as InputFile } from "./InputFile.component";
 export { default as TextArea } from "./TextArea.component";
 export { default as Tops } from "./Tops.component";
+export { default as Footer } from "./Footer.component";

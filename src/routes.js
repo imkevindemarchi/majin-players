@@ -19,6 +19,7 @@ export const ROUTES = [
     },
     { path: "/equipments", name: "Equipaggiamenti", element: <></> },
     { path: "/sponsorships", name: "Sponsor", element: <></> },
+    { path: "/contacts", name: "Contatti", element: <></> },
     {
         path: "/style-guide",
         name: "Style Guide",
