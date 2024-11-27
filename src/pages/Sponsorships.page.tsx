@@ -42,7 +42,7 @@ const Sponsorships: FC = () => {
     }, []);
 
     return (
-        <div className="flex flex-col justify-center items-center pb-[30vh] gap-20">
+        <div className="flex flex-col justify-center items-center pb-[30vh] gap-20 mobile:pb-[100vh] mobile:pt-20">
             <div className="flex flex-row justify-around items-center w-full mobile:flex-col mobile:gap-20">
                 {sponsorships.map((sponsorship) => (
                     <div
