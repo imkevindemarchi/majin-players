@@ -23,7 +23,7 @@ const BackToTopButton: FC<BackToTopButtonI> = ({ isDarkMode }) => {
                 opacity: state ? ".8" : "0",
                 zIndex: state ? "900" : "-900",
             }}
-            className={`border-none outline-none p-3 rounded-lg fixed bottom-7 right-7 bg-primary
+            className={`border-none outline-none p-3 rounded-lg fixed bottom-7 right-7 mobile:bottom-4 mobile:right-4 bg-primary
             `}
         >
             <ArrowUpIcon
