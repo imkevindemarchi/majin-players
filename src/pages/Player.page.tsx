@@ -107,7 +107,7 @@ const Player: FC = () => {
                     <Row label="Carta preferita:" value={data?.favouriteCard} />
                     <Row label="Mazzo preferito:" value={data?.favouriteDeck} />
                     <span
-                        className={`transition-all duration-200 text-lg
+                        className={`transition-all duration-200 text-lg overflow-y-scroll max-h-[20vh]
                             ${isDarkMode ? "text-white" : "text-black"}
                         `}
                     >
