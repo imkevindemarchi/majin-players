@@ -284,3 +284,8 @@ export interface FooterI {
     routes: RouteT[];
     urlSection: string;
 }
+
+// BackToTopButton
+export interface BackToTopButtonI {
+    isDarkMode: boolean;
+}

@@ -13,6 +13,7 @@ import Snackbar from "./Snackbar.component";
 import Navbar from "./Navbar.component";
 import Hamburger from "./Hamburger.component";
 import Sidebar from "./Sidebar.component";
+import BackToTopButton from "./BackToTopButton.component";
 
 // Contexts
 import {
@@ -123,6 +124,10 @@ const Layout: FC<LayoutI> = ({ isAdminSection, pathname, children }) => {
 
     const snackbar = <Snackbar state={snackbarState} onClose={closeSnackbar} />;
 
+    const backToTopButton = !sidebarState && !isAdminSection && !isLoginPage && (
+        <BackToTopButton isDarkMode={isDarkMode} />
+    );
+
     return (
         <div
             className={`w-full min-h-[100vh] relative
@@ -154,6 +159,7 @@ const Layout: FC<LayoutI> = ({ isAdminSection, pathname, children }) => {
             {footer}
             {loader}
             {snackbar}
+            {backToTopButton}
         </div>
     );
 };
