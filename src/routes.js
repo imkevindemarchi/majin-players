@@ -16,6 +16,7 @@ import {
     Player,
     Equipments,
     Sponsorships,
+    Contacts,
 } from "./pages";
 
 export const ROUTES = [
@@ -32,7 +33,7 @@ export const ROUTES = [
     },
     { path: "/equipments", name: "Equipaggiamenti", element: <Equipments /> },
     { path: "/sponsorships", name: "Sponsor", element: <Sponsorships /> },
-    { path: "/contacts", name: "Contatti", element: <></> },
+    { path: "/contacts", name: "Contatti", element: <Contacts /> },
     {
         path: "/style-guide",
         name: "Style Guide",
