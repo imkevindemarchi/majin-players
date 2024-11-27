@@ -122,7 +122,7 @@ const Tops: FC<TopsI> = ({ isDarkMode, isAdminSection, playerId }) => {
         // eslint-disable-next-line
     }, []);
 
-    const title = (
+    const title = tops.length > 0 && years.length > 0 && (
         <span
             className={`transition-all duration-200 text-3xl
                 ${isAdminSection && "text-primary"}
