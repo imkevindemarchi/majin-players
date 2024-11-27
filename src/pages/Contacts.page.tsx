@@ -26,16 +26,16 @@ const Contacts: FC = () => {
     );
 
     return (
-        <div className="flex flex-col justify-center items-center pb-[30vh] gap-20">
+        <div className="flex flex-col justify-center items-center pb-[30vh] gap-20 mobile:gap-10 mobile:pb-[100vh] mobile:pt-20">
             <Social link={process.env.REACT_APP_INSTAGRAM_LINK}>
-                <InstagramIcon className="text-primary text-[3em]" />
-                <span className="text-3xl font-bold uppercase text-primary">
+                <InstagramIcon className="text-primary text-[3em] mobile:text-3xl" />
+                <span className="text-3xl font-bold uppercase text-primary mobile:text-2xl">
                     Instagram
                 </span>
             </Social>
             <Social link={process.env.REACT_APP_YOUTUBE_LINK}>
-                <YouTubeIcon className="text-primary text-[3em]" />
-                <span className="text-3xl font-bold uppercase text-primary">
+                <YouTubeIcon className="text-primary text-[3em] mobile:text-3xl" />
+                <span className="text-3xl font-bold uppercase text-primary mobile:text-2xl">
                     YouTube
                 </span>
             </Social>
