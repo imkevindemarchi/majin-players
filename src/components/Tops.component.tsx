@@ -7,6 +7,9 @@ import {
     useState,
 } from "react";
 
+// Api
+import { TOPS_API } from "../api";
+
 // Assets
 import { AddIcon, DeleteIcon } from "../assets/icons";
 
@@ -30,7 +33,6 @@ import {
 
 // Utilities
 import { checkFormField, checkFormFieldYear } from "../utilities";
-import { TOPS_API } from "../api";
 
 interface FormDataI {
     year: string;
@@ -104,8 +106,9 @@ const Tops: FC<TopsI> = ({ isDarkMode, isAdminSection, playerId }) => {
             const res = await TOPS_API.getAll(playerId);
 
             if (res) {
-                const years = getDistinctYears(res);
-                setYears(years);
+                const years: number[] = getDistinctYears(res);
+                const orderedYears: number[] = years.sort((a, b) => b - a);
+                setYears(orderedYears);
                 setTops(res);
             }
 
