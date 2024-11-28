@@ -18,7 +18,7 @@ const GoBackBtn: FC<GoBackBtnI> = ({ isDarkMode }) => {
     return (
         <button
             onClick={goBackHandler}
-            className="bg-pink-transparent px-5 py-3 rounded-full flex flex-row items-center gap-3 transition-all duration-200 max-w-[20%] justify-center hover:opacity-50 mobile:max-w-[60%]"
+            className="bg-primary-transparent px-5 py-3 rounded-full flex flex-row items-center gap-3 transition-all duration-200 max-w-[20%] justify-center hover:opacity-50 mobile:max-w-[60%]"
         >
             <BackIcon className="text-2xl text-primary" />
             <span

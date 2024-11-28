@@ -19,7 +19,7 @@ const Contacts: FC = () => {
             href={link}
             target="_blank"
             rel="noreferrer"
-            className="transition-all duration-200 border-2 cursor-pointer border-primary rounded-full bg-pink-transparent-2 py-5 w-full flex flex-row gap-3 justify-center items-center hover:opacity-50"
+            className="transition-all duration-200 border-2 cursor-pointer border-primary rounded-full bg-primary-transparent-2 py-5 w-full flex flex-row gap-3 justify-center items-center hover:opacity-50"
         >
             {children}
         </a>

@@ -71,7 +71,7 @@ const Sidebar: FC<SidebarI> = ({
                                         ${
                                             isRouteActive
                                                 ? "bg-primary"
-                                                : "bg-transparent hover:bg-pink-transparent"
+                                                : "bg-transparent hover:bg-primary-transparent"
                                         }
                                     `}
                             >

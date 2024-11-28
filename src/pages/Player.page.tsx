@@ -95,7 +95,7 @@ const Player: FC = () => {
                 `}
             >
                 <img
-                    src={`https://koghcmfdnzuxvzfmbzop.supabase.co/storage/v1/object/public/images/${data?.id}`}
+                    src={`${process.env.REACT_APP_SUPABASE_URL}/storage/v1/object/public/images/${data?.id}`}
                     alt="Impossibile visualizzare l'immagine."
                     className="w-[30vh] object-contain mobile:w-full"
                 />

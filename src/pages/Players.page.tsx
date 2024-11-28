@@ -61,7 +61,7 @@ const Players: FC = () => {
             className="relative transition-all duration-200 hover:opacity-50"
         >
             <img
-                src={`https://koghcmfdnzuxvzfmbzop.supabase.co/storage/v1/object/public/images/${data.id}`}
+                src={`${process.env.REACT_APP_SUPABASE_URL}/storage/v1/object/public/images/${data.id}`}
                 alt="Impossibile visualizzare l'immagine."
                 className={`transition-all duration-200 w-[25vh] object-contain rounded-xl mobile:w-40
                     ${isDarkMode ? "border-white" : "border-black"}

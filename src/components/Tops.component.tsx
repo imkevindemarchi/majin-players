@@ -311,7 +311,7 @@ const Tops: FC<TopsI> = ({ isDarkMode, isAdminSection, playerId }) => {
                                     className={`w-full rounded-lg px-5 py-3 justify-between flex flex-row items-center 
                                         ${
                                             isAdminSection &&
-                                            "bg-pink-transparent"
+                                            "bg-primary-transparent"
                                         }
                                         ${
                                             !isAdminSection &&
@@ -340,7 +340,7 @@ const Tops: FC<TopsI> = ({ isDarkMode, isAdminSection, playerId }) => {
                                             onClick={(
                                                 event: MouseEvent<HTMLButtonElement>
                                             ) => onDeleteHandler(event, top)}
-                                            className="bg-pink-transparent"
+                                            className="bg-primary-transparent"
                                         >
                                             <DeleteIcon className="text-2xl text-primary" />
                                         </IconButton>

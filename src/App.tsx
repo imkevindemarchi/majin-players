@@ -73,14 +73,14 @@ const App: FC = () => {
     return (
         <Layout isAdminSection={isAdminSection} pathname={pathname}>
             <Routes>
-                {ROUTES.map((route) => (
+                {ROUTES.map((route: RouteT) => (
                     <Route
                         key={route.path}
                         path={route.path}
                         element={routeElement(route)}
                     />
                 ))}
-                {ADMIN_ROUTES.map((adminRoute) => (
+                {ADMIN_ROUTES.map((adminRoute: RouteT) => (
                     <Route
                         key={adminRoute.path}
                         path={adminRoute.path}

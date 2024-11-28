@@ -59,7 +59,7 @@ const Home: FC = () => {
 
     const image = (
         <img
-            src={`https://koghcmfdnzuxvzfmbzop.supabase.co/storage/v1/object/public/images/${img}`}
+            src={`${process.env.REACT_APP_SUPABASE_URL}/storage/v1/object/public/images/${img}`}
             alt="Impossibile visualizzare l'immagine."
             className="w-[30%] mobile:w-[40vh]"
         />
@@ -70,10 +70,10 @@ const Home: FC = () => {
             {sponsorships.map((sponsorship) => (
                 <div
                     key={sponsorship.id}
-                    className="border-solid border-2 border-white rounded-full bg-pink-transparent p-10 justify-center items-center"
+                    className="border-solid border-2 border-white rounded-full bg-primary-transparent p-10 justify-center items-center"
                 >
                     <img
-                        src={`https://koghcmfdnzuxvzfmbzop.supabase.co/storage/v1/object/public/images/${sponsorship.id}`}
+                        src={`${process.env.REACT_APP_SUPABASE_URL}/storage/v1/object/public/images/${sponsorship.id}`}
                         alt="Impossibile visualizzare l'immagine."
                         className="h-40 w-40 mobile:h-20 mobile:w-20 object-contain"
                     />

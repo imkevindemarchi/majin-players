@@ -41,7 +41,7 @@ const Footer: FC<FooterI> = ({ isDarkMode, routes, urlSection }) => {
             href={link}
             target="_blank"
             rel="noreferrer"
-            className={`transition-all duration-200 p-3 flex justify-center items-center rounded-full border-2 bg-pink-transparent border-primary hover:text-primary 
+            className={`transition-all duration-200 p-3 flex justify-center items-center rounded-full border-2 bg-primary-transparent border-primary hover:text-primary 
                 ${isDarkMode ? "text-white" : "text-black"}
             `}
         >

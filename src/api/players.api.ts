@@ -2,15 +2,9 @@
 import { supabase } from "../supabase";
 
 // Types
-import { PlayerT } from "../types";
+import { HTTPResponseDataT, PlayerT } from "../types";
 
 const TABLE = "players";
-
-type HTTPResponseDataT = {
-    data?: PlayerT[];
-    totalRecords?: string | null;
-    value: boolean;
-};
 
 export const PLAYERS_API = {
     getAll: async (

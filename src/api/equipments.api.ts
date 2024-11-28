@@ -2,15 +2,9 @@
 import { supabase } from "../supabase";
 
 // Types
-import { EquipmentT } from "../types";
+import { EquipmentT, HTTPResponseDataT } from "../types";
 
 const TABLE = "equipments";
-
-type HTTPResponseDataT = {
-    data?: EquipmentT[];
-    totalRecords?: string | null;
-    value: boolean;
-};
 
 export const EQUIPMENTS_API = {
     getAll: async (

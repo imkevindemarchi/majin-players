@@ -47,10 +47,10 @@ const Sponsorships: FC = () => {
                 {sponsorships.map((sponsorship) => (
                     <div
                         key={sponsorship.id}
-                        className="border-solid border-2 border-white rounded-full p-10 justify-center items-center bg-pink-transparent"
+                        className="border-solid border-2 border-white rounded-full p-10 justify-center items-center bg-primary-transparent"
                     >
                         <img
-                            src={`https://koghcmfdnzuxvzfmbzop.supabase.co/storage/v1/object/public/images/${sponsorship.id}`}
+                            src={`${process.env.REACT_APP_SUPABASE_URL}/storage/v1/object/public/images/${sponsorship.id}`}
                             alt="Impossibile visualizzare l'immagine."
                             className="h-40 w-40 mobile:h-20 mobile:w-20 object-contain"
                         />

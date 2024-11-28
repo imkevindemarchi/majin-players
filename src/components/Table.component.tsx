@@ -50,8 +50,8 @@ const Table: FC<TableI> = ({
             className={`transition-all duration-200  flex justify-center items-center p-2 rounded-lg 
                 ${
                     disabled
-                        ? "cursor-not-allowed bg-pink-transparent-2"
-                        : "hover:bg-pink-transparent-2 bg-pink-transparent"
+                        ? "cursor-not-allowed bg-primary-transparent-2"
+                        : "hover:bg-primary-transparent-2 bg-primary-transparent"
                 }
             `}
         >
@@ -62,7 +62,7 @@ const Table: FC<TableI> = ({
     return (
         <div className="overflow-x-scroll relative">
             <table className="w-full">
-                <thead className="bg-pink-transparent w-full">
+                <thead className="bg-primary-transparent w-full">
                     <tr>
                         {columns.map((column) => (
                             <th className="py-3 mobile:px-5" key={column.key}>
@@ -79,7 +79,7 @@ const Table: FC<TableI> = ({
                             <tr
                                 key={rowData.id}
                                 onClick={() => rowHandler(rowData)}
-                                className="bg-pink-transparent-2 hover:bg-pink-transparent transition-all duration-200 cursor-pointer"
+                                className="bg-primary-transparent-2 hover:bg-primary-transparent transition-all duration-200 cursor-pointer"
                             >
                                 {columns.map((column: TableColumnT) => {
                                     const isActionColumn: boolean =
@@ -111,9 +111,9 @@ const Table: FC<TableI> = ({
                                             className="p-10 mobile:py-5 flex justify-center"
                                             key={column.key}
                                         >
-                                            <div className="bg-pink-transparent w-40 flex justify-center items-center p-5 rounded-xl">
+                                            <div className="bg-primary-transparent w-40 flex justify-center items-center p-5 rounded-xl">
                                                 <img
-                                                    src={`https://koghcmfdnzuxvzfmbzop.supabase.co/storage/v1/object/public/images/${rowData.id}`}
+                                                    src={`${process.env.REACT_APP_SUPABASE_URL}/storage/v1/object/public/images/${rowData.id}`}
                                                     alt="Impossibile visualizzare l'immagine."
                                                     className="object-contain w-40"
                                                 />
@@ -148,7 +148,7 @@ const Table: FC<TableI> = ({
                 </tbody>
             </table>
             {totalRecords === 0 && (
-                <div className="w-full flex justify-center items-center py-5 bg-pink-transparent-2 rounded-bl-lg rounded-br-lg">
+                <div className="w-full flex justify-center items-center py-5 bg-primary-transparent-2 rounded-bl-lg rounded-br-lg">
                     <span
                         className={`text-md
                             ${isDarkMode ? "text-white" : "text-black"}
@@ -159,7 +159,7 @@ const Table: FC<TableI> = ({
                 </div>
             )}
             {totalRecords > 0 && (
-                <div className="w-full bg-pink-transparent p-5 rounded-bl-lg rounded-br-lg flex justify-between sticky bottom-0 left-0 right-0">
+                <div className="w-full bg-primary-transparent p-5 rounded-bl-lg rounded-br-lg flex justify-between sticky bottom-0 left-0 right-0">
                     <span
                         className={`${
                             isDarkMode ? "text-white" : "text-black"
@@ -176,7 +176,7 @@ const Table: FC<TableI> = ({
                                 className={`text-2xl
                                 ${
                                     !canGoPrevious
-                                        ? "text-pink-transparent"
+                                        ? "text-primary-transparent"
                                         : "text-primary"
                                 }
                             `}
@@ -190,7 +190,7 @@ const Table: FC<TableI> = ({
                                 className={`text-2xl
                                 ${
                                     !canGoNext
-                                        ? "text-pink-transparent"
+                                        ? "text-primary-transparent"
                                         : "text-primary"
                                 }
                             `}

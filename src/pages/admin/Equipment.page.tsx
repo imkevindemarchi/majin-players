@@ -155,7 +155,7 @@ const Equipment: FC = () => {
                     {formData.image && (
                         <img
                             id="image"
-                            src={`https://koghcmfdnzuxvzfmbzop.supabase.co/storage/v1/object/public/images/${formData?.id}`}
+                            src={`${process.env.REACT_APP_SUPABASE_URL}/storage/v1/object/public/images/${formData?.id}`}
                             alt="Impossibile visualizzare l'immagine."
                             className="w-40 rounded-lg object-contain"
                         />

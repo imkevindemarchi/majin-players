@@ -67,7 +67,7 @@ const Equipments: FC = () => {
 
     const tshirtImage = (
         <img
-            src={`https://koghcmfdnzuxvzfmbzop.supabase.co/storage/v1/object/public/images/${tShirt?.id}`}
+            src={`${process.env.REACT_APP_SUPABASE_URL}/storage/v1/object/public/images/${tShirt?.id}`}
             alt="Impossibile visualizzare l'immagine."
             className="w-[40vh] object-contain mobile:w-60"
         />
@@ -75,7 +75,7 @@ const Equipments: FC = () => {
 
     const armWarmerImage = (
         <img
-            src={`https://koghcmfdnzuxvzfmbzop.supabase.co/storage/v1/object/public/images/${armWarmer?.id}`}
+            src={`${process.env.REACT_APP_SUPABASE_URL}/storage/v1/object/public/images/${armWarmer?.id}`}
             alt="Impossibile visualizzare l'immagine."
             className="w-[25vh] mobile:w-32 object-contain"
         />
@@ -83,7 +83,7 @@ const Equipments: FC = () => {
 
     const spellgroundImage = (
         <img
-            src={`https://koghcmfdnzuxvzfmbzop.supabase.co/storage/v1/object/public/images/${spellground?.id}`}
+            src={`${process.env.REACT_APP_SUPABASE_URL}/storage/v1/object/public/images/${spellground?.id}`}
             alt="Impossibile visualizzare l'immagine."
             className="w-[60vh] mobile:w-[40vh] object-contain"
         />
@@ -91,7 +91,7 @@ const Equipments: FC = () => {
 
     const playmatImage = (
         <img
-            src={`https://koghcmfdnzuxvzfmbzop.supabase.co/storage/v1/object/public/images/${playmat?.id}`}
+            src={`${process.env.REACT_APP_SUPABASE_URL}/storage/v1/object/public/images/${playmat?.id}`}
             alt="Impossibile visualizzare l'immagine."
             className="w-[60vh] mobile:w-[40vh] object-contain"
         />
@@ -99,7 +99,7 @@ const Equipments: FC = () => {
 
     const fieldCenterImage = (
         <img
-            src={`https://koghcmfdnzuxvzfmbzop.supabase.co/storage/v1/object/public/images/${fieldCenter?.id}`}
+            src={`${process.env.REACT_APP_SUPABASE_URL}/storage/v1/object/public/images/${fieldCenter?.id}`}
             alt="Impossibile visualizzare l'immagine."
             className="w-60 mobile:w-32 object-contain"
         />

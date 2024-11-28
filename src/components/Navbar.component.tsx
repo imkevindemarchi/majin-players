@@ -63,7 +63,7 @@ const Navbar: FC<NavbarI> = ({
                                         ${
                                             isRouteActive
                                                 ? "bg-primary"
-                                                : "bg-transparent hover:bg-pink-transparent"
+                                                : "bg-transparent hover:bg-primary-transparent"
                                         }
                                     `}
                                 >

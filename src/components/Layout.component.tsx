@@ -14,6 +14,7 @@ import Navbar from "./Navbar.component";
 import Hamburger from "./Hamburger.component";
 import Sidebar from "./Sidebar.component";
 import BackToTopButton from "./BackToTopButton.component";
+import Footer from "./Footer.component";
 
 // Contexts
 import {
@@ -37,7 +38,6 @@ import {
 
 // Utilities
 import { removeFromStorage } from "../utilities";
-import Footer from "./Footer.component";
 
 const Layout: FC<LayoutI> = ({ isAdminSection, pathname, children }) => {
     const { state: isLoading } = useContext(LoaderContext) as LoaderContextI;
@@ -124,9 +124,9 @@ const Layout: FC<LayoutI> = ({ isAdminSection, pathname, children }) => {
 
     const snackbar = <Snackbar state={snackbarState} onClose={closeSnackbar} />;
 
-    const backToTopButton = !sidebarState && !isAdminSection && !isLoginPage && (
-        <BackToTopButton isDarkMode={isDarkMode} />
-    );
+    const backToTopButton = !sidebarState &&
+        !isAdminSection &&
+        !isLoginPage && <BackToTopButton isDarkMode={isDarkMode} />;
 
     return (
         <div

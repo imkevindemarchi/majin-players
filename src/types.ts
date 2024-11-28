@@ -40,6 +40,12 @@ export type TopT = {
     playerId: string;
 };
 
+export type HTTPResponseDataT = {
+    data?: any;
+    value: boolean;
+    totalRecords?: any;
+};
+
 // Input
 export type InputTypeT = "text" | "number" | "password";
 
@@ -264,12 +270,6 @@ export interface TextAreaI {
     name?: string;
     isDarkMode?: boolean;
 }
-
-// HTTP
-export type HTTPResponseDataT = {
-    data: any;
-    value: boolean;
-};
 
 // Tops
 export interface TopsI {
